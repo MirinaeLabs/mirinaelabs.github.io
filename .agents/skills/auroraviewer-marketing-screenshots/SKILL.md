@@ -16,6 +16,7 @@ Create product screenshots from the real current AuroraViewer build. Treat the s
 - Do not select by filename alone. Inspect the imagery visually.
 - Prefer a coherent product story over individually flashy pictures. The four screenshot roles should feel like one curated set.
 - If no suitable public-safe candidate exists for a role, report that role rather than forcing a bad choice.
+- Final marketing assets must contain only the intended AuroraViewer window. Never publish Codex/Computer Use observation badges, control indicators, screen-recording banners, appshot overlays, Stage Manager UI, desktop chrome, or unrelated application UI.
 
 ## Locate inputs
 
@@ -85,15 +86,23 @@ Prefer deterministic controls over fragile mouse coordinates.
 1. Use existing DEBUG automation hooks for launch/fullscreen/zoom where helpful.
 2. Use AuroraViewer's current keyboard shortcuts for mode changes when possible.
 3. Use Codex Computer Use or macOS accessibility automation for state that requires visible UI interaction, such as selecting a thumbnail, assigning compare slots, positioning a color sample, changing app language, or arranging a window.
-4. If a repeated state is too fragile, a narrowly scoped DEBUG-only AuroraViewer automation hook may be added in the AuroraViewer repository, but it must not alter release behavior and must be justified in the final report.
+4. Treat Computer Use as an interaction/inspection tool only. Do not use a Computer Use observation frame or appshot as a publishable marketing asset.
+5. If a repeated state is too fragile, a narrowly scoped DEBUG-only AuroraViewer automation hook may be added in the AuroraViewer repository, but it must not alter release behavior and must be justified in the final report.
 
 Stabilize the window before capture: loading complete, no menus/dialogs/tooltips, intended controls visible, cursor not obscuring important content unless the inspector requires it.
 
-## Capture
+## Capture without Codex overlays
 
-- Prefer the installed `$screenshot` skill for native app/window capture when available.
-- Otherwise use Codex Computer Use capture or macOS `screencapture`/window capture tooling.
-- Capture the AuroraViewer window, not an arbitrary desktop rectangle, whenever possible.
+The final capture path must be independent from the Computer Use observation image.
+
+1. Use Computer Use only to prepare and visually verify the AuroraViewer state when needed.
+2. Identify the actual AuroraViewer window ID using a native screenshot helper, Accessibility/CoreGraphics window listing, or equivalent macOS tooling.
+3. Capture that specific window buffer directly. Prefer a native target-window helper; a valid fallback is macOS `screencapture -x -l <window-id> <output.png>`.
+4. Do not publish full-display/region captures while Codex Computer Use is showing an observation/control badge. A window-ID capture is preferred because unrelated overlay windows are excluded.
+5. If a direct target-window capture still contains a Codex indicator, end/release the Computer Use observation session after the UI state is prepared and recapture through shell/native window capture. Do not crop away AuroraViewer chrome merely to hide the badge.
+6. Inspect the top-left corner and the entire frame before accepting each image. Any purple/magenta Codex viewing/controlling badge, Screen Recording banner, observation label, or unrelated overlay means the capture failed and must be redone.
+
+- Capture the AuroraViewer window, not an arbitrary desktop rectangle.
 - Keep a consistent window geometry/aspect ratio across the set. If the existing website expects 1800×1096, prefer arranging the app window to that aspect ratio (or a 2× Retina equivalent) instead of stretching afterward.
 - Downsample proportionally if needed; never resize width and height independently.
 - Preserve sufficient resolution for Retina/high-density displays.
@@ -102,6 +111,7 @@ Stabilize the window before capture: loading complete, no menus/dialogs/tooltips
 
 Inspect every output image visually and reject/retry when any of these occur:
 
+- Codex/Computer Use viewing or control indicator appears anywhere in the image
 - distorted aspect ratio or wrong window geometry
 - loading/progress state, transient dialog, menu, tooltip, or accidental hover
 - private/sensitive content
@@ -130,7 +140,8 @@ Report concisely:
 - AuroraViewer revision/build used
 - number of `~/Sample` candidates surveyed
 - why each selected image/pair suited its role
-- capture method and any DEBUG-only automation added
+- capture method and whether Computer Use was used only for setup/inspection
+- confirmation that no Codex/Computer Use indicator remains in final assets
 - final output pixel dimensions
 - website build/QA result
 - any role that could not be safely or convincingly captured
