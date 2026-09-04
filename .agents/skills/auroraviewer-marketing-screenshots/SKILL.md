@@ -17,6 +17,7 @@ Create product screenshots from the real current AuroraViewer build. Treat the s
 - Prefer a coherent product story over individually flashy pictures. The four screenshot roles should feel like one curated set.
 - If no suitable public-safe candidate exists for a role, report that role rather than forcing a bad choice.
 - Final marketing assets must contain only the intended AuroraViewer window. Never publish Codex/Computer Use observation badges, control indicators, screen-recording banners, appshot overlays, Stage Manager UI, desktop chrome, or unrelated application UI.
+- Preserve native macOS rounded-window corners with transparency. Do not flatten transparent corner pixels to white or another opaque matte.
 
 ## Locate inputs
 
@@ -91,27 +92,31 @@ Prefer deterministic controls over fragile mouse coordinates.
 
 Stabilize the window before capture: loading complete, no menus/dialogs/tooltips, intended controls visible, cursor not obscuring important content unless the inspector requires it.
 
-## Capture without Codex overlays
+## Capture without Codex overlays or corner mattes
 
 The final capture path must be independent from the Computer Use observation image.
 
 1. Use Computer Use only to prepare and visually verify the AuroraViewer state when needed.
 2. Identify the actual AuroraViewer window ID using a native screenshot helper, Accessibility/CoreGraphics window listing, or equivalent macOS tooling.
-3. Capture that specific window buffer directly. Prefer a native target-window helper; a valid fallback is macOS `screencapture -x -l <window-id> <output.png>`.
-4. Do not publish full-display/region captures while Codex Computer Use is showing an observation/control badge. A window-ID capture is preferred because unrelated overlay windows are excluded.
-5. If a direct target-window capture still contains a Codex indicator, end/release the Computer Use observation session after the UI state is prepared and recapture through shell/native window capture. Do not crop away AuroraViewer chrome merely to hide the badge.
-6. Inspect the top-left corner and the entire frame before accepting each image. Any purple/magenta Codex viewing/controlling badge, Screen Recording banner, observation label, or unrelated overlay means the capture failed and must be redone.
+3. Capture that specific window buffer directly. Prefer a native target-window helper. For macOS `screencapture`, prefer `screencapture -x -o -l <window-id> <output.png>` so the window shadow is omitted and rounded-corner transparency is preserved.
+4. Keep the direct capture as PNG, or another lossless alpha-capable format, through the publishing step. Do not convert it to JPEG if that would flatten transparent corners into white pixels.
+5. If optimizing file size, alpha-capable WebP is acceptable only if visual fidelity and transparency are verified. Never use an opaque matte around the rounded window.
+6. Do not publish full-display/region captures while Codex Computer Use is showing an observation/control badge. A window-ID capture is preferred because unrelated overlay windows are excluded.
+7. If a direct target-window capture still contains a Codex indicator, end/release the Computer Use observation session after the UI state is prepared and recapture through shell/native window capture. Do not crop away AuroraViewer chrome merely to hide the badge.
+8. Inspect all four corners, the top-left area, and the entire frame before accepting each image. Any purple/magenta Codex badge, opaque white corner wedge, Screen Recording banner, observation label, or unrelated overlay means the capture failed and must be redone.
 
 - Capture the AuroraViewer window, not an arbitrary desktop rectangle.
 - Keep a consistent window geometry/aspect ratio across the set. If the existing website expects 1800×1096, prefer arranging the app window to that aspect ratio (or a 2× Retina equivalent) instead of stretching afterward.
 - Downsample proportionally if needed; never resize width and height independently.
 - Preserve sufficient resolution for Retina/high-density displays.
+- Do not crop inside the AuroraViewer window merely to remove rounded corners. Preserve the complete native window shape and let transparent pixels reveal the website background.
 
 ## Review captures before publishing
 
 Inspect every output image visually and reject/retry when any of these occur:
 
 - Codex/Computer Use viewing or control indicator appears anywhere in the image
+- opaque white/black matte or halo appears outside the native rounded window corners
 - distorted aspect ratio or wrong window geometry
 - loading/progress state, transient dialog, menu, tooltip, or accidental hover
 - private/sensitive content
@@ -127,11 +132,12 @@ Do not stop at the first technically valid screenshot. Choose the strongest fina
 ## Publish to the website
 
 - Replace only the intended files under the site's screenshot asset directory.
-- Keep `viewer`, `thumbnail/library`, `compare`, and `color/inspect` filename conventions unless there is a strong reason to migrate them.
+- Keep `viewer`, `thumbnail/library`, `compare`, and `color/inspect` filename conventions, but migrate `.jpg` screenshots to `.png` when transparency is needed.
+- Update `src/data/product.ts` and any generated/static references when filename extensions change.
 - Read actual pixel dimensions of final assets and ensure HTML width/height metadata matches them.
-- Website CSS must keep `height: auto` and must not crop application UI with `object-fit: cover`.
+- Website CSS must keep `height: auto`, must not crop application UI with `object-fit: cover`, and must not paint an opaque background behind transparent window corners.
 - Rebuild the Astro site and run its existing site checks.
-- Visually inspect Home and Features at desktop and mobile widths after asset replacement.
+- Visually inspect Home and Features at desktop and mobile widths after asset replacement, including all four screenshot corners against both light and dark appearance.
 
 ## Final report
 
@@ -142,6 +148,7 @@ Report concisely:
 - why each selected image/pair suited its role
 - capture method and whether Computer Use was used only for setup/inspection
 - confirmation that no Codex/Computer Use indicator remains in final assets
-- final output pixel dimensions
+- confirmation that native rounded corners contain transparency rather than an opaque matte
+- final output pixel dimensions and format
 - website build/QA result
 - any role that could not be safely or convincingly captured
