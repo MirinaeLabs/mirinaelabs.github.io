@@ -1,0 +1,4 @@
+interface:
+  display_name: "AuroraViewer Marketing Screenshots"
+  short_description: "Curate real AuroraViewer screenshots from local samples"
+  default_prompt: "Use $auroraviewer-marketing-screenshots to curate ~/Sample and refresh the real AuroraViewer website screenshots."
