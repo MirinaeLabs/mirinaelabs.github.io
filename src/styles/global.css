@@ -148,11 +148,6 @@ a:hover {
   text-decoration: none;
 }
 
-.brand img {
-  border-radius: 9px;
-  box-shadow: 0 4px 14px rgba(22, 28, 41, 0.16);
-}
-
 .primary-nav {
   display: flex;
   justify-content: center;
@@ -396,8 +391,6 @@ p {
 .hero-identity img {
   width: 62px;
   height: 62px;
-  border-radius: 15px;
-  box-shadow: var(--shadow-soft);
 }
 
 .hero-identity p {
