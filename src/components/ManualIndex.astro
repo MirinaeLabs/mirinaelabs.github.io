@@ -12,22 +12,22 @@ const isKo = locale === "ko";
   locale={locale}
   current="manual"
   title={isKo ? "AuroraViewer 사용 설명서" : "AuroraViewer User Manual"}
-  description={isKo ? "파일 열기부터 탐색, 비교, 평가, 태그, 검사, 내보내기, 설정과 문제 해결까지 작업별로 정리한 AuroraViewer 사용자 설명서입니다." : "Task-oriented AuroraViewer documentation covering opening, browsing, comparing, rating, tagging, inspection, export, settings, and troubleshooting."}
+  description={isKo ? "파일을 여는 방법부터 탐색, 비교, 평가, 태그, 검사, 내보내기, 설정과 문제 해결까지 작업별로 정리한 AuroraViewer 사용 설명서입니다." : "Task-oriented AuroraViewer documentation covering opening, browsing, comparing, rating, tagging, inspection, export, settings, and troubleshooting."}
   path="manual"
 >
   <header class="page-hero page-hero--manual">
     <div class="wrap">
-      <p class="eyebrow">AuroraViewer guide</p>
+      <p class="eyebrow">{isKo ? "AuroraViewer 사용 설명서" : "AuroraViewer guide"}</p>
       <h1>{isKo ? "필요한 작업부터\n찾아보세요." : "Start with the task\nyou need."}</h1>
-      <p class="lede">{isKo ? "처음 파일을 여는 순서부터 세밀한 비교와 안전한 파일 정리까지, 실제 앱의 메뉴·설정·단축키를 기준으로 설명합니다." : "From opening your first files to close comparison and safe file organization, every guide follows the current app's menus, settings, and shortcuts."}</p>
+      <p class="lede">{isKo ? "처음 파일을 여는 방법부터 세밀하게 비교하고 안전하게 정리하는 방법까지, 실제 앱의 메뉴와 설정, 단축키를 기준으로 설명합니다." : "From opening your first files to close comparison and safe file organization, every guide follows the current app's menus, settings, and shortcuts."}</p>
     </div>
   </header>
 
   <section class="manual-start">
     <div class="wrap">
       <div class="section-heading">
-        <p class="eyebrow">Suggested path</p>
-        <h2>{isKo ? "처음이라면 이 순서로." : "New here? Follow this path."}</h2>
+        <p class="eyebrow">{isKo ? "처음 시작하기" : "Suggested path"}</p>
+        <h2>{isKo ? "처음이라면 이 순서로 살펴보세요." : "New here? Follow this path."}</h2>
       </div>
       <div class="manual-start-grid">
         {manualTopics.slice(0, 3).map((topic, index) => (
@@ -44,9 +44,9 @@ const isKo = locale === "ko";
   <section class="manual-directory section--tint">
     <div class="wrap">
       <div class="section-heading">
-        <p class="eyebrow">All topics</p>
+        <p class="eyebrow">{isKo ? "전체 목차" : "All topics"}</p>
         <h2>{isKo ? "작업별 설명서" : "Guides by task"}</h2>
-        <p class="lede">{isKo ? "각 페이지는 용도, 가장 짧은 실행 순서, 관련 단축키와 중요한 제한을 함께 제공합니다." : "Each page explains when to use a feature, the shortest reliable procedure, useful shortcuts, and important limitations."}</p>
+        <p class="lede">{isKo ? "각 페이지에서 기능을 언제 쓰는지, 가장 짧은 사용 순서와 관련 단축키, 알아 둘 제한 사항을 확인할 수 있습니다." : "Each page explains when to use a feature, the shortest reliable procedure, useful shortcuts, and important limitations."}</p>
       </div>
       <div class="manual-directory-grid">
         {manualTopics.map((topic, index) => (

@@ -54,8 +54,8 @@ export const siteCopy = {
     manual: "사용 설명서 보기",
     readMore: "자세히 알아보기",
     version: `버전 ${productFacts.version} · macOS ${productFacts.minimumMacOS} 이상`,
-    conditionalFormats: "표시 가능 여부와 품질은 파일 내부 코덱과 macOS의 ImageIO·Quick Look 지원에 따라 달라질 수 있습니다.",
-    footerNote: "Mac에서 이미지를 보고, 고르고, 정리하는 한 흐름.",
+    conditionalFormats: "파일을 열 수 있는지와 표시 품질은 내부 코덱 및 macOS의 ImageIO·Quick Look 지원에 따라 달라질 수 있습니다.",
+    footerNote: "Mac에서 이미지 검토와 정리를 한곳에.",
     legal: "© 2026 Mirinae Labs"
   },
   en: {

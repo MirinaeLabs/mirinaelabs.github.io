@@ -8,35 +8,41 @@ const isKo = locale === "ko";
 const copy = siteCopy[locale];
 const page = isKo ? {
   title: "AuroraViewer — Mac에서 이미지를 보고, 고르고, 정리하세요",
-  description: "폴더·RAW·PDF·ZIP/RAR/7z를 한 라이브러리에서 열고 비교, 평가, 태그, 검사, 내보내기까지 이어가는 macOS 이미지 뷰어입니다.",
+  description: "폴더와 압축 파일, RAW, PDF를 한 라이브러리에서 열고 비교·평가·태그·검사·내보내기까지 처리하는 macOS 이미지 뷰어입니다.",
+  heroEyebrow: "macOS용 이미지 검토·정리",
+  workflowEyebrow: "한곳에서 이어지는 작업",
+  libraryEyebrow: "빠른 라이브러리 검토",
+  compareEyebrow: "세밀한 비교",
+  formatEyebrow: "다양한 입력과 꼼꼼한 출력",
+  manualEyebrow: "사용 설명서에서 시작하기",
   headline: ["이미지를 여는 순간부터,", "고르는 일까지."],
-  intro: "폴더와 압축 파일을 하나의 라이브러리로 열고, 큰 이미지도 자연스럽게 탐색하세요. 비교하고, 평가하고, Finder 태그를 붙이고, 필요한 결과만 내보낼 수 있습니다.",
-  facts: ["모든 기능 무료", "사용자가 선택한 파일을 Mac 안에서 처리", `macOS ${productFacts.minimumMacOS} 이상`],
+  intro: "폴더와 압축 파일을 한 라이브러리에 모아 큰 이미지도 편하게 살펴보세요. 비교하고, 별점과 Finder 태그로 정리한 뒤 필요한 이미지만 내보낼 수 있습니다.",
+  facts: ["모든 기능 무료", "선택한 파일은 Mac 안에서만 처리", `macOS ${productFacts.minimumMacOS} 이상`],
   heroAlt: "AuroraViewer에서 폴더의 사진을 썸네일로 탐색하고 선택한 이미지를 크게 보는 화면",
-  heroCaption: "실제 AuroraViewer 화면 · 라이브러리, 평가 도구, 미니맵",
-  workflowTitle: ["열기, 보기, 정리를", "한 흐름 안에서."],
-  workflowIntro: "파일을 하나씩 다시 열거나 검토 결과를 다른 도구로 옮기지 않아도 됩니다. AuroraViewer의 라이브러리가 원본 위치와 작업 맥락을 함께 유지합니다.",
+  heroCaption: "AuroraViewer 실제 화면 · 라이브러리, 평가 도구, 미니맵",
+  workflowTitle: ["열고, 살펴보고, 정리하는 일을", "한곳에서."],
+  workflowIntro: "파일을 한 장씩 다시 열거나 검토 결과를 다른 앱으로 옮길 필요가 없습니다. 원본 파일은 제자리에 둔 채 한 라이브러리에서 계속 작업하세요.",
   workflows: [
-    ["01 · OPEN", "소스 그대로 열기", "이미지와 폴더, 하위 폴더, ZIP·RAR·7z를 추가하면 지원 이미지를 소스별 그룹으로 구성합니다."],
-    ["02 · REVIEW", "화면에 맞춰 보기", "창 맞춤부터 원본 크기, 200%, 두 장 보기, 2–4분할 비교까지 검토 방식에 맞게 전환합니다."],
-    ["03 · ORGANIZE", "선택을 결과로 남기기", "별점과 Pick/Reject, Finder 태그, 파일 이동·복사, 변환 내보내기로 다음 작업을 준비합니다."]
+    ["01 · 열기", "폴더와 압축 파일까지 한 번에", "이미지, 폴더와 하위 폴더, ZIP·RAR·7z를 추가하면 파일을 가져온 위치별로 묶어 보여 줍니다."],
+    ["02 · 보기", "이미지마다 알맞은 보기로", "창 크기에 맞추기, 원본 크기로 보기, 200%로 보기, 두 장 보기와 2~4분할 비교를 바로 전환합니다."],
+    ["03 · 정리", "고른 이미지를 바로 정리", "별점과 선택/제외, Finder 태그를 남기고 파일을 이동·복사하거나 다른 형식으로 내보냅니다."]
   ],
-  libraryTitle: ["많은 사진도", "빠르게 좁혀갑니다."],
-  libraryIntro: "리스트와 썸네일 그리드를 오가며 파일명·확장자를 검색하고, 촬영일·해상도·별점 등으로 정렬하세요.",
-  libraryBullets: ["별점, Pick/Reject, 확장자, Finder 태그, 애니메이션 필터", "다중 선택과 현재 필터 결과에 일괄 평가·태그", "최근 작업 실행 취소와 백그라운드 파일 작업"],
+  libraryTitle: ["많은 이미지에서", "필요한 것만 골라내세요."],
+  libraryIntro: "리스트와 썸네일 모드를 오가며 파일명이나 확장자로 검색하고, 촬영일·해상도·별점 등 원하는 기준으로 정렬하세요.",
+  libraryBullets: ["별점, 선택/제외, 확장자, Finder 태그, 애니메이션 필터", "선택한 이미지나 검색·필터 결과에 별점과 태그를 한꺼번에 적용", "마지막 작업 실행 취소와 진행 중인 파일 작업 확인"],
   libraryLink: "정리 기능 전체 보기",
   libraryAlt: "AuroraViewer 썸네일 모드에서 사진을 별점과 태그로 검토하는 화면",
   compareTitle: ["차이를 놓치지 않는", "2–4분할 비교."],
-  compareIntro: "후보를 슬롯에 놓고 확대·이동을 동기화하세요. 필요한 슬롯만 독립적으로 움직일 수도 있습니다.",
-  compareBullets: ["2·3·4슬롯 레이아웃과 드래그 앤 드롭 배치", "슬롯별 또는 동기화된 줌·팬", "활성 슬롯에서 바로 별점·선택·Finder 태그"],
+  compareIntro: "비교할 이미지를 나란히 놓고 확대 비율과 위치를 맞춰 보세요. 필요한 이미지만 따로 움직여 다른 부분을 볼 수도 있습니다.",
+  compareBullets: ["2·3·4분할 화면과 드래그 앤 드롭 배치", "이미지별 또는 동기화된 확대·이동", "현재 선택한 이미지에 바로 별점·선택/제외·Finder 태그 적용"],
   compareLink: "비교 모드 사용법",
   compareAlt: "AuroraViewer 비교 모드에서 두 이미지를 나란히 놓고 동기화해 보는 화면",
   formatTitle: ["사진부터 RAW, 문서,", "압축 파일까지."],
-  formatIntro: "파일을 변환하기 전에 먼저 확인하고, 필요한 결과는 목적에 맞는 형식과 크기로 내보낼 수 있습니다.",
+  formatIntro: "변환하기 전에 여러 형식의 파일을 바로 확인하세요. 필요한 이미지는 용도에 맞는 형식과 크기로 내보낼 수 있습니다.",
   formatGroups: [
     ["이미지 · RAW", "JPEG, PNG, TIFF, HEIC, WebP, AVIF, PSD와 주요 카메라 RAW 형식"],
     ["문서 · 압축", "SVG, AI, EPS, PDF와 ZIP, RAR, 7z 안의 지원 이미지"],
-    ["변환 내보내기", `${productFacts.exportFormats.join(" · ")} 형식, 자르기·리사이즈·메타데이터 옵션`]
+    ["형식을 바꿔 내보내기", `${productFacts.exportFormats.join(" · ")} 형식, 자르기·크기 조절·메타데이터 설정`]
   ],
   manualTitle: ["필요한 기능을", "바로 찾아보세요."],
   manualIntro: "처음 파일을 여는 방법부터 비교, 중복 이미지 검토, 내보내기, 단축키와 문제 해결까지 작업 순서대로 정리했습니다.",
@@ -44,6 +50,12 @@ const page = isKo ? {
 } : {
   title: "AuroraViewer — View, choose, and organize images on Mac",
   description: "A macOS image viewer that brings folders, RAW, PDF, ZIP, RAR, and 7z into one library for comparison, rating, tagging, inspection, and export.",
+  heroEyebrow: "macOS image review & organization",
+  workflowEyebrow: "One continuous workflow",
+  libraryEyebrow: "Library review",
+  compareEyebrow: "Compare closely",
+  formatEyebrow: "Broad input, careful output",
+  manualEyebrow: "Start with the manual",
   headline: ["From the moment you open it", "to the choice you keep."],
   intro: "Bring folders and archives into one library and move naturally through large images. Compare, rate, add Finder tags, and export only the results you need.",
   facts: ["Every feature is free", "Processes user-selected files on your Mac", `macOS ${productFacts.minimumMacOS} or later`],
@@ -87,7 +99,7 @@ const page = isKo ? {
           <img src={`${SITE_BASE}/assets/auroraviewer-icon.png`} width="62" height="62" alt={isKo ? "AuroraViewer 앱 아이콘" : "AuroraViewer app icon"} />
           <p><strong>AuroraViewer</strong><span>{copy.version}</span></p>
         </div>
-        <p class="eyebrow">macOS image review & organization</p>
+        <p class="eyebrow">{page.heroEyebrow}</p>
         <h1>{page.headline[0]}<br />{page.headline[1]}</h1>
         <p class="lede">{page.intro}</p>
         <div class="button-row">
@@ -108,7 +120,7 @@ const page = isKo ? {
   <section class="section section--tint">
     <div class="wrap">
       <div class="section-heading">
-        <p class="eyebrow">One continuous workflow</p>
+        <p class="eyebrow">{page.workflowEyebrow}</p>
         <h2>{page.workflowTitle[0]}<br />{page.workflowTitle[1]}</h2>
         <p class="lede">{page.workflowIntro}</p>
       </div>
@@ -127,7 +139,7 @@ const page = isKo ? {
   <section class="section">
     <div class="wrap feature-split">
       <div class="feature-split__copy">
-        <p class="eyebrow">Library review</p>
+        <p class="eyebrow">{page.libraryEyebrow}</p>
         <h2>{page.libraryTitle[0]}<br />{page.libraryTitle[1]}</h2>
         <p class="lede">{page.libraryIntro}</p>
         <ul>{page.libraryBullets.map((item) => <li>{item}</li>)}</ul>
@@ -145,7 +157,7 @@ const page = isKo ? {
         <img class="screenshot" src={screenshotPath("compare", locale)} width="1164" height="709" alt={page.compareAlt} loading="lazy" />
       </div>
       <div class="feature-split__copy">
-        <p class="eyebrow">Compare closely</p>
+        <p class="eyebrow">{page.compareEyebrow}</p>
         <h2>{page.compareTitle[0]}<br />{page.compareTitle[1]}</h2>
         <p class="lede">{page.compareIntro}</p>
         <ul>{page.compareBullets.map((item) => <li>{item}</li>)}</ul>
@@ -157,7 +169,7 @@ const page = isKo ? {
   <section class="section">
     <div class="wrap">
       <div class="section-heading">
-        <p class="eyebrow">Broad input, careful output</p>
+        <p class="eyebrow">{page.formatEyebrow}</p>
         <h2>{page.formatTitle[0]}<br />{page.formatTitle[1]}</h2>
         <p class="lede">{page.formatIntro}</p>
       </div>
@@ -172,7 +184,7 @@ const page = isKo ? {
 
   <section class="section section--tint">
     <div class="reading-wrap">
-      <p class="eyebrow">Start with the manual</p>
+      <p class="eyebrow">{page.manualEyebrow}</p>
       <h2>{page.manualTitle[0]}<br />{page.manualTitle[1]}</h2>
       <p class="lede">{page.manualIntro}</p>
       <div class="button-row">

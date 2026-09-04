@@ -26,7 +26,7 @@ const mediaList = (media: ManualMedia | ManualMedia[]) => Array.isArray(media) ?
     <article class="manual-article">
       <p class="manual-breadcrumb"><a href={localizedPath(locale, "manual")}>{isKo ? "사용 설명서" : "Manual"}</a> / {topicTitle}</p>
       <header>
-        <p class="eyebrow">AuroraViewer manual</p>
+        <p class="eyebrow">{isKo ? "AuroraViewer 사용 설명서" : "AuroraViewer manual"}</p>
         <h1>{topicTitle}</h1>
         <p class="lede">{text(topic.purpose, locale)}</p>
       </header>

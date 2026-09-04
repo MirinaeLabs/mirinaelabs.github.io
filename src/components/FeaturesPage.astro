@@ -9,38 +9,46 @@ const copy = siteCopy[locale];
 
 const page = isKo ? {
   title: "AuroraViewer 기능 — 이미지 검토와 정리를 한곳에서",
-  description: "폴더·압축·RAW 열기, 대용량 이미지 탐색, 비교, 별점과 Finder 태그, 색상·메타데이터 검사, 중복 찾기와 변환 내보내기를 살펴보세요.",
+  description: "폴더·압축 파일·RAW 열기, 큰 이미지 탐색, 비교, 별점과 Finder 태그, 색상·메타데이터 확인, 중복 찾기와 변환 내보내기 기능을 소개합니다.",
+  eyebrow: "주요 기능",
+  storyEyebrows: ["찾아보기", "검토", "비교", "자세히 보기", "정리", "내보내기"],
+  formatsEyebrow: "지원 형식",
+  workflowEyebrow: "설정과 이어서 작업",
   headline: ["보는 도구를 넘어,", "고르고 정리하는 뷰어."],
-  intro: "AuroraViewer는 원본 파일의 위치를 유지한 채 탐색, 비교, 평가, 태그, 검사와 내보내기를 연결합니다. 아래 기능은 현재 배포 소스와 버전 1.6.3을 기준으로 정리했습니다.",
+  intro: "AuroraViewer에서는 원본 파일을 제자리에 둔 채 한 라이브러리에서 탐색부터 내보내기까지 처리할 수 있습니다. 버전 1.6.3에서 제공하는 기능을 작업 순서에 따라 살펴보세요.",
   groups: [
-    ["01 · INPUT", "여러 소스를 한 라이브러리로", "개별 이미지, 여러 폴더와 하위 폴더, ZIP·RAR·7z 안의 이미지를 소스별 그룹으로 엽니다. Finder에서 열기와 드래그 앤 드롭도 지원합니다.", ["이미지·폴더·압축 파일 동시 추가", "그룹 접기·펼치기와 순서 변경", "중복 URL 제거와 숨김 항목 제외"], "open-and-import"],
-    ["02 · VIEW", "큰 이미지도 맥락과 세부를 함께", "창 맞춤, 원본 크기, 200%, 비율 유지와 커서 중심 확대를 오가며 전체 구도와 픽셀을 확인합니다.", ["점진적 고해상도 렌더링", "미니맵·히스토그램·픽셀 그리드", "회전, 투명 배경, 안티에일리어싱 설정"], "view-and-zoom"],
-    ["03 · FIND", "검색하고 정렬해 빠르게 좁히기", "파일명과 확장자를 검색하고 촬영일·수정일·크기·해상도·별점 등으로 정렬합니다. 여러 필터를 조합할 수 있습니다.", ["별점과 Pick/Reject 필터", "확장자·Finder 태그·애니메이션 필터", "필터 결과를 일괄 작업 범위로 사용"], "sidebar-search-filter"],
-    ["04 · REVIEW", "평가와 Finder 태그를 원본 곁에", "0–5점과 Pick/Reject 상태를 기록하고 Finder 태그를 읽고 씁니다. 다중 선택이나 필터 결과에도 한 번에 적용할 수 있습니다.", ["키보드 중심 평가", "Finder 태그 생성·적용·해제", "최근 Aurora 작업 실행 취소"], "rate-tag-organize"],
-    ["05 · COMPARE", "후보를 나란히, 필요한 만큼", "2·3·4개 슬롯에 이미지를 배치하고 줌과 팬을 동기화합니다. 만화·스캔에는 두 장 보기와 오른쪽에서 왼쪽 읽기 방향을 사용할 수 있습니다.", ["드래그 앤 드롭 슬롯 배치", "슬롯별 독립 또는 동기화된 이동", "애니메이션 재생과 슬라이드쇼"], "compare-and-pages"],
-    ["06 · INSPECT", "색상과 촬영 정보를 더 가까이", "포인터 아래 픽셀의 RGBA·HEX·HSB 값을 확대해 보고, EXIF 오버레이에서 카메라와 촬영 정보를 확인합니다.", ["컬러 인스펙터와 루페", "히스토그램·채널 보기", "JPEG·TIFF·HEIC의 일부 EXIF 필드 편집"], "inspect-color-metadata"],
-    ["07 · CLEAN", "비슷한 이미지를 묶어 검토", "파일 해시로 완전 중복을 찾거나 지각 해시와 평균 색으로 유사 이미지를 그룹화합니다. 자동 삭제하지 않고 사용자가 결과를 검토합니다.", ["전체·선택·필터 결과 범위", "유사도 임계값 조절", "그룹별 유지 후보 표시"], "duplicates"],
-    ["08 · OUTPUT", "다음 작업에 맞춰 내보내기", "선택한 이미지를 변환하거나 원본을 복사·이동합니다. 자르기, 리사이즈, 품질과 메타데이터 정책을 목적에 맞게 정합니다.", ["PNG·JPEG·TIFF·HEIC·WebP", "픽셀·퍼센트·긴 변·짧은 변 리사이즈", "메타데이터 유지·제거·사용자 선택"], "export-and-metadata"]
+    ["01 · 열기", "이미지와 폴더, 압축 파일을 한곳에", "개별 이미지와 여러 폴더, 하위 폴더, ZIP·RAR·7z 안의 이미지를 가져온 위치별로 묶어 엽니다. Finder에서 열거나 드래그 앤 드롭으로 추가할 수도 있습니다.", ["이미지·폴더·압축 파일 함께 추가", "그룹 접기·펼치기와 순서 변경", "같은 파일의 중복 추가 방지와 숨김 항목 제외"], "open-and-import"],
+    ["02 · 보기", "전체 구도부터 픽셀까지 선명하게", "창 크기에 맞추기, 원본 크기로 보기, 200%로 보기, 비율 유지를 오가며 전체 이미지와 세부 픽셀을 확인합니다.", ["큰 이미지를 빠르게 표시한 뒤 선명하게 전환", "미니맵·히스토그램·픽셀 그리드", "회전, 투명 영역 배경, 안티에일리어싱 설정"], "view-and-zoom"],
+    ["03 · 찾기", "원하는 이미지를 빠르게 찾기", "파일명이나 확장자로 검색하고 촬영일·수정일·파일 크기·해상도·별점 등으로 정렬하세요. 여러 필터를 함께 적용할 수도 있습니다.", ["별점과 선택/제외 필터", "확장자·Finder 태그·애니메이션 필터", "검색·필터 결과를 한꺼번에 처리"], "sidebar-search-filter"],
+    ["04 · 검토", "별점과 태그로 바로 정리", "0~5점과 선택/제외 상태를 기록하고 Finder 태그를 읽거나 씁니다. 여러 이미지나 검색·필터 결과에도 한 번에 적용할 수 있습니다.", ["별점과 선택/제외를 키보드로 입력", "Finder 태그 생성·적용·해제", "마지막 작업 실행 취소"], "rate-tag-organize"],
+    ["05 · 비교", "이미지를 나란히 놓고 비교", "2~4분할 화면에 이미지를 놓고 확대 비율과 위치를 맞춰 봅니다. 만화나 스캔 자료는 두 장 보기와 우→좌 읽기 순서로 볼 수 있습니다.", ["드래그 앤 드롭으로 이미지 배치", "이미지별 또는 동기화된 확대·이동", "애니메이션 재생과 슬라이드쇼"], "compare-and-pages"],
+    ["06 · 검사", "색상과 촬영 정보를 자세히", "포인터 아래 픽셀을 확대해 RGBA·HEX·HSB 값을 보고, EXIF 오버레이에서 카메라와 촬영 정보를 확인합니다.", ["컬러 픽커와 확대 보기", "히스토그램과 채널별 보기", "JPEG·TIFF·HEIC의 일부 EXIF 항목 편집"], "inspect-color-metadata"],
+    ["07 · 정리", "중복·유사 이미지를 모아 검토", "내용이 완전히 같거나 화면상 비슷한 이미지를 그룹으로 모읍니다. 결과는 직접 확인한 뒤 정리할 수 있으며 자동으로 삭제하지 않습니다.", ["전체 라이브러리·선택한 이미지·검색 결과·폴더에서 찾기", "유사도 민감도 조절", "그룹마다 유지할 이미지 추천"], "duplicates"],
+    ["08 · 내보내기", "용도에 맞게 내보내기", "선택한 이미지는 형식을 바꿔 내보내고, 원본은 복사하거나 이동할 수 있습니다. 자르기, 크기, 품질과 메타데이터 처리 방법을 정하세요.", ["PNG·JPEG·TIFF·HEIC·WebP", "원본 크기·5~300% 비율·가로/세로 픽셀 지정", "메타데이터 유지·위치 정보만 제거·모두 제거"], "export-and-metadata"]
   ],
-  inspectTitle: ["눈으로 확인하고,", "수치로 다시 확인합니다."],
-  inspectIntro: "컬러 인스펙터는 원본 좌표를 따라 픽셀을 확대하고 색상 값을 표시합니다. EXIF 오버레이와 히스토그램을 함께 사용하면 파일을 바꾸지 않고도 필요한 정보를 살펴볼 수 있습니다.",
-  inspectAlt: "AuroraViewer 컬러 인스펙터가 이미지 픽셀과 색상 값을 보여 주는 화면",
+  inspectTitle: ["눈으로 보고,", "수치로 확인하세요."],
+  inspectIntro: "컬러 픽커로 포인터 아래 픽셀을 확대하고 색상 값을 확인하세요. EXIF 오버레이와 히스토그램을 함께 켜면 파일을 수정하지 않고도 촬영 정보와 색상 분포를 살펴볼 수 있습니다.",
+  inspectAlt: "AuroraViewer 컬러 픽커가 확대된 이미지 픽셀과 색상 값을 보여 주는 화면",
   libraryAlt: "AuroraViewer 썸네일 모드에서 여러 이미지를 탐색하고 평가하는 화면",
   viewerAlt: "AuroraViewer에서 선택한 이미지를 크게 보고 별점과 Finder 태그를 관리하는 화면",
   compareAlt: "AuroraViewer 비교 모드에서 두 이미지를 나란히 확인하는 화면",
   flowNavLabel: "기능 흐름 바로가기",
   flowLabels: ["탐색", "검토", "비교", "검사", "정리", "내보내기"],
   formatsTitle: "지원 형식",
-  formatsIntro: "스캐너가 인식하는 입력 확장자입니다. 실제 표시 결과는 파일 내부 코덱과 macOS 지원에 따라 달라질 수 있습니다.",
+  formatsIntro: "AuroraViewer에서 열 수 있는 파일 형식입니다. 실제 표시 여부와 품질은 파일 내부 코덱과 macOS 지원에 따라 달라질 수 있습니다.",
   images: "이미지 · RAW · 문서",
   archives: "압축",
   exports: "변환 출력",
-  workflowTitle: "설정과 작업 상태도 이어집니다.",
-  workflowText: "단축키를 바꾸고, 마우스·렌더링·사이드바 동작을 조정할 수 있습니다. 세션 저장과 복원, 여러 뷰어 창, 현재 파일을 Finder에서 보기와 기본 편집 앱으로 열기도 제공합니다.",
+  workflowTitle: "내 작업 방식에 맞게 설정하세요.",
+  workflowText: "단축키와 마우스 동작, 이미지 표시 방식, 썸네일 바를 원하는 대로 조정하세요. 열어 둔 파일과 화면 상태를 복원하고 여러 뷰어 창을 함께 쓰거나, 현재 이미지를 Finder와 다른 앱에서 바로 열 수도 있습니다.",
   workflowLink: "설정·세션·창 사용법"
 } : {
   title: "AuroraViewer Features — Image review and organization in one place",
   description: "Explore folders, archives, RAW viewing, large-image navigation, comparison, ratings, Finder tags, color and metadata inspection, duplicate review, and converted export.",
+  eyebrow: "Product capabilities",
+  storyEyebrows: ["Browse", "Review", "Compare", "Inspect", "Organize", "Export"],
+  formatsEyebrow: "Formats",
+  workflowEyebrow: "Workspace continuity",
   headline: ["More than a viewer:", "choose and organize."],
   intro: "AuroraViewer connects browsing, comparison, ratings, tags, inspection, and export while preserving the source location of your files. These capabilities reflect the current source and version 1.6.3.",
   groups: [
@@ -51,7 +59,7 @@ const page = isKo ? {
     ["05 · COMPARE", "Place candidates side by side", "Arrange images in two, three, or four slots and synchronize zoom and pan. For comics and scans, use two-page viewing with right-to-left ordering when needed.", ["Drag-and-drop slot placement", "Independent or synchronized transforms", "Animation playback and slideshows"], "compare-and-pages"],
     ["06 · INSPECT", "Look closer at color and capture data", "Magnify the pixel under the pointer and read RGBA, HEX, and HSB values. Use the EXIF overlay for camera and capture information.", ["Color inspector and loupe", "Histogram and channel views", "Edit selected EXIF fields in JPEG, TIFF, and HEIC"], "inspect-color-metadata"],
     ["07 · CLEAN", "Group duplicate and similar images", "Find exact duplicates by file hash, or group visually similar images with perceptual hash and average color. Nothing is deleted automatically.", ["All, selection, or filtered-result scope", "Adjustable similarity threshold", "Review a suggested keeper in each group"], "duplicates"],
-    ["08 · OUTPUT", "Prepare files for the next task", "Convert selected images, or copy and move originals. Choose crop, dimensions, quality, and metadata handling for the intended result.", ["PNG, JPEG, TIFF, HEIC, and WebP", "Pixel, percent, long-edge, and short-edge resizing", "Keep, remove, or select metadata"], "export-and-metadata"]
+    ["08 · OUTPUT", "Prepare files for the next task", "Convert selected images, or copy and move originals. Choose crop, dimensions, quality, and metadata handling for the intended result.", ["PNG, JPEG, TIFF, HEIC, and WebP", "Original size, 5–300% scaling, or explicit width and height", "Keep, remove location, or strip metadata"], "export-and-metadata"]
   ],
   inspectTitle: ["Confirm it by eye,", "then confirm the values."],
   inspectIntro: "The Color Inspector follows source coordinates to magnify a pixel and report its values. Pair it with the EXIF overlay and histogram to inspect information without altering the file.",
@@ -76,7 +84,7 @@ const [input, view, find, review, compare, inspect, organize, output] = featureG
 
 <BaseLayout locale={locale} current="features" title={page.title} description={page.description} path="features">
   <header class="page-hero"><div class="wrap">
-    <p class="eyebrow">Product capabilities</p>
+    <p class="eyebrow">{page.eyebrow}</p>
     <h1>{page.headline[0]}<br />{page.headline[1]}</h1>
     <p class="lede">{page.intro}</p>
   </div></header>
@@ -89,7 +97,7 @@ const [input, view, find, review, compare, inspect, organize, output] = featureG
 
   <section class="product-section" id="browse"><div class="wrap product-story">
     <div class="product-story__copy">
-      <p class="eyebrow">Browse</p>
+      <p class="eyebrow">{page.storyEyebrows[0]}</p>
       <h2>{input[1]}</h2><p class="lede">{input[2]}</p>
       <ul class="feature-list">{input[3].map((item) => <li>{item}</li>)}</ul>
       <a class="text-link" href={localizedPath(locale, `manual/${input[4]}`)}>{copy.readMore}</a>
@@ -103,7 +111,7 @@ const [input, view, find, review, compare, inspect, organize, output] = featureG
   <section class="product-section section--tint" id="review"><div class="wrap product-story product-story--reverse">
     <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("viewer", locale)} width="1164" height="709" alt={page.viewerAlt} loading="lazy" /></figure>
     <div class="product-story__copy">
-      <p class="eyebrow">Review</p><h2>{review[1]}</h2><p class="lede">{review[2]}</p>
+      <p class="eyebrow">{page.storyEyebrows[1]}</p><h2>{review[1]}</h2><p class="lede">{review[2]}</p>
       <ul class="feature-list">{review[3].map((item) => <li>{item}</li>)}</ul>
       <a class="text-link" href={localizedPath(locale, `manual/${review[4]}`)}>{copy.readMore}</a>
     </div>
@@ -111,7 +119,7 @@ const [input, view, find, review, compare, inspect, organize, output] = featureG
 
   <section class="product-section" id="compare"><div class="wrap product-story">
     <div class="product-story__copy">
-      <p class="eyebrow">Compare</p><h2>{compare[1]}</h2><p class="lede">{compare[2]}</p>
+      <p class="eyebrow">{page.storyEyebrows[2]}</p><h2>{compare[1]}</h2><p class="lede">{compare[2]}</p>
       <ul class="feature-list">{compare[3].map((item) => <li>{item}</li>)}</ul>
       <a class="text-link" href={localizedPath(locale, `manual/${compare[4]}`)}>{copy.readMore}</a>
     </div>
@@ -121,7 +129,7 @@ const [input, view, find, review, compare, inspect, organize, output] = featureG
   <section class="product-section section--tint" id="inspect"><div class="wrap product-story product-story--reverse">
     <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("inspect", locale)} width="1164" height="709" alt={page.inspectAlt} loading="lazy" /></figure>
     <div class="product-story__copy">
-      <p class="eyebrow">Inspect</p><h2>{inspect[1]}</h2><p class="lede">{inspect[2]}</p>
+      <p class="eyebrow">{page.storyEyebrows[3]}</p><h2>{inspect[1]}</h2><p class="lede">{inspect[2]}</p>
       <ul class="feature-list">{inspect[3].map((item) => <li>{item}</li>)}</ul>
       <a class="text-link" href={localizedPath(locale, `manual/${inspect[4]}`)}>{copy.readMore}</a>
     </div>
@@ -129,14 +137,14 @@ const [input, view, find, review, compare, inspect, organize, output] = featureG
 
   <section class="product-section" id="organize"><div class="wrap product-duo">
     {[organize, output].map((group, index) => <article id={index === 1 ? "export" : undefined}>
-      <p class="eyebrow">{index === 0 ? "Organize" : "Export"}</p><h2>{group[1]}</h2><p class="lede">{group[2]}</p>
+      <p class="eyebrow">{page.storyEyebrows[index + 4]}</p><h2>{group[1]}</h2><p class="lede">{group[2]}</p>
       <ul class="feature-list">{group[3].map((item) => <li>{item}</li>)}</ul>
       <a class="text-link" href={localizedPath(locale, `manual/${group[4]}`)}>{copy.readMore}</a>
     </article>)}
   </div></section>
 
   <section class="product-section product-section--formats section--tint"><div class="wrap">
-    <div class="section-heading"><p class="eyebrow">Formats</p><h2>{page.formatsTitle}</h2><p class="lede">{page.formatsIntro}</p></div>
+    <div class="section-heading"><p class="eyebrow">{page.formatsEyebrow}</p><h2>{page.formatsTitle}</h2><p class="lede">{page.formatsIntro}</p></div>
     <div class="format-groups">
       <article class="format-group"><h3>{page.images}</h3><p>{productFacts.imageFormats.join(" · ")}</p></article>
       <article class="format-group"><h3>{page.archives}</h3><p>{productFacts.archiveFormats.join(" · ")}</p></article>
@@ -146,7 +154,7 @@ const [input, view, find, review, compare, inspect, organize, output] = featureG
   </div></section>
 
   <section class="product-section"><div class="reading-wrap">
-    <p class="eyebrow">Workspace continuity</p><h2>{page.workflowTitle}</h2><p class="lede">{page.workflowText}</p>
+    <p class="eyebrow">{page.workflowEyebrow}</p><h2>{page.workflowTitle}</h2><p class="lede">{page.workflowText}</p>
     <a class="text-link" href={localizedPath(locale, "manual/settings-sessions-windows")}>{page.workflowLink}</a>
   </div></section>
 </BaseLayout>
