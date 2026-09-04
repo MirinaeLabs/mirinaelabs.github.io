@@ -19,6 +19,7 @@ export interface ManualSection {
   note?: LocalizedText;
   warning?: LocalizedText;
   media?: ManualMedia | ManualMedia[];
+  mediaPosition?: "beforeSteps" | "afterSteps";
   shortcuts?: Array<{
     action: LocalizedText;
     key: string;
@@ -66,7 +67,7 @@ export const manualTopics: ManualTopic[] = [
         heading: l("첫 라이브러리 열기", "Open your first library"),
         steps: [
           l("Mac App Store에서 AuroraViewer를 설치하고 실행합니다.", "Install AuroraViewer from the Mac App Store and launch it."),
-          l("파일 메뉴에서 ‘파일 또는 폴더 추가…’를 선택하거나 ⌘O를 누릅니다.", "Choose File > Open, or press Command-O."),
+          l("파일 메뉴에서 ‘파일 또는 폴더 추가…’를 선택하거나 ⌘O를 누릅니다.", "Choose File > Add File or Folder…, or press Command-O."),
           l("이미지, 폴더 또는 ZIP·RAR·7z 압축 파일을 하나 이상 선택합니다.", "Select one or more images, folders, or ZIP, RAR, or 7z archives."),
           l("썸네일 바에서 그룹과 썸네일을 확인한 뒤 첫 이미지를 선택합니다.", "Review the source groups and thumbnails in the sidebar, then select an image.")
         ],
@@ -92,11 +93,12 @@ export const manualTopics: ManualTopic[] = [
           "기본 뷰어 화면에서 라이브러리와 현재 이미지, 평가 도구, 탐색 위치를 함께 확인할 수 있습니다.",
           "The main viewer keeps the library, current image, review controls, and navigation position in one window."
         ),
+        mediaPosition: "beforeSteps",
         bullets: [
           l("썸네일 바: 가져온 위치별 그룹과 검색·정렬·필터, 여러 이미지 선택을 관리합니다.", "Sidebar: manage input sources, search, sorting, filters, and multiple selection."),
           l("이미지 화면: 현재 이미지, 두 장 보기 또는 비교 화면을 표시합니다.", "Canvas: displays the current image, a two-page spread, or Compare slots."),
           l("상단 도구: 별점, 선택/제외, Finder 태그와 보기 상태를 바꿉니다.", "Top controls: manage ratings, Pick/Reject, Finder tags, and view state."),
-          l("하단 슬라이더와 정보 창: 이미지 이동, 배율, 파일 정보, 미니맵과 히스토그램을 보여 줍니다.", "Bottom slider and overlays: help with navigation, zoom, file information, the minimap, and histogram.")
+          l("하단 슬라이더와 화면 정보: 이미지 이동, 배율, 파일 정보, 미니맵과 히스토그램을 보여 줍니다.", "Bottom slider and overlays: help with navigation, zoom, file information, the minimap, and histogram.")
         ]
       }
     ],
@@ -106,7 +108,7 @@ export const manualTopics: ManualTopic[] = [
     slug: "open-and-import",
     title: l("이미지·폴더·압축 열기", "Open images, folders, and archives"),
     summary: l("이미지, 폴더, 압축 파일을 여는 방법과 처리 조건을 확인합니다.", "Understand the available input paths and how folders and archives are handled."),
-    purpose: l("직접 고른 이미지뿐 아니라 폴더와 하위 폴더, 압축 파일 안의 이미지도 같은 라이브러리에서 볼 수 있습니다. 가져온 위치별로 묶여 서로 다른 폴더의 이미지도 함께 검토하기 쉽습니다.", "You can review selected images, folder trees, and images inside archives in the same library. Source groups preserve where each set came from."),
+    purpose: l("직접 고른 이미지뿐 아니라 폴더와 하위 폴더, 압축 파일 안의 이미지도 같은 라이브러리에서 볼 수 있습니다. 이미지가 가져온 위치별로 묶이므로 서로 다른 폴더도 함께 검토하기 쉽습니다.", "You can review selected images, folder trees, and images inside archives in the same library. Source groups preserve where each set came from."),
     sections: [
       {
         heading: l("현재 뷰어에 추가하기", "Add sources to the current viewer"),
@@ -120,7 +122,7 @@ export const manualTopics: ManualTopic[] = [
           "Added images and folders remain grouped by source so you can browse them as one library."
         ),
         steps: [
-          l("파일 메뉴에서 ‘파일 또는 폴더 추가…’를 선택하거나 ⌘O를 누릅니다.", "Choose the add/open command from the File menu, or press Command-O."),
+          l("파일 메뉴에서 ‘파일 또는 폴더 추가…’를 선택하거나 ⌘O를 누릅니다.", "Choose File > Add File or Folder…, or press Command-O."),
           l("여러 이미지, 폴더, 압축 파일을 함께 선택합니다.", "Select multiple images, folders, and archives together."),
           l("파일을 모두 불러오면 썸네일 바에서 각 그룹을 펼쳐 이미지를 확인합니다.", "When scanning finishes, expand the source groups in the sidebar to review the results."),
           l("더 열 파일이 있으면 같은 명령을 다시 사용하거나 창으로 드래그 앤 드롭합니다.", "Repeat the command or drag more sources into the window when you need to add input.")
@@ -163,7 +165,7 @@ export const manualTopics: ManualTopic[] = [
     slug: "browse-and-navigate",
     title: l("탐색과 이동", "Browse and navigate"),
     summary: l("키보드와 하단 슬라이더, 썸네일 바를 이용해 라이브러리를 빠르게 이동합니다.", "Move quickly through a library with the keyboard, slider, and sidebar."),
-    purpose: l("이미지가 많아도 현재 보고 있는 파일과 목록 위치를 가능한 한 유지합니다. 키보드와 하단 슬라이더, 썸네일 바를 이용해 가까운 이미지부터 멀리 떨어진 이미지까지 빠르게 이동하세요.", "In a large library, staying oriented while moving to the next candidate matters. AuroraViewer preserves selection and scroll position where possible, even after the list changes."),
+    purpose: l("이미지가 많아도 보고 있던 파일과 목록 위치를 쉽게 이어갈 수 있습니다. 키보드와 하단 슬라이더, 썸네일 바를 이용해 가까운 이미지부터 멀리 떨어진 이미지까지 빠르게 이동하세요.", "In a large library, staying oriented while moving to the next candidate matters. AuroraViewer preserves selection and scroll position where possible, even after the list changes."),
     sections: [
       {
         heading: l("이전·다음 이미지로 이동", "Move to the previous or next image"),
@@ -322,7 +324,7 @@ export const manualTopics: ManualTopic[] = [
           l("검색·정렬·필터를 적용하고 결과 개수를 확인합니다.", "Apply search, sorting, and filters, then confirm the result count."),
           l("별점이나 Finder 태그를 적용할 때 ‘현재 필터 결과’를 선택합니다.", "Choose the current filtered results as the scope for a rating or Finder tag action."),
           l("바뀔 이미지 수와 내용을 확인한 뒤 실행합니다.", "Review the intended change, then run it."),
-          l("잘못 적용했다면 ‘마지막 작업 실행 취소’를 사용합니다.", "If the action was wrong, use Undo Last Aurora Operation.")
+          l("잘못 적용했다면 ‘마지막 작업 실행 취소’를 사용합니다.", "If the action was wrong, use Undo Last Operation.")
         ],
         warning: l("검색·필터 결과 전체를 파일 이동·복사나 중복 검사에 사용할 수도 있습니다. 실행하기 전에 대상 이미지 수를 한 번 더 확인하세요.", "Filtered results can also define a broad scope for move, copy, or duplicate scans. Check the scope again before a file-system operation.")
       }
@@ -407,19 +409,19 @@ export const manualTopics: ManualTopic[] = [
           l("태그를 적용할 이미지를 선택합니다.", "Select the images you want to tag."),
           l("상단 태그 도구나 ⌃1–⌃7을 사용해 색상 태그를 전환합니다.", "Use the top tag controls or Control-1 through Control-7 to toggle color tags."),
           l("태그 필터로 같은 Finder 태그가 붙은 이미지를 다시 모읍니다.", "Use the tag filter to gather images with the same Finder tag."),
-          l("모든 태그를 지우려면 대상 이미지를 확인한 뒤 ‘태그 지우기’를 사용합니다.", "When clearing tags, confirm the scope before using Clear All Tags.")
+          l("모든 태그를 지우려면 대상 이미지를 확인한 뒤 ‘태그 지우기’를 사용합니다.", "When clearing tags, confirm the selection before using Clear Tags.")
         ],
         note: l("Finder 태그는 원본 파일에 저장되므로 다른 Mac 앱에서도 보입니다. 태그를 쓸 권한이 없으면 이미지가 있는 상위 폴더를 다시 선택해 접근을 승인해야 할 수 있습니다.", "Finder tags are extended attributes on the file itself. If write permission is missing, you may need to select and approve the containing folder again.")
       },
       {
         heading: l("목록에서 삭제와 휴지통 이동 구분", "Distinguish Remove from Trash"),
         bullets: [
-          l("‘선택한 이미지 목록에서 삭제’: 썸네일 바에서만 이미지를 빼며 원본 파일은 그대로 둡니다.", "Remove from List: removes the item only from the AuroraViewer library and leaves the source file intact."),
-          l("‘선택한 이미지 휴지통으로 이동’: 실제 파일을 Finder 휴지통으로 옮기고 성공한 이미지를 목록에서 뺍니다.", "Delete Image: moves the file to Finder Trash and removes successful items from the library."),
+          l("‘선택한 이미지 목록에서 삭제’: 썸네일 바에서만 이미지를 빼며 원본 파일은 그대로 둡니다.", "Remove Selected from List removes the items only from the AuroraViewer library and leaves the source files intact."),
+          l("‘선택한 이미지 휴지통으로 이동’: 실제 파일을 Finder 휴지통으로 옮기고 성공한 이미지를 목록에서 뺍니다.", "Move Selected to Trash moves the files to Finder Trash and removes successful items from the library."),
           l("휴지통 작업 실행 취소는 원래 위치가 비어 있고 휴지통 항목이 남아 있을 때만 복구될 수 있습니다.", "Undoing a trash operation can succeed only while the original location is available and the trashed item still exists."),
           l("압축 안에서 연 이미지는 원본 압축 내부를 직접 이동하거나 삭제하지 않습니다.", "Images opened from an archive do not directly move or delete the original entry inside that archive.")
         ],
-        warning: l("‘선택한 이미지 휴지통으로 이동’은 실제 파일을 옮깁니다. 실행 전에 선택한 이미지를 반드시 확인하세요.", "Delete Image moves real files to Trash. Always verify the selected images and scope before running it.")
+        warning: l("‘선택한 이미지 휴지통으로 이동’은 실제 파일을 옮깁니다. 실행 전에 선택한 이미지를 반드시 확인하세요.", "Move Selected to Trash moves real files to Trash. Always verify the selected images before running it.")
       },
       {
         heading: l("이름 변경, 이동, 복사", "Rename, move, and copy"),
@@ -428,7 +430,7 @@ export const manualTopics: ManualTopic[] = [
           l("이동이 끝나면 새 파일 위치가 라이브러리와 별점·선택/제외 기록에 반영됩니다.", "Move updates the library path and local review record for successful files."),
           l("복사하면 라이브러리의 원본은 그대로 남습니다. 복사본을 자동으로 지우는 실행 취소는 제공하지 않습니다.", "Copy keeps the original in the library and does not provide an automatic delete-the-copy undo."),
           l("‘선택한 이미지 내보내기’는 같은 이름이 있으면 번호를 붙여 기존 파일을 덮어쓰지 않습니다.", "Batch Export Originals adds a number to conflicting names instead of overwriting existing files."),
-          l("‘마지막 작업 실행 취소’는 최근 작업을 최대 30개까지 기억하며 앱을 다시 실행한 뒤까지 유지된다고 보장되지 않습니다.", "Undo Last Aurora Operation keeps up to 30 in-memory actions and is not guaranteed after relaunch.")
+          l("‘마지막 작업 실행 취소’는 최근 작업을 최대 30개까지 기억하며, 앱을 종료하면 실행 취소 기록은 사라집니다.", "Undo Last Operation keeps up to 30 actions in memory; the history does not survive relaunch.")
         ]
       }
     ],
@@ -509,8 +511,8 @@ export const manualTopics: ManualTopic[] = [
         heading: l("이미지 비교 방식", "Understand the matching methods"),
         bullets: [
           l("완전 동일: 파일 내용이 완전히 같은 이미지를 찾습니다.", "Exact: uses a full-file SHA-256 hash to find byte-identical files."),
-          l("같은 이미지 추정: 이미지 크기와 화면 특징을 비교해 다시 저장된 유사본을 찾습니다.", "Likely Same Image: uses pixel dimensions and a 64-bit perceptual hash to narrow likely re-encodes."),
-          l("시각 유사: Apple Vision 특징 거리로 비슷한 구도와 내용을 비교합니다.", "Visual Similarity: compares Apple Vision feature distance for similar composition and content."),
+          l("같은 이미지 추정: 이미지 크기와 픽셀 패턴을 비교해 다시 저장된 유사본을 찾습니다.", "Likely Same Image: uses pixel dimensions and a 64-bit perceptual hash to narrow likely re-encodes."),
+          l("시각 유사: Apple Vision으로 구도와 내용이 비슷한 이미지를 찾습니다.", "Visual Similarity: compares Apple Vision feature distance for similar composition and content."),
           l("RAW+JPEG: 같은 폴더에서 기본 파일명이 같은 카메라 원본과 현상본을 짝지어 봅니다.", "RAW+JPEG: pairs camera originals and rendered files with the same base name in the same folder.")
         ],
         note: l("‘AI 기반 유사 이미지 분류’는 설정에서 끌 수 있습니다. 민감도를 ‘넓게’로 정하면 결과가 많아져 직접 확인할 이미지도 늘어납니다.", "Vision-based classification can be disabled in Settings. Broad sensitivity returns more candidates and therefore requires more manual review.")
@@ -526,6 +528,7 @@ export const manualTopics: ManualTopic[] = [
           "검색 결과에는 각 그룹의 분류 기준과 유지 추천 이미지가 표시되며, 정리할 파일은 사용자가 직접 선택합니다.",
           "Scan results explain each group and recommend a keeper, while cleanup targets remain an explicit user choice."
         ),
+        mediaPosition: "beforeSteps",
         bullets: [
           l("그룹 종류와 신뢰도, 이미지 수, 예상 절약 용량을 먼저 확인합니다.", "Review match type, confidence, item count, and estimated savings first."),
           l("유지 추천은 해상도와 파일 크기, RAW 여부를 바탕으로 고른 참고 정보입니다.", "The recommended keeper is guidance based on resolution, file size, and RAW status."),
@@ -541,7 +544,7 @@ export const manualTopics: ManualTopic[] = [
     slug: "export-and-metadata",
     title: l("내보내기·자르기·\u200B메타데이터", "Export, crop, and metadata"),
     summary: l("원본 복사와 파일 형식 변환의 차이를 알아보고 자르기·크기·메타데이터를 설정합니다.", "Distinguish original-copy workflows from format conversion, then set crop, size, and metadata options."),
-    purpose: l("원본을 그대로 다른 이름으로 저장하는 방법과 픽셀을 다시 처리해 다른 형식으로 내보내는 방법은 결과가 다릅니다. 원하는 결과에 맞는 방법을 먼저 선택하세요.", "Saving an original under another name and re-encoding pixels into another format produce different results. Choose the path that matches your intent."),
+    purpose: l("원본을 그대로 다른 이름으로 저장하는 방법과 다른 형식으로 변환해 내보내는 방법은 결과가 다릅니다. 원하는 결과에 맞는 방법을 먼저 선택하세요.", "Saving an original under another name and re-encoding pixels into another format produce different results. Choose the path that matches your intent."),
     sections: [
       {
         heading: l("현재 이미지를 변환해 내보내기", "Export the current image with conversion"),
@@ -554,10 +557,11 @@ export const manualTopics: ManualTopic[] = [
           "저장하기 전에 파일 형식과 자르기, 크기, EXIF·ICC 처리 방법을 한 화면에서 확인합니다.",
           "Review format, crop, size, and EXIF or ICC policy together before saving."
         ),
+        mediaPosition: "beforeSteps",
         steps: [
-          l("파일 메뉴의 ‘내보내기’에서 ‘내보내기 시트 열기…’를 선택합니다.", "Open Export Current Image from the File menu."),
+          l("파일 메뉴의 ‘내보내기’에서 ‘내보내기 시트 열기…’를 선택합니다.", "From File > Export, choose Open Export Sheet…"),
           l("PNG, JPEG, TIFF, HEIC, WebP 중 출력 형식을 선택합니다.", "Choose PNG, JPEG, TIFF, HEIC, or WebP."),
-          l("손실 형식이라면 10–100% 품질을 정합니다.", "For a lossy format, choose 10–100% quality."),
+          l("JPEG, HEIC, WebP라면 10~100% 품질을 정합니다.", "For JPEG, HEIC, or WebP, choose 10–100% quality."),
           l("자르기, 크기, 메타데이터 처리 방법을 확인합니다.", "Review crop, size, and metadata policy."),
           l("저장 위치와 이름을 선택해 내보냅니다.", "Choose a destination and file name, then export.")
         ],
@@ -568,7 +572,7 @@ export const manualTopics: ManualTopic[] = [
         bullets: [
           l("미리보기 위에서 영역을 그리거나 이동·크기 조절하고, X·Y·가로·세로 픽셀 값을 직접 입력할 수 있습니다.", "Draw, move, and resize the crop on the preview, or enter X, Y, width, and height in pixels."),
           l("같은 이미지에 관심 영역(ROI)을 지정했다면 자르기 영역에 자동으로 반영됩니다.", "An ROI for the same image is automatically carried into the crop area."),
-          l("크기는 원본, 5–300% 비율, 명시한 가로·세로 픽셀 중 선택합니다.", "Choose original size, a 5–300% scale, or explicit width and height in pixels."),
+          l("크기는 원본, 5~300% 비율, 직접 입력한 가로·세로 픽셀 중 선택합니다.", "Choose original size, a 5–300% scale, or explicit width and height in pixels."),
           l("크기를 바꾸면 표시와 공유에 알맞은 8비트 sRGB로 처리됩니다. 고비트 심도나 광색역 원본을 보존하려는 용도에는 알맞지 않습니다.", "Resize uses an 8-bit sRGB path intended for display and sharing, not archival preservation of high-bit-depth or wide-gamut originals.")
         ]
       },
@@ -595,10 +599,10 @@ export const manualTopics: ManualTopic[] = [
         heading: l("EXIF 편집", "Edit EXIF"),
         steps: [
           l("JPEG, TIFF 또는 HEIC 이미지 한 장을 선택합니다.", "Select one JPEG, TIFF, or HEIC image."),
-          l("이미지 메뉴에서 ‘EXIF 수정’을 선택합니다.", "Open Edit EXIF from the Image menu."),
+          l("이미지 메뉴에서 ‘EXIF 수정’을 선택합니다.", "Choose Image > Edit EXIF."),
           l("설명, 작가, 저작권, 카메라·렌즈, 날짜, 노출 관련 항목을 편집합니다.", "Edit supported description, author, copyright, camera, lens, date, and exposure fields."),
           l("입력한 값의 형식을 확인하고 저장합니다. 값을 비워 저장하면 해당 항목이 삭제됩니다.", "Validate the value formats and save. An empty string removes that key."),
-          l("필요하면 ‘마지막 작업 실행 취소’를 사용합니다. 편집 화면에서 바꾼 항목의 이전 값만 되돌립니다.", "If needed, use Undo Last Aurora Operation to write back the previous values exposed by the editor.")
+          l("필요하면 ‘마지막 작업 실행 취소’를 사용합니다. 편집 화면에서 바꾼 항목의 이전 값만 되돌립니다.", "If needed, use Undo Last Operation. It restores only the previous values changed in the editor.")
         ],
         warning: l("EXIF 실행 취소는 원본 파일 전체를 백업해 복원하는 기능이 아닙니다. 편집한 항목의 이전 값만 되돌립니다.", "EXIF undo writes back the previous editable field values; it is not a byte-for-byte backup of the whole source file.")
       }
@@ -614,7 +618,7 @@ export const manualTopics: ManualTopic[] = [
       {
         heading: l("자주 쓰는 기본 단축키", "Common default shortcuts"),
         shortcuts: [
-          { action: l("파일 또는 폴더 추가", "Open"), key: "⌘O" },
+          { action: l("파일 또는 폴더 추가", "Add File or Folder"), key: "⌘O" },
           { action: l("이전 / 다음 이미지", "Previous / next image"), key: "← / →" },
           { action: l("창 맞춤 / 원본 크기 전환", "Toggle fit / original"), key: "⌘0" },
           { action: l("뷰 초기화", "Reset view"), key: "Space" },
@@ -673,7 +677,7 @@ export const manualTopics: ManualTopic[] = [
     slug: "settings-sessions-windows",
     title: l("설정·세션·여러 창", "Settings, sessions, and windows"),
     summary: l("보기·입력·단축키를 설정하고 열어 둔 작업과 여러 뷰어 창을 관리합니다.", "Adjust viewing, input, and shortcut preferences, then manage sessions and multiple viewers."),
-    purpose: l("환경 설정은 모든 뷰어 창에 함께 적용됩니다. 세션에는 각 창에서 열어 둔 파일과 선택, 검색, 이미지 화면 상태가 저장됩니다. 이 차이를 알아 두면 이전 작업을 복원하거나 여러 창을 쓸 때 동작을 쉽게 예상할 수 있습니다.", "Settings are preferences shared across viewers. Sessions preserve each window's library, selection, search, and canvas state. Knowing the difference makes restore and multi-window behavior predictable."),
+    purpose: l("앱 설정은 모든 뷰어 창에 함께 적용됩니다. 세션에는 각 창에서 열어 둔 파일과 선택, 검색, 이미지 화면 상태가 저장됩니다. 이 차이를 알아 두면 이전 작업을 복원하거나 여러 창을 쓸 때 동작을 쉽게 예상할 수 있습니다.", "Settings are preferences shared across viewers. Sessions preserve each window's library, selection, search, and canvas state. Knowing the difference makes restore and multi-window behavior predictable."),
     sections: [
       {
         heading: l("설정 페이지", "Settings pages"),
@@ -686,11 +690,12 @@ export const manualTopics: ManualTopic[] = [
           "설정 왼쪽에서 항목을 고른 뒤 각 패널과 화면 정보의 표시 방식을 조정합니다.",
           "Choose a category in the Settings sidebar, then adjust panel and overlay behavior in the same window."
         ),
+        mediaPosition: "beforeSteps",
         bullets: [
           l("뷰어: 배율, 안티에일리어싱, 픽셀 그리드, 투명 영역 배경, 유사 이미지, 두 장 보기, 슬라이드쇼, 세션·캐시를 설정합니다.", "Viewer: configure zoom, antialiasing, pixel grid, transparency, visual similarity, two-page view, slideshow, sessions, and cache."),
           l("인터페이스: 앱 언어, 썸네일 바·평가 도구·화면 정보·타이틀 바 표시 방식을 정합니다.", "Interface: choose app language and how the sidebar, rating controls, overlays, and title bar appear."),
           l("마우스 입력: 휠 탐색·확대, 전체 화면 클릭, 컬러 샘플, ROI 드래그 조합을 바꿉니다.", "Mouse Input: remap wheel navigation and zoom, full-screen click, color sampling, and ROI drag combinations."),
-          l("단축키·외부 앱·기본 앱·지원: 키 동작과 등록한 앱의 순서, Finder 연결, 도움말을 관리합니다.", "Shortcuts, External Apps, Default Apps, and Support: manage key actions, registered app order, Finder integration, and help.")
+          l("단축키·외부 앱·기본 앱·지원: 키 동작과 등록한 앱의 순서, Finder 연결, 도움말을 관리합니다.", "Shortcuts, External Apps, Default App, and Support: manage key actions, registered app order, Finder integration, and help.")
         ]
       },
       {
@@ -763,7 +768,7 @@ export const manualTopics: ManualTopic[] = [
       {
         heading: l("표시가 느리거나 예상과 다를 때", "When display is slow or unexpected"),
         bullets: [
-          l("큰 이미지는 저비용 미리보기를 먼저 표시한 뒤 화면이 안정되면 고화질과 보이는 영역 타일을 준비합니다.", "Large images show a lower-cost preview first, then prepare higher quality and visible-region tiles after the view settles."),
+          l("큰 이미지는 빠른 미리보기를 먼저 보여 준 뒤, 화면이 안정되면 더 선명한 이미지와 현재 보이는 영역을 차례로 준비합니다.", "Large images show a lower-cost preview first, then prepare higher quality and visible-region tiles after the view settles."),
           l("GIF·WebP·APNG 애니메이션, 투명 이미지, 픽셀 그리드는 일반 정지 이미지와 표시 방식이 달라 속도 차이가 날 수 있습니다.", "GIF, WebP, and APNG animation, transparent images, and pixel grid use a different rendering path from static opaque images."),
           l("캐시 문제가 의심되면 설정에서 모든 캐시 비우기를 실행한 뒤 파일을 다시 엽니다.", "If cache appears stale, clear all caches in Settings and reopen the file."),
           l("macOS의 ‘동작 줄이기’를 켜면 빈 라이브러리의 Aurora 효과가 더 느리게 움직입니다.", "With Reduce Motion enabled, the empty-library Aurora effect updates less frequently by design.")
@@ -774,7 +779,7 @@ export const manualTopics: ManualTopic[] = [
         bullets: [
           l("선택한 파일 형식으로 내보낼 수 있는지는 현재 macOS의 ImageIO 지원에 따라 달라집니다.", "The selected output encoder must be available through ImageIO in the current macOS version."),
           l("등록한 외부 앱이 이동되었다면 설정에서 앱을 다시 추가합니다.", "If a registered external app moved, add it again in Settings."),
-          l("기본 이미지 앱은 설정의 ‘기본 앱’에서 파일 형식별로 등록합니다. 등록이 반영되지 않으면 Finder의 ‘정보 가져오기 > 다음으로 열기 > 모두 변경’을 사용합니다.", "For the Mac App Store build, change the default image app in Finder using Get Info > Open with > Change All."),
+          l("기본 이미지 앱은 설정의 ‘기본 앱’에서 파일 형식별로 등록합니다. 등록이 반영되지 않으면 Finder의 ‘정보 가져오기 > 다음으로 열기 > 모두 변경’을 사용합니다.", "Register default image apps by format in Settings > Default App. If registration does not take effect, use Finder > Get Info > Open with > Change All."),
           l("애니메이션 변환 내보내기는 전체 프레임이 아니라 단일 이미지를 만드는 기능입니다.", "Converted export of an animation creates one image, not a full multi-frame export.")
         ]
       },

@@ -35,6 +35,19 @@ const mediaList = (media: ManualMedia | ManualMedia[]) => Array.isArray(media) ?
         <section class="manual-section">
           <h2>{text(section.heading, locale)}</h2>
           {section.intro && <p>{text(section.intro, locale)}</p>}
+          {section.media && section.mediaPosition === "beforeSteps" && mediaList(section.media).map((item) => (
+            <figure class:list={["manual-media", item.kind === "detail" && "manual-media--detail"]}>
+              <img
+                src={`${SITE_BASE}/assets/manual/${text(item.src, locale)}`}
+                alt={text(item.alt, locale)}
+                width={item.width}
+                height={item.height}
+                loading="lazy"
+                decoding="async"
+              />
+              {item.caption && <figcaption>{text(item.caption, locale)}</figcaption>}
+            </figure>
+          ))}
           {section.steps && (
             <ol>
               {section.steps.map((step) => <li>{text(step, locale)}</li>)}
@@ -67,7 +80,7 @@ const mediaList = (media: ManualMedia | ManualMedia[]) => Array.isArray(media) ?
               </table>
             </div>
           )}
-          {section.media && mediaList(section.media).map((item) => (
+          {section.media && section.mediaPosition !== "beforeSteps" && mediaList(section.media).map((item) => (
             <figure class:list={["manual-media", item.kind === "detail" && "manual-media--detail"]}>
               <img
                 src={`${SITE_BASE}/assets/manual/${text(item.src, locale)}`}
