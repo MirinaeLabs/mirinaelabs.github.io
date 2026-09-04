@@ -99,7 +99,7 @@ const page = isKo ? {
         {page.facts.map((fact) => <li>{fact}</li>)}
       </ul>
       <figure class="hero-visual">
-        <img class="screenshot" src={screenshotPath("viewer", locale)} width="1800" height="1096" alt={page.heroAlt} loading="eager" fetchpriority="high" />
+        <img class="screenshot" src={screenshotPath("viewer", locale)} width="1164" height="709" alt={page.heroAlt} loading="eager" fetchpriority="high" />
         <figcaption class="screenshot-caption">{page.heroCaption}</figcaption>
       </figure>
     </div>
@@ -134,7 +134,7 @@ const page = isKo ? {
         <a class="text-link" href={localizedPath(locale, "features")}>{page.libraryLink}</a>
       </div>
       <div class="feature-split__visual">
-        <img class="screenshot" src={screenshotPath("library", locale)} width="1800" height="1096" alt={page.libraryAlt} loading="lazy" />
+        <img class="screenshot" src={screenshotPath("library", locale)} width="1164" height="709" alt={page.libraryAlt} loading="lazy" />
       </div>
     </div>
   </section>
@@ -142,7 +142,7 @@ const page = isKo ? {
   <section class="section section--tint">
     <div class="wrap feature-split feature-split--reverse">
       <div class="feature-split__visual">
-        <img class="screenshot" src={screenshotPath("compare", locale)} width="1800" height="1096" alt={page.compareAlt} loading="lazy" />
+        <img class="screenshot" src={screenshotPath("compare", locale)} width="1164" height="709" alt={page.compareAlt} loading="lazy" />
       </div>
       <div class="feature-split__copy">
         <p class="eyebrow">Compare closely</p>

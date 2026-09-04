@@ -97,11 +97,11 @@ const [input, view, find, review, compare, inspect, organize, output] = featureG
         {[view, find].map((group) => <article><h3>{group[1]}</h3><p>{group[2]}</p><a href={localizedPath(locale, `manual/${group[4]}`)}>{copy.readMore}</a></article>)}
       </div>
     </div>
-    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("library", locale)} width="1800" height="1096" alt={page.libraryAlt} loading="eager" /></figure>
+    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("library", locale)} width="1164" height="709" alt={page.libraryAlt} loading="eager" /></figure>
   </div></section>
 
   <section class="product-section section--tint" id="review"><div class="wrap product-story product-story--reverse">
-    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("viewer", locale)} width="1800" height="1096" alt={page.viewerAlt} loading="lazy" /></figure>
+    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("viewer", locale)} width="1164" height="709" alt={page.viewerAlt} loading="lazy" /></figure>
     <div class="product-story__copy">
       <p class="eyebrow">Review</p><h2>{review[1]}</h2><p class="lede">{review[2]}</p>
       <ul class="feature-list">{review[3].map((item) => <li>{item}</li>)}</ul>
@@ -115,11 +115,11 @@ const [input, view, find, review, compare, inspect, organize, output] = featureG
       <ul class="feature-list">{compare[3].map((item) => <li>{item}</li>)}</ul>
       <a class="text-link" href={localizedPath(locale, `manual/${compare[4]}`)}>{copy.readMore}</a>
     </div>
-    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("compare", locale)} width="1800" height="1096" alt={page.compareAlt} loading="lazy" /></figure>
+    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("compare", locale)} width="1164" height="709" alt={page.compareAlt} loading="lazy" /></figure>
   </div></section>
 
   <section class="product-section section--tint" id="inspect"><div class="wrap product-story product-story--reverse">
-    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("inspect", locale)} width="1800" height="1096" alt={page.inspectAlt} loading="lazy" /></figure>
+    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("inspect", locale)} width="1164" height="709" alt={page.inspectAlt} loading="lazy" /></figure>
     <div class="product-story__copy">
       <p class="eyebrow">Inspect</p><h2>{inspect[1]}</h2><p class="lede">{inspect[2]}</p>
       <ul class="feature-list">{inspect[3].map((item) => <li>{item}</li>)}</ul>
