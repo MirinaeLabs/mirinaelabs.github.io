@@ -18,10 +18,10 @@ export const productFacts = {
   archiveFormats: ["ZIP", "RAR", "7z"],
   exportFormats: ["PNG", "JPEG", "TIFF", "HEIC", "WebP"],
   screenshots: {
-    viewer: { ko: "viewer-ko.jpg", en: "viewer-en.jpg" },
-    library: { ko: "thumbnail-ko.jpg", en: "thumbnail-en.jpg" },
-    compare: { ko: "compare-ko.jpg", en: "compare-en.jpg" },
-    inspect: { ko: "color-ko.jpg", en: "color-en.jpg" }
+    viewer: { ko: "viewer-ko.png", en: "viewer-en.png" },
+    library: { ko: "thumbnail-ko.png", en: "thumbnail-en.png" },
+    compare: { ko: "compare-ko.png", en: "compare-en.png" },
+    inspect: { ko: "color-ko.png", en: "color-en.png" }
   }
 } as const;
 

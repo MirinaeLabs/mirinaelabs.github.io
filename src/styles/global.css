@@ -446,7 +446,7 @@ p {
   height: auto;
   border: 1px solid color-mix(in srgb, var(--line-strong) 74%, transparent);
   border-radius: 8px;
-  background: white;
+  background: transparent;
   box-shadow: var(--shadow-image);
 }
 
