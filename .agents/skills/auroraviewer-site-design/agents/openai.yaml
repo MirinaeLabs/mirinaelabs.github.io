@@ -1,0 +1,4 @@
+interface:
+  display_name: "AuroraViewer Site Design"
+  short_description: "Build a polished accessible AuroraViewer product site"
+  default_prompt: "Use $auroraviewer-site-design to design and implement a production-quality AuroraViewer website for GitHub Pages."
