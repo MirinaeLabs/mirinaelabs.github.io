@@ -58,6 +58,19 @@ const mediaList = (media: ManualMedia | ManualMedia[]) => Array.isArray(media) ?
               {section.bullets.map((item) => <li>{text(item, locale)}</li>)}
             </ul>
           )}
+          {section.media && section.mediaPosition === "afterSteps" && mediaList(section.media).map((item) => (
+            <figure class:list={["manual-media", item.kind === "detail" && "manual-media--detail"]}>
+              <img
+                src={`${SITE_BASE}/assets/manual/${text(item.src, locale)}`}
+                alt={text(item.alt, locale)}
+                width={item.width}
+                height={item.height}
+                loading="lazy"
+                decoding="async"
+              />
+              {item.caption && <figcaption>{text(item.caption, locale)}</figcaption>}
+            </figure>
+          ))}
           {section.shortcuts && (
             <div class="shortcut-table-wrap">
               <table class="shortcut-table">
@@ -80,7 +93,7 @@ const mediaList = (media: ManualMedia | ManualMedia[]) => Array.isArray(media) ?
               </table>
             </div>
           )}
-          {section.media && section.mediaPosition !== "beforeSteps" && mediaList(section.media).map((item) => (
+          {section.media && !section.mediaPosition && mediaList(section.media).map((item) => (
             <figure class:list={["manual-media", item.kind === "detail" && "manual-media--detail"]}>
               <img
                 src={`${SITE_BASE}/assets/manual/${text(item.src, locale)}`}
