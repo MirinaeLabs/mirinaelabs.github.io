@@ -1,0 +1,4 @@
+interface:
+  display_name: "AuroraViewer Manual"
+  short_description: "Write accurate task-oriented AuroraViewer user manuals"
+  default_prompt: "Use $auroraviewer-manual to create or update accurate task-oriented AuroraViewer user documentation."
