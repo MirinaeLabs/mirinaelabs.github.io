@@ -1,0 +1,4 @@
+interface:
+  display_name: "AuroraViewer Korean Copy"
+  short_description: "Rewrite AuroraViewer Korean copy as native product writing"
+  default_prompt: "Use $auroraviewer-korean-copy to audit and rewrite the Korean AuroraViewer website copy while preserving verified facts and actual UI terms."
