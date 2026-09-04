@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ISSUE_URL, localizedPath, productFacts, type Locale } from "../data/product";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const isKo = locale === "ko";
+const page = isKo ? {
+  title: "AuroraViewer 지원",
+  description: "AuroraViewer 사용 중 발생한 문제를 해결하고, 설명서와 GitHub 지원 요청 경로를 확인하세요.",
+  headline: ["막힌 지점부터", "함께 해결해요."],
+  intro: `AuroraViewer ${productFacts.version}은 macOS ${productFacts.minimumMacOS} 이상을 지원합니다. 먼저 아래 항목을 확인하고, 해결되지 않으면 재현 정보와 함께 지원 요청을 남겨 주세요.`,
+  manual: ["설명서에서 찾기", "파일 열기, 보기, 비교, 평가, 내보내기와 설정을 작업별로 설명합니다.", "사용 설명서 열기"],
+  troubleshoot: ["문제 해결 순서", "권한, 지원 형식, 압축 제한, 캐시와 기본 앱 설정처럼 자주 막히는 지점을 확인합니다.", "문제 해결 보기"],
+  request: ["지원 요청 보내기", "GitHub Issues에서 공개 지원 요청을 작성할 수 있습니다. 개인 정보나 공개하면 안 되는 파일은 첨부하지 마세요.", "GitHub에서 요청 작성"],
+  beforeTitle: "요청 전에 준비할 내용",
+  before: ["AuroraViewer 버전과 macOS 버전", "문제가 발생한 작업 순서와 기대한 결과", "파일 형식과 입력 경로 종류(개별 파일·폴더·압축)", "가능하면 개인 정보를 가린 화면 캡처와 반복 가능 여부"],
+  checksTitle: "먼저 확인해 보세요",
+  checks: [
+    ["파일이 열리지 않아요", "지원 확장자여도 파일 내부 구조나 macOS ImageIO·Quick Look 지원에 따라 표시되지 않을 수 있습니다. 다른 파일로 비교하고 손상 여부를 확인하세요."],
+    ["폴더 접근이 끊겼어요", "파일을 옮기거나 이름을 바꿨다면 저장된 접근 권한이 더는 맞지 않을 수 있습니다. 원래 폴더를 다시 열어 macOS 권한을 승인하세요."],
+    ["압축 파일이 멈춰요", "암호는 최대 3회 시도할 수 있으며 한 항목 256MB, 전체 1GB, 20,000개 항목 제한이 있습니다. 중첩 압축은 자동으로 열지 않습니다."],
+    ["기본 이미지 앱으로 쓰고 싶어요", "Mac App Store 앱은 기본 앱을 자동 변경할 수 없습니다. Finder의 정보 가져오기에서 ‘다음으로 열기’를 AuroraViewer로 고르고 ‘모두 변경’을 사용하세요."]
+  ],
+  privacy: "개인정보 처리방침"
+} : {
+  title: "AuroraViewer Support",
+  description: "Troubleshoot AuroraViewer, browse the manual, and learn how to submit a support request through GitHub.",
+  headline: ["Start where you got stuck.", "We will help from there."],
+  intro: `AuroraViewer ${productFacts.version} supports macOS ${productFacts.minimumMacOS} or later. Check the common cases below, then send a support request with reproducible details if the issue remains.`,
+  manual: ["Find it in the manual", "Follow task-based guidance for opening, viewing, comparing, rating, exporting, and settings.", "Open the manual"],
+  troubleshoot: ["Follow the troubleshooting path", "Check permissions, format conditions, archive limits, caches, and default-app setup.", "View troubleshooting"],
+  request: ["Send a support request", "GitHub Issues is the public support channel. Do not attach private information or files that should not be public.", "Open a GitHub request"],
+  beforeTitle: "What to include",
+  before: ["Your AuroraViewer and macOS versions", "The steps that produced the problem and the result you expected", "The file format and input type: individual file, folder, or archive", "If possible, a redacted screenshot and whether the issue repeats"],
+  checksTitle: "Check these first",
+  checks: [
+    ["A file will not open", "A recognized extension can still fail when file contents or macOS ImageIO and Quick Look support are incompatible. Compare with another file and check for damage."],
+    ["Folder access stopped working", "Moving or renaming a source can invalidate saved access. Open the original folder again and approve the macOS permission prompt."],
+    ["An archive does not finish", "Passwords allow three attempts, with limits of 256 MB per item, 1 GB total, and 20,000 entries. Nested archives are not opened automatically."],
+    ["I want AuroraViewer as the default", "A Mac App Store app cannot change the default automatically. In Finder > Get Info, choose AuroraViewer under Open with, then use Change All."]
+  ],
+  privacy: "Privacy policy"
+};
+---
+
+<BaseLayout locale={locale} current="support" title={page.title} description={page.description} path="support">
+  <header class="page-hero"><div class="wrap">
+    <p class="eyebrow">Support</p><h1>{page.headline[0]}<br />{page.headline[1]}</h1><p class="lede">{page.intro}</p>
+  </div></header>
+
+  <section class="section section--compact"><div class="wrap support-grid support-grid--three">
+    <article class="support-card"><h2>{page.manual[0]}</h2><p>{page.manual[1]}</p><a class="text-link" href={localizedPath(locale, "manual")}>{page.manual[2]}</a></article>
+    <article class="support-card"><h2>{page.troubleshoot[0]}</h2><p>{page.troubleshoot[1]}</p><a class="text-link" href={localizedPath(locale, "manual/troubleshooting")}>{page.troubleshoot[2]}</a></article>
+    <article class="support-card"><h2>{page.request[0]}</h2><p>{page.request[1]}</p><a class="text-link" href={ISSUE_URL}>{page.request[2]}</a></article>
+  </div></section>
+
+  <section class="section section--tint"><div class="wrap">
+    <div class="section-heading"><p class="eyebrow">Quick checks</p><h2>{page.checksTitle}</h2></div>
+    <div class="feature-groups">{page.checks.map(([title, description]) => <article class="feature-group"><h3>{title}</h3><p>{description}</p></article>)}</div>
+  </div></section>
+
+  <section class="section"><div class="reading-wrap">
+    <p class="eyebrow">Useful context</p><h2>{page.beforeTitle}</h2>
+    <ul class="feature-list">{page.before.map((item) => <li>{item}</li>)}</ul>
+    <div class="button-row"><a class="button button--primary" href={ISSUE_URL}>{page.request[2]}</a><a class="button" href={localizedPath(locale, "privacy")}>{page.privacy}</a></div>
+  </div></section>
+</BaseLayout>

@@ -1,0 +1,42 @@
+---
+import { localizedPath, siteCopy, SITE_BASE, type Locale } from "../data/product";
+
+interface Props {
+  locale: Locale;
+  current: "home" | "features" | "manual" | "support" | "privacy";
+  alternatePath: string;
+}
+
+const { locale, current, alternatePath } = Astro.props;
+const copy = siteCopy[locale];
+const alternateLocale: Locale = locale === "ko" ? "en" : "ko";
+const navItems = [
+  ["home", copy.nav.home, localizedPath(locale)],
+  ["features", copy.nav.features, localizedPath(locale, "features")],
+  ["manual", copy.nav.manual, localizedPath(locale, "manual")],
+  ["support", copy.nav.support, localizedPath(locale, "support")]
+] as const;
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href={localizedPath(locale)} aria-label={`${copy.nav.home} — AuroraViewer`}>
+      <img src={`${SITE_BASE}/assets/auroraviewer-icon.png`} width="36" height="36" alt="" />
+      <span>AuroraViewer</span>
+    </a>
+    <nav class="primary-nav" aria-label={locale === "ko" ? "주요 메뉴" : "Primary navigation"}>
+      {navItems.map(([key, label, href]) => (
+        <a href={href} aria-current={current === key ? "page" : undefined}>{label}</a>
+      ))}
+    </nav>
+    <a
+      class="language-link"
+      href={localizedPath(alternateLocale, alternatePath)}
+      lang={alternateLocale}
+      hreflang={alternateLocale}
+      aria-label={copy.languageAria}
+    >
+      {copy.languageLabel}
+    </a>
+  </div>
+</header>

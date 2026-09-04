@@ -1,0 +1,23 @@
+---
+import { APP_STORE_URL, localizedPath, siteCopy, type Locale } from "../data/product";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const copy = siteCopy[locale];
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div>
+      <strong>AuroraViewer</strong>
+      <p>{copy.footerNote}</p>
+    </div>
+    <nav aria-label={locale === "ko" ? "하단 메뉴" : "Footer navigation"}>
+      <a href={localizedPath(locale, "manual")}>{copy.nav.manual}</a>
+      <a href={localizedPath(locale, "support")}>{copy.nav.support}</a>
+      <a href={localizedPath(locale, "privacy")}>{copy.nav.privacy}</a>
+      <a href={APP_STORE_URL}>Mac App Store</a>
+    </nav>
+  </div>
+  <div class="site-footer__legal">{copy.legal}</div>
+</footer>

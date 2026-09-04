@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ManualNav from "./ManualNav.astro";
+import { localizedPath, type Locale } from "../data/product";
+import { getManualTopic, text, type ManualTopic } from "../data/manual";
+
+interface Props {
+  locale: Locale;
+  topic: ManualTopic;
+}
+const { locale, topic } = Astro.props;
+const isKo = locale === "ko";
+const topicTitle = text(topic.title, locale);
+---
+
+<BaseLayout
+  locale={locale}
+  current="manual"
+  title={`${topicTitle} — ${isKo ? "AuroraViewer 사용 설명서" : "AuroraViewer Manual"}`}
+  description={text(topic.summary, locale)}
+  path={`manual/${topic.slug}`}
+>
+  <div class="manual-layout">
+    <ManualNav locale={locale} currentSlug={topic.slug} />
+    <article class="manual-article">
+      <p class="manual-breadcrumb"><a href={localizedPath(locale, "manual")}>{isKo ? "사용 설명서" : "Manual"}</a> / {topicTitle}</p>
+      <header>
+        <p class="eyebrow">AuroraViewer manual</p>
+        <h1>{topicTitle}</h1>
+        <p class="lede">{text(topic.purpose, locale)}</p>
+      </header>
+
+      {topic.sections.map((section) => (
+        <section class="manual-section">
+          <h2>{text(section.heading, locale)}</h2>
+          {section.intro && <p>{text(section.intro, locale)}</p>}
+          {section.steps && (
+            <ol>
+              {section.steps.map((step) => <li>{text(step, locale)}</li>)}
+            </ol>
+          )}
+          {section.bullets && (
+            <ul>
+              {section.bullets.map((item) => <li>{text(item, locale)}</li>)}
+            </ul>
+          )}
+          {section.shortcuts && (
+            <div class="shortcut-table-wrap">
+              <table class="shortcut-table">
+                <thead>
+                  <tr>
+                    <th scope="col">{isKo ? "동작" : "Action"}</th>
+                    <th scope="col">{isKo ? "기본 키" : "Default"}</th>
+                    {section.shortcuts.some((shortcut) => shortcut.detail) && <th scope="col">{isKo ? "설명" : "Details"}</th>}
+                  </tr>
+                </thead>
+                <tbody>
+                  {section.shortcuts.map((shortcut) => (
+                    <tr>
+                      <td>{text(shortcut.action, locale)}</td>
+                      <td><kbd>{shortcut.key}</kbd></td>
+                      {section.shortcuts?.some((item) => item.detail) && <td>{shortcut.detail ? text(shortcut.detail, locale) : ""}</td>}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {section.note && <aside class="note"><strong>{isKo ? "참고" : "Note"}</strong><br />{text(section.note, locale)}</aside>}
+          {section.warning && <aside class="warning"><strong>{isKo ? "주의" : "Caution"}</strong><br />{text(section.warning, locale)}</aside>}
+        </section>
+      ))}
+
+      <nav class="related-topics" aria-label={isKo ? "관련 설명서" : "Related manual topics"}>
+        <h2>{isKo ? "함께 보면 좋은 설명서" : "Related guides"}</h2>
+        <ul>
+          {topic.related.map((slug) => {
+            const related = getManualTopic(slug);
+            return related ? <li><a href={localizedPath(locale, `manual/${slug}`)}>{text(related.title, locale)}</a></li> : null;
+          })}
+        </ul>
+      </nav>
+    </article>
+  </div>
+</BaseLayout>

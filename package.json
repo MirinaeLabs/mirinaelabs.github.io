@@ -1,0 +1,19 @@
+{
+  "name": "mirinaelabs-github-pages",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro build",
+    "check": "astro check",
+    "preview": "astro preview --host 127.0.0.1",
+    "validate": "npm run check && npm run build && node scripts/check-site.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "typescript": "6.0.3"
+  }
+}

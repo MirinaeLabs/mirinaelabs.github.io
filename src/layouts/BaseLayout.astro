@@ -1,0 +1,77 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import "../styles/global.css";
+import { APP_STORE_URL, localizedPath, productFacts, SITE_BASE, type Locale } from "../data/product";
+
+interface Props {
+  locale: Locale;
+  current: "home" | "features" | "manual" | "support" | "privacy";
+  title: string;
+  description: string;
+  path?: string;
+  alternatePath?: string;
+  structuredData?: boolean;
+}
+
+const {
+  locale,
+  current,
+  title,
+  description,
+  path = "/",
+  alternatePath = path,
+  structuredData = false
+} = Astro.props;
+const canonicalPath = localizedPath(locale, path);
+const canonical = new URL(canonicalPath, Astro.site);
+const koUrl = new URL(localizedPath("ko", alternatePath), Astro.site);
+const enUrl = new URL(localizedPath("en", alternatePath), Astro.site);
+const jsonLd = structuredData ? {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: productFacts.name,
+  applicationCategory: "PhotographyApplication",
+  operatingSystem: `macOS ${productFacts.minimumMacOS} or later`,
+  softwareVersion: productFacts.version,
+  downloadUrl: APP_STORE_URL,
+  offers: {
+    "@type": "Offer",
+    price: productFacts.price,
+    priceCurrency: "USD"
+  }
+} : null;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f8fb" media="(prefers-color-scheme: light)" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ko" href={koUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={koUrl} />
+    <link rel="icon" type="image/png" href={`${SITE_BASE}/favicon.png`} />
+    <link rel="apple-touch-icon" href={`${SITE_BASE}/apple-touch-icon.png`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AuroraViewer" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale === "ko" ? "ko_KR" : "en_US"} />
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{locale === "ko" ? "본문으로 건너뛰기" : "Skip to content"}</a>
+    <SiteHeader locale={locale} current={current} alternatePath={alternatePath} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter locale={locale} />
+  </body>
+</html>

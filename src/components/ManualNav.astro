@@ -1,0 +1,45 @@
+---
+import { localizedPath, type Locale } from "../data/product";
+import { manualTopics, text } from "../data/manual";
+
+interface Props {
+  locale: Locale;
+  currentSlug?: string;
+}
+const { locale, currentSlug } = Astro.props;
+const currentTopic = manualTopics.find((topic) => topic.slug === currentSlug);
+const overview = locale === "ko" ? "사용 설명서 전체" : "Manual overview";
+const contents = locale === "ko" ? "설명서 목차" : "Manual contents";
+---
+
+<nav class="manual-nav manual-nav--desktop" aria-label={contents}>
+  <a href={localizedPath(locale, "manual")}>{overview}</a>
+  <ol>
+    {manualTopics.map((topic, index) => (
+      <li>
+        <a
+          href={localizedPath(locale, `manual/${topic.slug}`)}
+          aria-current={currentSlug === topic.slug ? "page" : undefined}
+        >
+          {String(index + 1).padStart(2, "0")} · {text(topic.title, locale)}
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<details class="manual-nav-mobile">
+  <summary>{currentTopic ? `${contents} · ${text(currentTopic.title, locale)}` : contents}</summary>
+  <nav aria-label={contents}>
+    <a href={localizedPath(locale, "manual")}>{overview}</a>
+    <ol>
+      {manualTopics.map((topic, index) => (
+        <li>
+          <a href={localizedPath(locale, `manual/${topic.slug}`)} aria-current={currentSlug === topic.slug ? "page" : undefined}>
+            {String(index + 1).padStart(2, "0")} · {text(topic.title, locale)}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+</details>

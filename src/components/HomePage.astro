@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { APP_STORE_URL, localizedPath, productFacts, screenshotPath, siteCopy, SITE_BASE, type Locale } from "../data/product";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const isKo = locale === "ko";
+const copy = siteCopy[locale];
+const page = isKo ? {
+  title: "AuroraViewer — Mac에서 이미지를 보고, 고르고, 정리하세요",
+  description: "폴더·RAW·PDF·ZIP/RAR/7z를 한 라이브러리에서 열고 비교, 평가, 태그, 검사, 내보내기까지 이어가는 macOS 이미지 뷰어입니다.",
+  headline: ["이미지를 여는 순간부터,", "고르는 일까지."],
+  intro: "폴더와 압축 파일을 하나의 라이브러리로 열고, 큰 이미지도 자연스럽게 탐색하세요. 비교하고, 평가하고, Finder 태그를 붙이고, 필요한 결과만 내보낼 수 있습니다.",
+  facts: ["모든 기능 무료", "사용자가 선택한 파일을 Mac 안에서 처리", `macOS ${productFacts.minimumMacOS} 이상`],
+  heroAlt: "AuroraViewer에서 폴더의 사진을 썸네일로 탐색하고 선택한 이미지를 크게 보는 화면",
+  heroCaption: "실제 AuroraViewer 화면 · 라이브러리, 평가 도구, 미니맵",
+  workflowTitle: ["열기, 보기, 정리를", "한 흐름 안에서."],
+  workflowIntro: "파일을 하나씩 다시 열거나 검토 결과를 다른 도구로 옮기지 않아도 됩니다. AuroraViewer의 라이브러리가 원본 위치와 작업 맥락을 함께 유지합니다.",
+  workflows: [
+    ["01 · OPEN", "소스 그대로 열기", "이미지와 폴더, 하위 폴더, ZIP·RAR·7z를 추가하면 지원 이미지를 소스별 그룹으로 구성합니다."],
+    ["02 · REVIEW", "화면에 맞춰 보기", "창 맞춤부터 원본 크기, 200%, 두 장 보기, 2–4분할 비교까지 검토 방식에 맞게 전환합니다."],
+    ["03 · ORGANIZE", "선택을 결과로 남기기", "별점과 Pick/Reject, Finder 태그, 파일 이동·복사, 변환 내보내기로 다음 작업을 준비합니다."]
+  ],
+  libraryTitle: ["많은 사진도", "빠르게 좁혀갑니다."],
+  libraryIntro: "리스트와 썸네일 그리드를 오가며 파일명·확장자를 검색하고, 촬영일·해상도·별점 등으로 정렬하세요.",
+  libraryBullets: ["별점, Pick/Reject, 확장자, Finder 태그, 애니메이션 필터", "다중 선택과 현재 필터 결과에 일괄 평가·태그", "최근 작업 실행 취소와 백그라운드 파일 작업"],
+  libraryLink: "정리 기능 전체 보기",
+  libraryAlt: "AuroraViewer 썸네일 모드에서 사진을 별점과 태그로 검토하는 화면",
+  compareTitle: ["차이를 놓치지 않는", "2–4분할 비교."],
+  compareIntro: "후보를 슬롯에 놓고 확대·이동을 동기화하세요. 필요한 슬롯만 독립적으로 움직일 수도 있습니다.",
+  compareBullets: ["2·3·4슬롯 레이아웃과 드래그 앤 드롭 배치", "슬롯별 또는 동기화된 줌·팬", "활성 슬롯에서 바로 별점·선택·Finder 태그"],
+  compareLink: "비교 모드 사용법",
+  compareAlt: "AuroraViewer 비교 모드에서 두 이미지를 나란히 놓고 동기화해 보는 화면",
+  formatTitle: ["사진부터 RAW, 문서,", "압축 파일까지."],
+  formatIntro: "파일을 변환하기 전에 먼저 확인하고, 필요한 결과는 목적에 맞는 형식과 크기로 내보낼 수 있습니다.",
+  formatGroups: [
+    ["이미지 · RAW", "JPEG, PNG, TIFF, HEIC, WebP, AVIF, PSD와 주요 카메라 RAW 형식"],
+    ["문서 · 압축", "SVG, AI, EPS, PDF와 ZIP, RAR, 7z 안의 지원 이미지"],
+    ["변환 내보내기", `${productFacts.exportFormats.join(" · ")} 형식, 자르기·리사이즈·메타데이터 옵션`]
+  ],
+  manualTitle: ["필요한 기능을", "바로 찾아보세요."],
+  manualIntro: "처음 파일을 여는 방법부터 비교, 중복 이미지 검토, 내보내기, 단축키와 문제 해결까지 작업 순서대로 정리했습니다.",
+  support: "지원 받기"
+} : {
+  title: "AuroraViewer — View, choose, and organize images on Mac",
+  description: "A macOS image viewer that brings folders, RAW, PDF, ZIP, RAR, and 7z into one library for comparison, rating, tagging, inspection, and export.",
+  headline: ["From the moment you open it", "to the choice you keep."],
+  intro: "Bring folders and archives into one library and move naturally through large images. Compare, rate, add Finder tags, and export only the results you need.",
+  facts: ["Every feature is free", "Processes user-selected files on your Mac", `macOS ${productFacts.minimumMacOS} or later`],
+  heroAlt: "AuroraViewer showing folder thumbnails beside a large selected image",
+  heroCaption: "Actual AuroraViewer interface · library, rating controls, and minimap",
+  workflowTitle: ["Open, view, and organize", "in one continuous flow."],
+  workflowIntro: "You do not have to reopen files one at a time or move review decisions between tools. The AuroraViewer library keeps source location and working context together.",
+  workflows: [
+    ["01 · OPEN", "Open sources as they are", "Add images, folders, nested folders, ZIP, RAR, and 7z; supported images are grouped by source."],
+    ["02 · REVIEW", "Choose the right view", "Move from Fit to Original Size, 200%, two-page viewing, or two-to-four-slot comparison."],
+    ["03 · ORGANIZE", "Turn choices into results", "Use ratings, Pick/Reject, Finder tags, file moves and copies, or converted export for the next step."]
+  ],
+  libraryTitle: ["Narrow a large library", "without losing your place."],
+  libraryIntro: "Move between the list and thumbnail grid, search by file name or extension, and sort by capture date, resolution, rating, and more.",
+  libraryBullets: ["Ratings, Pick/Reject, extension, Finder tag, and animation filters", "Batch ratings and tags for a selection or all filtered results", "Undo for recent actions and background file operations"],
+  libraryLink: "Explore organization features",
+  libraryAlt: "AuroraViewer Thumbnail mode used to review photos with ratings and tags",
+  compareTitle: ["A two-to-four-way view", "for differences that matter."],
+  compareIntro: "Place candidates in slots and synchronize zoom and pan. Any slot can be made independent when you need a different area.",
+  compareBullets: ["Two-, three-, and four-slot layouts with drag-and-drop placement", "Per-slot or synchronized zoom and pan", "Ratings, Pick/Reject, and Finder tags for the active slot"],
+  compareLink: "Learn Compare mode",
+  compareAlt: "Two images side by side in AuroraViewer Compare mode with synchronized transforms",
+  formatTitle: ["Photos, RAW, documents,", "and archives."],
+  formatIntro: "Inspect a file before converting it, then export the result with the format and dimensions the next task needs.",
+  formatGroups: [
+    ["Images · RAW", "JPEG, PNG, TIFF, HEIC, WebP, AVIF, PSD, and major camera RAW formats"],
+    ["Documents · Archives", "SVG, AI, EPS, PDF, plus supported images inside ZIP, RAR, and 7z"],
+    ["Converted export", `${productFacts.exportFormats.join(" · ")}, with crop, resize, and metadata options`]
+  ],
+  manualTitle: ["Find the feature you need", "and get back to the image."],
+  manualIntro: "The manual follows real tasks from opening files through comparison, duplicate review, export, shortcuts, and troubleshooting.",
+  support: "Get support"
+};
+---
+
+<BaseLayout locale={locale} current="home" title={page.title} description={page.description} structuredData>
+  <section class="home-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="hero-identity">
+          <img src={`${SITE_BASE}/assets/auroraviewer-icon.png`} width="62" height="62" alt={isKo ? "AuroraViewer 앱 아이콘" : "AuroraViewer app icon"} />
+          <p><strong>AuroraViewer</strong><span>{copy.version}</span></p>
+        </div>
+        <p class="eyebrow">macOS image review & organization</p>
+        <h1>{page.headline[0]}<br />{page.headline[1]}</h1>
+        <p class="lede">{page.intro}</p>
+        <div class="button-row">
+          <a class="button button--primary" href={APP_STORE_URL}>{copy.appStore}</a>
+          <a class="button" href={localizedPath(locale, "manual")}>{copy.manual}</a>
+        </div>
+        <ul class="hero-meta" aria-label={isKo ? "제품 요약" : "Product summary"}>
+          {page.facts.map((fact) => <li>{fact}</li>)}
+        </ul>
+      </div>
+      <figure class="hero-visual">
+        <img class="screenshot" src={screenshotPath("viewer", locale)} width="1800" height="1096" alt={page.heroAlt} loading="eager" fetchpriority="high" />
+        <figcaption class="screenshot-caption">{page.heroCaption}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap">
+      <div class="section-heading">
+        <p class="eyebrow">One continuous workflow</p>
+        <h2>{page.workflowTitle[0]}<br />{page.workflowTitle[1]}</h2>
+        <p class="lede">{page.workflowIntro}</p>
+      </div>
+      <div class="editorial-grid">
+        {page.workflows.map(([index, title, description]) => (
+          <article class="editorial-card">
+            <span class="index">{index}</span>
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap feature-split">
+      <div class="feature-split__copy">
+        <p class="eyebrow">Library review</p>
+        <h2>{page.libraryTitle[0]}<br />{page.libraryTitle[1]}</h2>
+        <p class="lede">{page.libraryIntro}</p>
+        <ul>{page.libraryBullets.map((item) => <li>{item}</li>)}</ul>
+        <a class="text-link" href={localizedPath(locale, "features")}>{page.libraryLink}</a>
+      </div>
+      <div class="feature-split__visual">
+        <img class="screenshot" src={screenshotPath("library", locale)} width="1800" height="1096" alt={page.libraryAlt} loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap feature-split feature-split--reverse">
+      <div class="feature-split__visual">
+        <img class="screenshot" src={screenshotPath("compare", locale)} width="1800" height="1096" alt={page.compareAlt} loading="lazy" />
+      </div>
+      <div class="feature-split__copy">
+        <p class="eyebrow">Compare closely</p>
+        <h2>{page.compareTitle[0]}<br />{page.compareTitle[1]}</h2>
+        <p class="lede">{page.compareIntro}</p>
+        <ul>{page.compareBullets.map((item) => <li>{item}</li>)}</ul>
+        <a class="text-link" href={localizedPath(locale, "manual/compare-and-pages")}>{page.compareLink}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-heading">
+        <p class="eyebrow">Broad input, careful output</p>
+        <h2>{page.formatTitle[0]}<br />{page.formatTitle[1]}</h2>
+        <p class="lede">{page.formatIntro}</p>
+      </div>
+      <div class="format-groups">
+        {page.formatGroups.map(([title, description]) => (
+          <article class="format-group"><h3>{title}</h3><p>{description}</p></article>
+        ))}
+      </div>
+      <p class="fine-print">{copy.conditionalFormats}</p>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="reading-wrap">
+      <p class="eyebrow">Start with the manual</p>
+      <h2>{page.manualTitle[0]}<br />{page.manualTitle[1]}</h2>
+      <p class="lede">{page.manualIntro}</p>
+      <div class="button-row">
+        <a class="button button--primary" href={localizedPath(locale, "manual")}>{copy.manual}</a>
+        <a class="button" href={localizedPath(locale, "support")}>{page.support}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

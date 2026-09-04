@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ISSUE_URL, type Locale } from "../data/product";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const isKo = locale === "ko";
+const page = isKo ? {
+  title: "AuroraViewer 개인정보 처리방침",
+  description: "AuroraViewer 앱과 공식 웹사이트가 파일, 설정과 개인 정보를 처리하는 방식을 설명합니다.",
+  headline: "개인정보 처리방침",
+  updated: "최종 업데이트: 2026년 9월 4일",
+  intro: "AuroraViewer는 사용자가 선택한 이미지를 Mac에서 열고 정리하는 샌드박스 앱입니다. 앱에는 분석 도구, 광고 SDK 또는 개발자 서버로 파일을 보내는 기능이 없습니다.",
+  sections: [
+    ["수집하지 않는 정보", ["앱은 이름, 이메일 주소, 연락처 같은 개인 정보를 요구하거나 수집하지 않습니다.", "사용 분석, 광고 식별자, 자동 진단 전송 또는 행동 추적 기능을 포함하지 않습니다.", "공식 웹사이트는 분석 스크립트나 추적 쿠키를 사용하지 않습니다."]],
+    ["선택한 파일의 처리", ["이미지, 폴더와 압축 파일은 사용자가 명시적으로 선택하거나 Finder에서 열도록 요청했을 때 Mac 안에서 처리됩니다.", "AuroraViewer는 선택한 파일의 내용을 Mirinae Labs 서버로 업로드하지 않습니다.", "macOS의 ImageIO, Quick Look, Finder와 기본 편집 앱 같은 시스템 기능을 사용하면 해당 기능의 동작과 Apple의 정책이 적용될 수 있습니다."]],
+    ["Mac에 저장되는 데이터", ["앱 설정, 단축키, 별점과 Pick/Reject 상태, 세션 정보, 최근 작업 맥락이 로컬 저장소에 남을 수 있습니다.", "샌드박스 접근을 다시 사용할 수 있도록 사용자가 승인한 파일·폴더의 보안 범위 북마크를 저장할 수 있습니다.", "표시 성능과 압축 파일 처리를 위해 썸네일·미리보기·추출 캐시를 만들 수 있습니다. 캐시 삭제는 원본 파일을 삭제하지 않습니다."]],
+    ["사용자가 요청한 파일 변경", ["Finder 태그, 지원되는 EXIF 필드 편집, 이름 변경, 이동, 복사, 휴지통 보내기와 내보내기는 사용자가 명령했을 때 대상 파일이나 결과 파일을 변경합니다.", "별점과 Pick/Reject는 앱의 로컬 데이터이며 원본 이미지 바이트에 자동으로 기록되지 않습니다.", "암호로 연 압축의 추출물은 종료 시 정리됩니다. 일반 캐시는 설정과 앱 동작에 따라 정리될 수 있습니다."]],
+    ["외부 링크와 지원", ["Mac App Store와 GitHub 지원 페이지 같은 외부 사이트를 열면 해당 서비스의 개인정보 처리방침이 적용됩니다.", "GitHub Issues는 공개 공간입니다. 지원 요청에 개인 정보나 공개하면 안 되는 파일을 포함하지 마세요."]],
+    ["문의", ["이 방침이나 AuroraViewer의 데이터 처리에 관한 질문은 GitHub 지원 요청으로 보내 주세요."]]
+  ],
+  contact: "지원 요청 열기"
+} : {
+  title: "AuroraViewer Privacy Policy",
+  description: "Learn how the AuroraViewer app and official website handle files, settings, and personal information.",
+  headline: "Privacy Policy",
+  updated: "Last updated: September 4, 2026",
+  intro: "AuroraViewer is a sandboxed app that opens and organizes images selected by the user on the Mac. The app has no analytics, advertising SDK, or feature that sends files to a developer server.",
+  sections: [
+    ["Information we do not collect", ["The app does not request or collect personal information such as your name, email address, or contacts.", "It does not include usage analytics, advertising identifiers, automatic diagnostic reporting, or behavioral tracking.", "The official website uses no analytics scripts or tracking cookies."]],
+    ["How selected files are processed", ["Images, folders, and archives are processed on your Mac after you select them explicitly or ask Finder to open them.", "AuroraViewer does not upload selected file contents to a Mirinae Labs server.", "When the app invokes system features such as macOS ImageIO, Quick Look, Finder, or a default editor, those features and Apple's policies may apply."]],
+    ["Data stored on your Mac", ["App settings, shortcuts, ratings, Pick/Reject status, session information, and recent working context may remain in local storage.", "The app may store security-scoped bookmarks for files and folders you approved so sandbox access can be restored.", "Thumbnail, preview, and extracted-file caches may be created for display performance and archive handling. Clearing a cache does not delete original files."]],
+    ["File changes you request", ["Finder tags, supported EXIF-field edits, rename, move, copy, Move to Trash, and export change a target or result file only when you invoke the command.", "Ratings and Pick/Reject status are local app data and are not automatically written into the original image bytes.", "Files extracted from a password-protected archive are removed on exit. General caches may be cleared according to settings and app behavior."]],
+    ["External links and support", ["External sites such as the Mac App Store and GitHub support are governed by their own privacy policies.", "GitHub Issues is public. Do not include personal information or files that should not be public in a support request."]],
+    ["Contact", ["Send questions about this policy or AuroraViewer data handling through the GitHub support request."]]
+  ],
+  contact: "Open a support request"
+};
+const policySections = page.sections as Array<[string, string[]]>;
+---
+
+<BaseLayout locale={locale} current="privacy" title={page.title} description={page.description} path="privacy">
+  <header class="page-hero"><div class="reading-wrap">
+    <p class="eyebrow">AuroraViewer</p><h1>{page.headline}</h1><p class="lede">{page.intro}</p><p class="fine-print">{page.updated}</p>
+  </div></header>
+  <article class="section section--compact policy-article"><div class="reading-wrap">
+    {policySections.map(([heading, paragraphs], index) => (
+      <section><h2>{heading}</h2>{paragraphs.map((paragraph) => <p>{paragraph}</p>)}{index === policySections.length - 1 && <p><a class="text-link" href={ISSUE_URL}>{page.contact}</a></p>}</section>
+    ))}
+  </div></article>
+</BaseLayout>
