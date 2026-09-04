@@ -94,10 +94,10 @@ const page = isKo ? {
           <a class="button button--primary" href={APP_STORE_URL}>{copy.appStore}</a>
           <a class="button" href={localizedPath(locale, "manual")}>{copy.manual}</a>
         </div>
-        <ul class="hero-meta" aria-label={isKo ? "제품 요약" : "Product summary"}>
-          {page.facts.map((fact) => <li>{fact}</li>)}
-        </ul>
       </div>
+      <ul class="hero-meta" aria-label={isKo ? "제품 요약" : "Product summary"}>
+        {page.facts.map((fact) => <li>{fact}</li>)}
+      </ul>
       <figure class="hero-visual">
         <img class="screenshot" src={screenshotPath("viewer", locale)} width="1800" height="1096" alt={page.heroAlt} loading="eager" fetchpriority="high" />
         <figcaption class="screenshot-caption">{page.heroCaption}</figcaption>

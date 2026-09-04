@@ -25,6 +25,11 @@ const page = isKo ? {
   inspectTitle: ["눈으로 확인하고,", "수치로 다시 확인합니다."],
   inspectIntro: "컬러 인스펙터는 원본 좌표를 따라 픽셀을 확대하고 색상 값을 표시합니다. EXIF 오버레이와 히스토그램을 함께 사용하면 파일을 바꾸지 않고도 필요한 정보를 살펴볼 수 있습니다.",
   inspectAlt: "AuroraViewer 컬러 인스펙터가 이미지 픽셀과 색상 값을 보여 주는 화면",
+  libraryAlt: "AuroraViewer 썸네일 모드에서 여러 이미지를 탐색하고 평가하는 화면",
+  viewerAlt: "AuroraViewer에서 선택한 이미지를 크게 보고 별점과 Finder 태그를 관리하는 화면",
+  compareAlt: "AuroraViewer 비교 모드에서 두 이미지를 나란히 확인하는 화면",
+  flowNavLabel: "기능 흐름 바로가기",
+  flowLabels: ["탐색", "검토", "비교", "검사", "정리", "내보내기"],
   formatsTitle: "지원 형식",
   formatsIntro: "스캐너가 인식하는 입력 확장자입니다. 실제 표시 결과는 파일 내부 코덱과 macOS 지원에 따라 달라질 수 있습니다.",
   images: "이미지 · RAW · 문서",
@@ -51,6 +56,11 @@ const page = isKo ? {
   inspectTitle: ["Confirm it by eye,", "then confirm the values."],
   inspectIntro: "The Color Inspector follows source coordinates to magnify a pixel and report its values. Pair it with the EXIF overlay and histogram to inspect information without altering the file.",
   inspectAlt: "AuroraViewer Color Inspector showing magnified pixels and color values",
+  libraryAlt: "AuroraViewer Thumbnail mode for browsing and rating a collection of images",
+  viewerAlt: "AuroraViewer showing a selected image with rating and Finder tag controls",
+  compareAlt: "AuroraViewer Compare mode showing two images side by side",
+  flowNavLabel: "Jump to a feature workflow",
+  flowLabels: ["Browse", "Review", "Compare", "Inspect", "Organize", "Export"],
   formatsTitle: "Supported formats",
   formatsIntro: "These are the input extensions recognized by the scanner. Actual rendering still depends on file contents and macOS support.",
   images: "Images · RAW · Documents",
@@ -61,6 +71,7 @@ const page = isKo ? {
   workflowLink: "Learn settings, sessions, and windows"
 };
 const featureGroups = page.groups as Array<[string, string, string, string[], string]>;
+const [input, view, find, review, compare, inspect, organize, output] = featureGroups;
 ---
 
 <BaseLayout locale={locale} current="features" title={page.title} description={page.description} path="features">
@@ -70,27 +81,61 @@ const featureGroups = page.groups as Array<[string, string, string, string[], st
     <p class="lede">{page.intro}</p>
   </div></header>
 
-  <section class="section"><div class="wrap feature-groups">
-    {featureGroups.map(([index, title, description, bullets, slug]) => (
-      <article class="feature-group">
-        <span class="index">{index}</span><h2>{title}</h2><p>{description}</p>
-        <ul class="feature-list">{bullets.map((item) => <li>{item}</li>)}</ul>
-        <a class="text-link" href={localizedPath(locale, `manual/${slug}`)}>{copy.readMore}</a>
-      </article>
-    ))}
-  </div></section>
-
-  <section class="section section--tint"><div class="wrap feature-split">
-    <div class="feature-split__copy">
-      <p class="eyebrow">Inspect color & metadata</p>
-      <h2>{page.inspectTitle[0]}<br />{page.inspectTitle[1]}</h2>
-      <p class="lede">{page.inspectIntro}</p>
-      <a class="text-link" href={localizedPath(locale, "manual/inspect-color-metadata")}>{copy.readMore}</a>
+  <nav class="feature-flow-nav" aria-label={page.flowNavLabel}>
+    <div class="wrap">
+      {page.flowLabels.map((label, index) => <a href={`#${["browse", "review", "compare", "inspect", "organize", "export"][index]}`}><span>{String(index + 1).padStart(2, "0")}</span>{label}</a>)}
     </div>
-    <div class="feature-split__visual"><img class="screenshot" src={screenshotPath("inspect", locale)} width="1800" height="1096" alt={page.inspectAlt} loading="lazy" /></div>
+  </nav>
+
+  <section class="product-section" id="browse"><div class="wrap product-story">
+    <div class="product-story__copy">
+      <p class="eyebrow">Browse</p>
+      <h2>{input[1]}</h2><p class="lede">{input[2]}</p>
+      <ul class="feature-list">{input[3].map((item) => <li>{item}</li>)}</ul>
+      <a class="text-link" href={localizedPath(locale, `manual/${input[4]}`)}>{copy.readMore}</a>
+      <div class="story-details">
+        {[view, find].map((group) => <article><h3>{group[1]}</h3><p>{group[2]}</p><a href={localizedPath(locale, `manual/${group[4]}`)}>{copy.readMore}</a></article>)}
+      </div>
+    </div>
+    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("library", locale)} width="1800" height="1096" alt={page.libraryAlt} loading="eager" /></figure>
   </div></section>
 
-  <section class="section"><div class="wrap">
+  <section class="product-section section--tint" id="review"><div class="wrap product-story product-story--reverse">
+    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("viewer", locale)} width="1800" height="1096" alt={page.viewerAlt} loading="lazy" /></figure>
+    <div class="product-story__copy">
+      <p class="eyebrow">Review</p><h2>{review[1]}</h2><p class="lede">{review[2]}</p>
+      <ul class="feature-list">{review[3].map((item) => <li>{item}</li>)}</ul>
+      <a class="text-link" href={localizedPath(locale, `manual/${review[4]}`)}>{copy.readMore}</a>
+    </div>
+  </div></section>
+
+  <section class="product-section" id="compare"><div class="wrap product-story">
+    <div class="product-story__copy">
+      <p class="eyebrow">Compare</p><h2>{compare[1]}</h2><p class="lede">{compare[2]}</p>
+      <ul class="feature-list">{compare[3].map((item) => <li>{item}</li>)}</ul>
+      <a class="text-link" href={localizedPath(locale, `manual/${compare[4]}`)}>{copy.readMore}</a>
+    </div>
+    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("compare", locale)} width="1800" height="1096" alt={page.compareAlt} loading="lazy" /></figure>
+  </div></section>
+
+  <section class="product-section section--tint" id="inspect"><div class="wrap product-story product-story--reverse">
+    <figure class="product-story__visual"><img class="screenshot" src={screenshotPath("inspect", locale)} width="1800" height="1096" alt={page.inspectAlt} loading="lazy" /></figure>
+    <div class="product-story__copy">
+      <p class="eyebrow">Inspect</p><h2>{inspect[1]}</h2><p class="lede">{inspect[2]}</p>
+      <ul class="feature-list">{inspect[3].map((item) => <li>{item}</li>)}</ul>
+      <a class="text-link" href={localizedPath(locale, `manual/${inspect[4]}`)}>{copy.readMore}</a>
+    </div>
+  </div></section>
+
+  <section class="product-section" id="organize"><div class="wrap product-duo">
+    {[organize, output].map((group, index) => <article id={index === 1 ? "export" : undefined}>
+      <p class="eyebrow">{index === 0 ? "Organize" : "Export"}</p><h2>{group[1]}</h2><p class="lede">{group[2]}</p>
+      <ul class="feature-list">{group[3].map((item) => <li>{item}</li>)}</ul>
+      <a class="text-link" href={localizedPath(locale, `manual/${group[4]}`)}>{copy.readMore}</a>
+    </article>)}
+  </div></section>
+
+  <section class="product-section product-section--formats section--tint"><div class="wrap">
     <div class="section-heading"><p class="eyebrow">Formats</p><h2>{page.formatsTitle}</h2><p class="lede">{page.formatsIntro}</p></div>
     <div class="format-groups">
       <article class="format-group"><h3>{page.images}</h3><p>{productFacts.imageFormats.join(" · ")}</p></article>
@@ -100,7 +145,7 @@ const featureGroups = page.groups as Array<[string, string, string, string[], st
     <p class="fine-print">{copy.conditionalFormats}</p>
   </div></section>
 
-  <section class="section section--tint"><div class="reading-wrap">
+  <section class="product-section"><div class="reading-wrap">
     <p class="eyebrow">Workspace continuity</p><h2>{page.workflowTitle}</h2><p class="lede">{page.workflowText}</p>
     <a class="text-link" href={localizedPath(locale, "manual/settings-sessions-windows")}>{page.workflowLink}</a>
   </div></section>
