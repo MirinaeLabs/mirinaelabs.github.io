@@ -934,7 +934,7 @@ p {
 
 .manual-article {
   min-width: 0;
-  max-width: 780px;
+  max-width: 860px;
 }
 
 .manual-breadcrumb {
@@ -984,6 +984,31 @@ p {
 
 .manual-section ol li + li {
   margin-top: 0.82em;
+}
+
+.manual-media {
+  width: 100%;
+  max-width: 860px;
+  margin-top: 30px;
+}
+
+.manual-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+.manual-media--detail {
+  max-width: 720px;
+}
+
+.manual-media figcaption {
+  max-width: 720px;
+  margin-top: 10px;
+  color: var(--ink-faint);
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
 .note,
@@ -1374,6 +1399,15 @@ kbd {
   .manual-start-item + .manual-start-item {
     border-top: 1px solid var(--line);
     border-left: 0;
+  }
+
+  .manual-media {
+    margin-top: 24px;
+  }
+
+  .manual-media figcaption {
+    margin-top: 8px;
+    font-size: 0.78rem;
   }
 
   .manual-directory-grid {

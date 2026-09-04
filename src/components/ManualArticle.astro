@@ -1,8 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ManualNav from "./ManualNav.astro";
-import { localizedPath, type Locale } from "../data/product";
-import { getManualTopic, text, type ManualTopic } from "../data/manual";
+import { localizedPath, SITE_BASE, type Locale } from "../data/product";
+import { getManualTopic, text, type ManualMedia, type ManualTopic } from "../data/manual";
 
 interface Props {
   locale: Locale;
@@ -11,6 +11,7 @@ interface Props {
 const { locale, topic } = Astro.props;
 const isKo = locale === "ko";
 const topicTitle = text(topic.title, locale);
+const mediaList = (media: ManualMedia | ManualMedia[]) => Array.isArray(media) ? media : [media];
 ---
 
 <BaseLayout
@@ -66,6 +67,19 @@ const topicTitle = text(topic.title, locale);
               </table>
             </div>
           )}
+          {section.media && mediaList(section.media).map((item) => (
+            <figure class:list={["manual-media", item.kind === "detail" && "manual-media--detail"]}>
+              <img
+                src={`${SITE_BASE}/assets/manual/${text(item.src, locale)}`}
+                alt={text(item.alt, locale)}
+                width={item.width}
+                height={item.height}
+                loading="lazy"
+                decoding="async"
+              />
+              {item.caption && <figcaption>{text(item.caption, locale)}</figcaption>}
+            </figure>
+          ))}
           {section.note && <aside class="note"><strong>{isKo ? "참고" : "Note"}</strong><br />{text(section.note, locale)}</aside>}
           {section.warning && <aside class="warning"><strong>{isKo ? "주의" : "Caution"}</strong><br />{text(section.warning, locale)}</aside>}
         </section>

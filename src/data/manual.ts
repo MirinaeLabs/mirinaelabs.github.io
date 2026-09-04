@@ -2,6 +2,15 @@ import type { Locale } from "./product";
 
 type LocalizedText = Record<Locale, string>;
 
+export interface ManualMedia {
+  src: LocalizedText;
+  alt: LocalizedText;
+  caption?: LocalizedText;
+  width: number;
+  height: number;
+  kind?: "window" | "detail";
+}
+
 export interface ManualSection {
   heading: LocalizedText;
   intro?: LocalizedText;
@@ -9,6 +18,7 @@ export interface ManualSection {
   bullets?: LocalizedText[];
   note?: LocalizedText;
   warning?: LocalizedText;
+  media?: ManualMedia | ManualMedia[];
   shortcuts?: Array<{
     action: LocalizedText;
     key: string;
@@ -26,6 +36,24 @@ export interface ManualTopic {
 }
 
 const l = (ko: string, en: string): LocalizedText => ({ ko, en });
+
+const media = (
+  name: string,
+  width: number,
+  height: number,
+  altKo: string,
+  altEn: string,
+  captionKo: string,
+  captionEn: string,
+  kind: ManualMedia["kind"] = "window"
+): ManualMedia => ({
+  src: l(`${name}-ko.png`, `${name}-en.png`),
+  alt: l(altKo, altEn),
+  caption: l(captionKo, captionEn),
+  width,
+  height,
+  kind
+});
 
 export const manualTopics: ManualTopic[] = [
   {
@@ -55,6 +83,15 @@ export const manualTopics: ManualTopic[] = [
       },
       {
         heading: l("화면의 주요 영역", "Know the main areas"),
+        media: media(
+          "getting-started",
+          1164,
+          709,
+          "AuroraViewer의 사이드바, 이미지 캔버스, 상단 평가 도구, 하단 탐색 막대가 보이는 기본 뷰어 창",
+          "The main AuroraViewer window showing the sidebar, image canvas, top rating controls, and bottom navigation bar",
+          "기본 뷰어 한 화면에서 라이브러리, 현재 이미지, 평가 도구와 탐색 위치를 함께 확인할 수 있습니다.",
+          "The main viewer keeps the library, current image, review controls, and navigation position in one window."
+        ),
         bullets: [
           l("사이드바: 입력 소스, 검색·정렬·필터, 다중 선택을 관리합니다.", "Sidebar: manage input sources, search, sorting, filters, and multiple selection."),
           l("캔버스: 현재 이미지, 두 장 보기 또는 비교 슬롯을 표시합니다.", "Canvas: displays the current image, a two-page spread, or Compare slots."),
@@ -73,6 +110,15 @@ export const manualTopics: ManualTopic[] = [
     sections: [
       {
         heading: l("현재 뷰어에 추가하기", "Add sources to the current viewer"),
+        media: media(
+          "open-import",
+          1164,
+          709,
+          "서로 다른 두 폴더가 소스 그룹으로 펼쳐지고 각 이미지 썸네일이 표시된 AuroraViewer",
+          "AuroraViewer with two source folders expanded into groups and their image thumbnails visible",
+          "이미지와 폴더를 추가하면 원본 위치별 그룹으로 정리되어 한 라이브러리에서 이어서 탐색할 수 있습니다.",
+          "Added images and folders remain grouped by source so you can browse them as one library."
+        ),
         steps: [
           l("파일 메뉴에서 입력 추가 명령을 선택하거나 ⌘O를 누릅니다.", "Choose the add/open command from the File menu, or press Command-O."),
           l("여러 이미지, 폴더, 압축 파일을 함께 선택합니다.", "Select multiple images, folders, and archives together."),
@@ -121,6 +167,15 @@ export const manualTopics: ManualTopic[] = [
     sections: [
       {
         heading: l("이전·다음 이미지로 이동", "Move to the previous or next image"),
+        media: media(
+          "browse-and-navigate",
+          1164,
+          709,
+          "AuroraViewer 썸네일 모드에서 이미지 라이브러리를 격자로 탐색하는 화면",
+          "AuroraViewer Thumbnail mode displaying an image library as a browsable grid",
+          "썸네일 모드는 많은 이미지를 한눈에 훑고 원하는 항목으로 바로 이동할 때 유용합니다.",
+          "Thumbnail mode helps you scan a large library and jump directly to a candidate."
+        ),
         steps: [
           l("캔버스가 활성화된 상태에서 ← 또는 →를 누릅니다.", "With the canvas active, press Left Arrow or Right Arrow."),
           l("멀리 이동하려면 하단 슬라이더의 손잡이를 끌거나 원하는 눈금을 선택합니다.", "To move farther, drag the bottom slider or select a point on it."),
@@ -166,6 +221,15 @@ export const manualTopics: ManualTopic[] = [
     sections: [
       {
         heading: l("배율 모드 선택", "Choose a zoom mode"),
+        media: media(
+          "view-zoom",
+          1164,
+          709,
+          "AuroraViewer에서 오로라 사진을 200퍼센트로 확대하고 미니맵으로 현재 영역을 확인하는 화면",
+          "AuroraViewer showing an aurora photo at 200 percent with the current viewport indicated in the minimap",
+          "200% 확대에서는 세부 픽셀을 확인하면서 미니맵으로 전체 이미지 안의 현재 위치를 유지할 수 있습니다.",
+          "At 200%, the minimap keeps the current viewport in context while you inspect fine detail."
+        ),
         bullets: [
           l("창 크기에 맞추기: 이미지 전체가 현재 캔버스 안에 들어오도록 표시합니다.", "Fit to Window: fits the full image within the current canvas."),
           l("원본 크기: 소스 픽셀과 화면 point의 기본 1:1 기준으로 봅니다.", "Original Size: uses the default 1:1 relationship between source pixels and screen points."),
@@ -218,6 +282,15 @@ export const manualTopics: ManualTopic[] = [
     sections: [
       {
         heading: l("파일명과 확장자로 검색", "Search by file name or extension"),
+        media: media(
+          "sidebar-search-filter",
+          1164,
+          709,
+          "AuroraViewer 검색 필드에 winter를 입력해 40개 이미지 중 겨울 사진 2개만 남긴 화면",
+          "AuroraViewer with winter entered in the search field, narrowing a 40-image library to two winter photos",
+          "검색 결과 수와 남은 썸네일을 함께 확인한 뒤 필터나 일괄 작업의 범위를 정합니다.",
+          "Confirm the result count and remaining thumbnails before using filters or batch actions."
+        ),
         steps: [
           l("⌘F를 눌러 검색 필드로 이동합니다.", "Press Command-F to focus the search field."),
           l("파일명 일부 또는 확장자를 입력합니다. 대소문자는 구분하지 않습니다.", "Enter part of a file name or an extension. Search is case-insensitive."),
@@ -264,6 +337,15 @@ export const manualTopics: ManualTopic[] = [
     sections: [
       {
         heading: l("선택한 이미지를 비교하기", "Compare selected images"),
+        media: media(
+          "compare-and-pages",
+          1164,
+          709,
+          "AuroraViewer 비교 모드에서 겨울 사진 두 장을 나란히 놓고 동기화된 확대와 이동으로 비교하는 화면",
+          "AuroraViewer Compare mode showing two winter photos side by side with synchronized zoom and pan",
+          "비교 모드는 후보를 같은 창에 배치하고 활성 슬롯, 동기화 상태와 각 이미지의 차이를 함께 보여 줍니다.",
+          "Compare mode places candidates in one window so you can track the active slot, sync state, and visual differences."
+        ),
         steps: [
           l("사이드바에서 비교할 이미지를 1–4개 선택합니다.", "Select one to four images in the sidebar."),
           l("비교 모드를 켭니다. 선택 개수에 맞춰 2·3·4슬롯 레이아웃이 정해집니다.", "Turn on Compare mode. A two-, three-, or four-slot layout is chosen for the selection."),
@@ -302,6 +384,15 @@ export const manualTopics: ManualTopic[] = [
     sections: [
       {
         heading: l("별점과 Pick/Reject", "Ratings and Pick/Reject"),
+        media: media(
+          "rate-tag-organize",
+          1164,
+          709,
+          "AuroraViewer에서 선택한 오로라 사진에 별점 4점, Pick 상태와 파란 Finder 태그를 적용한 화면",
+          "AuroraViewer with a selected aurora photo marked four stars, Pick, and a blue Finder tag",
+          "현재 이미지의 별점, Pick/Reject와 Finder 태그는 상단 도구와 썸네일 배지에서 바로 확인할 수 있습니다.",
+          "Ratings, Pick or Reject, and Finder tags are visible both in the top controls and on thumbnail badges."
+        ),
         steps: [
           l("현재 이미지 또는 사이드바의 여러 이미지를 선택합니다.", "Select the current image or multiple images in the sidebar."),
           l("0–5를 눌러 별점을 지정합니다.", "Press 0–5 to set a rating."),
@@ -369,6 +460,15 @@ export const manualTopics: ManualTopic[] = [
       },
       {
         heading: l("컬러 픽커", "Color Picker"),
+        media: media(
+          "inspect-color-metadata",
+          1164,
+          709,
+          "AuroraViewer 컬러 픽커로 그라데이션 이미지의 픽셀을 샘플링하고 HEX, RGB, HSB 값을 확인하는 화면",
+          "AuroraViewer Color Picker sampling a gradient image and displaying HEX, RGB, and HSB values",
+          "컬러 픽커는 캔버스의 실제 픽셀을 기록하고 값과 최근 샘플을 한 화면에서 확인하게 합니다.",
+          "Color Picker records a real canvas pixel and keeps its values and recent samples visible together."
+        ),
         steps: [
           l("⌥P 또는 도구 메뉴에서 컬러 픽커를 켭니다.", "Press Option-P or use the Tools menu to enable Color Picker."),
           l("기본 설정에서는 Option-클릭으로 현재 픽셀을 기록합니다.", "By default, Option-click records the current pixel."),
@@ -417,6 +517,15 @@ export const manualTopics: ManualTopic[] = [
       },
       {
         heading: l("결과 검토와 정리", "Review and organize results"),
+        media: media(
+          "duplicates",
+          1640,
+          873,
+          "AuroraViewer 중복 이미지 검토 창에서 완전히 같은 두 그룹과 권장 보존본, 예상 절약 용량을 확인하는 화면",
+          "AuroraViewer Review Duplicates window showing two exact-match groups, the recommended keeper, and estimated savings",
+          "검사 결과는 그룹 근거와 권장 보존본을 보여 주지만 정리 대상은 사용자가 직접 선택합니다.",
+          "Scan results explain each group and recommend a keeper, while cleanup targets remain an explicit user choice."
+        ),
         bullets: [
           l("그룹 종류, 신뢰도, 항목 수, 예상 절약 용량을 먼저 확인합니다.", "Review match type, confidence, item count, and estimated savings first."),
           l("권장 보존본은 해상도, 파일 크기, RAW 여부에 따른 검토 보조입니다.", "The recommended keeper is guidance based on resolution, file size, and RAW status."),
@@ -430,12 +539,21 @@ export const manualTopics: ManualTopic[] = [
   },
   {
     slug: "export-and-metadata",
-    title: l("내보내기·자르기·메타데이터", "Export, crop, and metadata"),
+    title: l("내보내기·자르기·\u200B메타데이터", "Export, crop, and metadata"),
     summary: l("원본 복사와 포맷 변환을 구분하고 자르기·크기·메타데이터 옵션을 설정합니다.", "Distinguish original-copy workflows from format conversion, then set crop, size, and metadata options."),
     purpose: l("원본을 그대로 다른 이름으로 저장하는 작업과 픽셀을 다시 인코딩하는 변환 내보내기는 결과가 다릅니다. 목적에 맞는 경로를 먼저 선택하세요.", "Saving an original under another name and re-encoding pixels into another format produce different results. Choose the path that matches your intent."),
     sections: [
       {
         heading: l("현재 이미지를 변환해 내보내기", "Export the current image with conversion"),
+        media: media(
+          "export-and-metadata",
+          1040,
+          792,
+          "AuroraViewer 내보내기 창에서 오로라 이미지 미리보기와 PNG 포맷, 품질, 자르기, 크기, 메타데이터 옵션을 확인하는 화면",
+          "AuroraViewer Export window showing an aurora preview with PNG format, quality, crop, resize, and metadata options",
+          "저장 전에 출력 형식, 자르기, 크기와 EXIF·ICC 유지 정책을 한 화면에서 검토합니다.",
+          "Review format, crop, size, and EXIF or ICC policy together before saving."
+        ),
         steps: [
           l("파일 메뉴에서 현재 이미지 내보내기를 엽니다.", "Open Export Current Image from the File menu."),
           l("PNG, JPEG, TIFF, HEIC, WebP 중 출력 형식을 선택합니다.", "Choose PNG, JPEG, TIFF, HEIC, or WebP."),
@@ -559,6 +677,15 @@ export const manualTopics: ManualTopic[] = [
     sections: [
       {
         heading: l("설정 페이지", "Settings pages"),
+        media: media(
+          "settings-sessions-windows",
+          1120,
+          788,
+          "AuroraViewer 인터페이스 설정에서 언어, 패널 불투명도, 썸네일 바, 평가 도구와 확대율 박스 표시를 조정하는 화면",
+          "AuroraViewer Interface settings for language, panel opacity, thumbnail bar, rating controls, and zoom box visibility",
+          "설정 사이드바에서 범주를 고르고, 각 패널과 오버레이의 표시 방식을 같은 창에서 조정합니다.",
+          "Choose a category in the Settings sidebar, then adjust panel and overlay behavior in the same window."
+        ),
         bullets: [
           l("뷰어: 배율, 안티에일리어싱, 픽셀 그리드, 투명 배경, 유사 이미지, 두 장 보기, 슬라이드쇼, 세션·캐시를 설정합니다.", "Viewer: configure zoom, antialiasing, pixel grid, transparency, visual similarity, two-page view, slideshow, sessions, and cache."),
           l("인터페이스: 앱 언어, 사이드바·평가 도구·오버레이·타이틀 바 표시 방식을 정합니다.", "Interface: choose app language and how the sidebar, rating controls, overlays, and title bar appear."),
