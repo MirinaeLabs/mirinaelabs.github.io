@@ -1,0 +1,4 @@
+interface:
+  display_name: "AuroraViewer Product Facts"
+  short_description: "Verify current AuroraViewer product facts from source"
+  default_prompt: "Use $auroraviewer-product-docs to verify the AuroraViewer claims needed for this website or documentation change."
