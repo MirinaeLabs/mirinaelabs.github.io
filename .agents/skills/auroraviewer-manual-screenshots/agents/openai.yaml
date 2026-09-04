@@ -1,0 +1,4 @@
+interface:
+  display_name: "AuroraViewer Manual Screenshots"
+  short_description: "Add current task-focused AuroraViewer screenshots to the manual"
+  default_prompt: "Use $auroraviewer-manual-screenshots to add clean, current, task-oriented AuroraViewer screenshots to the user manual and validate the result."
