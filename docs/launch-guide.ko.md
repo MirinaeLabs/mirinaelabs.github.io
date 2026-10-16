@@ -9,22 +9,23 @@
 | 도메인 보유·갱신              | hosting.kr의 `mirinaelabs.com`           | 기존 등록·갱신 비용만 유지                                      |
 | DNS·HTTPS                     | Cloudflare Free + Pages 인증서           | 무료                                                            |
 | 소스 관리                     | 기존 `MirinaeLabs/mirinaelabs.github.io` | 기존 공개 저장소 사용                                           |
-| 홈페이지 자동 배포            | Cloudflare Pages Free의 GitHub 연동      | 무료, 월 500빌드·동시 1빌드 범위                                |
+| 홈페이지 자동 배포            | GitHub Actions → Cloudflare Pages Free   | 공개 저장소의 표준 GitHub 호스팅 runner와 정적 Pages 사용       |
 | 회사 주소 메일 수신·발신·답장 | Zoho Mail Forever Free                   | 제공되는 데이터센터에서만 가입 가능. 1도메인, 최대 5명, 1인 5GB |
 | 편지함 이용                   | Zoho 웹메일 또는 공식 모바일 앱          | 무료 플랜에 IMAP·POP·ActiveSync 미포함                          |
 
-홈페이지는 정적 파일만 배포한다. 별도 서버·데이터베이스·유료 Functions는 사용하지 않는다. GitHub Actions는 빌드와 링크 검증을 하고, 실제 자동 배포는 Cloudflare의 Git 연동이 수행한다. 별도 Cloudflare API 토큰이나 GitHub Secret은 필요하지 않다.
+홈페이지는 정적 파일만 배포한다. 별도 서버·데이터베이스·유료 Functions는 사용하지 않는다. GitHub Actions가 빌드·링크 검증 후 Cloudflare Pages에 업로드한다. Pages 편집 권한으로 제한된 API 토큰 하나를 GitHub Secret에 저장한다. GitHub 웹 로그인을 통한 Cloudflare 앱 설치는 필요하지 않다.
 
 Cloudflare Email Routing은 기본적으로 수신 전달용이다. 이것만 설정해서는 회사 주소로 외부 고객에게 답장할 수 없다. 일반 외부 수신자에게 Cloudflare Email Sending으로 보내려면 Workers 유료 플랜이 필요하므로 이번 구성에 포함하지 않는다.
 
 ## 지금 준비된 것과 남은 것
 
 - 회사 메인 페이지, AuroraViewer 제품·기존 한영 설명서 연결, 개인정보 안내, 404 페이지.
-- PC·모바일 레이아웃, 사이트맵, 검색 메타데이터, HTTPS 정식 주소, www 리다이렉트 파일.
+- PC·모바일 레이아웃, 사이트맵, 검색 메타데이터, HTTPS 정식 주소, www 기본 주소 리다이렉트 구성.
 - 회사 사이트 빌드·전체 내부 링크 검증, GitHub Actions 설정.
 - 회사 소개 문구는 초안이다. 공개 전 실제 회사 소개와 맞는지 확인한다.
 - `contact@mirinaelabs.com`은 아직 개설 완료로 표시하지 않는다. 수신·발신 테스트 후 아래 절차로 메일 링크를 활성화한다.
-- Cloudflare 계정 로그인·GitHub 앱 연결, DNS 위임, Zoho 가입·도메인 인증, 실제 배포는 계정 설정이 필요하다.
+- hosting.kr의 네임서버는 `hank.ns.cloudflare.com`, `uma.ns.cloudflare.com`으로 변경했고 공용 DNS 반영을 확인했다. Cloudflare Free 플랜 도메인 등록도 완료했다.
+- Pages 배포, GitHub의 배포 전용 Secret 설정, Zoho 가입·도메인 인증은 개별 완료 상태를 확인해야 한다.
 
 ## 1. Cloudflare에 도메인 추가
 
@@ -46,34 +47,26 @@ Cloudflare Email Routing은 기본적으로 수신 전달용이다. 이것만 �
 
 기존 GitHub Pages의 AuroraViewer 소개·설명서는 유지하면서, Cloudflare에는 회사 메인과 제품 페이지를 함께 배포한다. 회사 사이트의 배포 결과물은 `dist/`이며 저장소 전체를 그대로 업로드하지 않는다.
 
-1. GitHub의 회사 홈페이지 변경 PR을 검토해 `main`에 반영한다.
-2. Cloudflare → **Workers & Pages → Create application → Pages → Import an existing Git repository**로 이동한다. 메뉴 이름은 UI 개편에 따라 다를 수 있다.
-3. GitHub 계정 `MirinaeLabs`를 연결하고 저장소 `mirinaelabs.github.io`만 선택한다. 새 GitHub 앱 권한 승인은 계정 소유자가 진행한다.
-4. 다음 값을 설정한다.
+1. Cloudflare → **Workers & Pages → Create application → Continue to Pages → Drag and drop your files**로 이동한다. 메뉴 이름은 UI 개편에 따라 다를 수 있다.
+2. Direct Upload 프로젝트 `mirinaelabs`를 만들고 `npm run validate:company`로 만든 `dist/`의 내용을 처음 업로드한다. 파일을 압축한다면 ZIP 안 최상위에 `index.html`이 있어야 한다.
+3. Cloudflare API Tokens에서 이 계정의 **Account → Cloudflare Pages → Edit**만 허용한 배포 전용 토큰을 만든다. 다른 계정·DNS·도메인 편집 권한을 부여하지 않는다. 토큰 생성은 계정 소유자 승인 후 진행한다.
+4. GitHub 저장소 `MirinaeLabs/mirinaelabs.github.io`에 repository secret `CLOUDFLARE_API_TOKEN`, repository variable `CLOUDFLARE_ACCOUNT_ID`를 설정한다. 토큰을 소스·로그·문서에 넣지 않는다.
+5. `.github/workflows/deploy-company.yml`을 `main`에 반영한다. 이후 회사·제품 소스 변경을 `main`에 push하면 검증 후 자동 배포된다. 문서만 수정한 push는 불필요한 배포를 하지 않는다.
+6. GitHub Actions의 **Deploy company website → Run workflow**로 수동 재배포할 수도 있다. PR에서는 빌드만 검사하고 배포 토큰을 사용하지 않는다.
+7. 배포가 성공하면 **실제로 발급된** `*.pages.dev` 주소에서 메인, 제품, 설명서, 모바일 레이아웃을 확인한다.
 
-| 항목                   | 값                                           |
-| ---------------------- | -------------------------------------------- |
-| 프로젝트 이름          | `mirinaelabs` (사용 불가하면 다른 이름 가능) |
-| Production branch      | `main`                                       |
-| Framework preset       | `None`                                       |
-| Root directory         | 저장소 루트 / 비워 두기                      |
-| Build command          | `npm run validate:company`                   |
-| Build output directory | `dist`                                       |
-| Environment variable   | `NODE_VERSION` = `22`                        |
-
-5. 배포가 성공하면 **실제로 발급된** `*.pages.dev` 주소에서 메인, 제품, 설명서, 모바일 레이아웃을 확인한다. 프로젝트 이름에서 URL을 추측해 DNS에 먼저 입력하지 않는다.
-6. 이후 `main`에 push하면 Cloudflare가 자동으로 새 버전을 빌드·배포한다. PR 브랜치는 프리뷰로 확인할 수 있다.
-
-**처음부터 Git 저장소 연동 방식으로 만든다.** Direct Upload 프로젝트를 먼저 만들면 나중에 같은 프로젝트를 Git 연동으로 전환할 수 없다.
+빌드는 GitHub에서 수행하므로 Cloudflare 프로젝트에 별도 build command를 입력하지 않는다. Node.js 버전, 빌드 명령, 출력 디렉터리는 workflow 파일에 있다. Direct Upload 프로젝트는 Cloudflare의 기본 Git 연동으로 전환할 수 없지만, 위와 같이 GitHub Actions로 자동 배포하는 것은 지원된다.
 
 ## 4. 구매한 도메인 연결
 
 1. Pages 프로젝트 → **Custom domains → Set up a custom domain**에서 `mirinaelabs.com`을 추가한다.
-2. 같은 곳에서 `www.mirinaelabs.com`도 추가한다. `_redirects` 파일이 www 요청을 기본 주소로 보낸다. www 도메인도 인증서·연결이 완료되어야 리다이렉트가 동작한다.
+2. 같은 곳에서 `www.mirinaelabs.com`도 추가하고 인증서·연결이 완료되는지 확인한다.
 3. Cloudflare가 안내하는 웹용 DNS 레코드를 적용하고 도메인과 인증서가 **Active**가 될 때까지 기다린다.
 4. `https://mirinaelabs.com/`, `/auroraviewer/`, `/auroraviewer/manual/`을 확인한다.
 
 루트 도메인을 Pages에 연결하려면 Cloudflare의 네임서버를 사용해야 한다. DNS 레코드만 먼저 수동으로 만들지 말고 Pages의 Custom domains에서 등록부터 완료한다.
+
+www 리다이렉트는 Cloudflare 도메인의 **Rules → Redirect Rules**에 설정한다. 호스트가 `www.mirinaelabs.com`인 요청만 `https://mirinaelabs.com`으로 301 이동시키고 경로·쿼리 문자열을 보존한다. Pages의 `_redirects`는 호스트를 조건으로 하는 리다이렉트를 지원하지 않으므로 여기에 www 규칙을 넣지 않는다.
 
 ## 5. Zoho 무료 업무용 메일 개설
 
@@ -127,13 +120,14 @@ npm run check:domain -- <Zoho의_DKIM_selector>
 
 `check:domain`은 공개 DNS와 HTTPS 상태만 읽는다. 웹 콘텐츠 진위·인증서 갱신 장기 보장·DKIM 실제 서명·메일 송수신 성공까지 증명하는 도구는 아니다. 설정 전에는 PENDING과 종료 코드 1이 정상이다.
 
-Cloudflare는 Free·Pages 정적 호스팅, Zoho는 Forever Free를 유지한다. 자동 업그레이드나 유료 추가 기능을 켜지 않는다. 가입 과정에서 카드나 유료 플랜이 요구되면 무료 제공 조건부터 재확인한다. 메일 저장 공간·인원·발송 정책과 무료 빌드 한도를 지킨다.
+Cloudflare는 Free·Pages 정적 호스팅, GitHub Actions는 공개 저장소의 표준 호스팅 runner, Zoho는 Forever Free를 유지한다. 자동 업그레이드나 유료 추가 기능을 켜지 않는다. 가입 과정에서 카드나 유료 플랜이 요구되면 무료 제공 조건부터 재확인한다. 메일 저장 공간·인원·발송 정책과 서비스 한도를 지킨다.
 
 ## 공식 근거
 
 - [Cloudflare Pages 가격·무료 범위](https://pages.cloudflare.com/)
 - [Cloudflare Pages 한도](https://developers.cloudflare.com/pages/platform/limits/)
 - [GitHub 연동](https://developers.cloudflare.com/pages/configuration/git-integration/)
+- [GitHub Actions에서 Pages에 직접 자동 배포](https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/)
 - [Custom domains](https://developers.cloudflare.com/pages/configuration/custom-domains/)
 - [Cloudflare Email 요금: 외부 발송은 유료 플랜](https://developers.cloudflare.com/email-service/platform/pricing/)
 - [Zoho Mail Forever Free 플랜·지역 제한](https://www.zoho.com/mail/zohomail-pricing.html)

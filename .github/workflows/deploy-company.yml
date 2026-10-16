@@ -1,0 +1,43 @@
+name: Deploy company website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "company/**"
+      - "src/**"
+      - "public/**"
+      - "scripts/**"
+      - "package*.json"
+      - "astro.config.mjs"
+      - ".github/workflows/deploy-company.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: company-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run validate:company
+      - name: Deploy static files to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=mirinaelabs --branch=main
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
