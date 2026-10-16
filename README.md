@@ -1,6 +1,6 @@
 # MirinaeLabs company & AuroraViewer website
 
-MirinaeLabs 회사 홈페이지와 기존 AuroraViewer 제품 소개·한영 사용 설명서입니다. 회사 홈페이지는 Cloudflare Pages 무료 플랜에서 GitHub 연동으로 배포하도록 준비되어 있습니다.
+MirinaeLabs 회사 홈페이지와 기존 AuroraViewer 제품 소개·한영 사용 설명서입니다. GitHub Actions가 정적 파일을 빌드하고 Cloudflare Pages 무료 플랜에 배포합니다.
 
 **개설 순서와 DNS·메일 설정:** [홈페이지·이메일 개설 안내](docs/launch-guide.ko.md)
 
@@ -12,7 +12,7 @@ npm run validate:company
 npm run preview:company
 ```
 
-미리보기: `http://127.0.0.1:4322/`. Cloudflare Pages 설정은 build command `npm run validate:company`, output directory `dist`, production branch `main`, `NODE_VERSION=22`입니다. `main` push 후 실제 자동 배포는 Cloudflare의 GitHub 연동이 처리하며, `.github/workflows/validate-company.yml`은 검사와 결과물 업로드만 수행합니다.
+미리보기: `http://127.0.0.1:4322/`. `.github/workflows/deploy-company.yml`이 `main`의 사이트 변경 시 Node.js 22로 `npm run validate:company`를 실행하고 `dist/`를 Cloudflare Pages 프로젝트 `mirinaelabs`에 배포합니다. GitHub repository secret `CLOUDFLARE_API_TOKEN`과 repository variable `CLOUDFLARE_ACCOUNT_ID`를 설정해야 동작합니다. 토큰은 해당 Cloudflare 계정의 Pages 편집 권한으로 제한합니다. `.github/workflows/validate-company.yml`은 PR 검사용이며 유료 저장 공간을 사용하지 않도록 빌드 아티팩트는 업로드하지 않습니다.
 
 회사 페이지는 `company/`에서 수정합니다. `build:company`는 이 파일들을 `dist/`에 복사하고, Astro 제품 사이트를 `dist/auroraviewer/`에 새로 생성합니다. 기존 GitHub Pages용 `auroraviewer/` 폴더는 수정하지 않습니다. 회사 사이트 배포 시 제품 canonical은 `mirinaelabs.com`을 사용합니다.
 

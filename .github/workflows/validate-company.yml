@@ -2,7 +2,7 @@ name: Validate company website
 
 on:
   push:
-    branches: [main, feat/company-website]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -25,8 +25,3 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run validate:company
-      - uses: actions/upload-artifact@v4
-        with:
-          name: company-website
-          path: dist/
-          retention-days: 7
