@@ -1,6 +1,6 @@
 # MirinaeLabs 홈페이지·이메일 개설 안내
 
-확인일: 2026-10-16. 실제 계정에서 무료 플랜 제공 여부를 확인한 뒤 개설한다. 무료 제공 정책은 바뀔 수 있으며 영구적인 비용 0원을 보장할 수는 없다.
+확인일: 2026-10-16. 실제 Cloudflare Free 및 Zoho Mail Free 계정으로 개설했다. 무료 제공 정책은 바뀔 수 있으며 영구적인 비용 0원을 보장할 수는 없다.
 
 ## 선택한 구성
 
@@ -23,11 +23,11 @@ Cloudflare Email Routing은 기본적으로 수신 전달용이다. 이것만 �
 - PC·모바일 레이아웃, 사이트맵, 검색 메타데이터, HTTPS 정식 주소, www 기본 주소 리다이렉트 구성.
 - 회사 사이트 빌드·전체 내부 링크 검증, GitHub Actions 설정.
 - 회사 소개 문구는 수정 가능한 기본안이다. 정식 소개가 확정되면 `company/index.html`에서 변경한다.
-- `contact@mirinaelabs.com`은 아직 개설 완료로 표시하지 않는다. 수신·발신 테스트 후 아래 절차로 메일 링크를 활성화한다.
+- `contact@mirinaelabs.com` 편지함을 개설했다. 관리자 화면의 실제 요금제는 **Mail Free**, 전체 라이선스는 5개이며 현재 1개를 사용한다.
 - hosting.kr의 네임서버는 `hank.ns.cloudflare.com`, `uma.ns.cloudflare.com`으로 변경했고 공용 DNS 반영을 확인했다. Cloudflare Free 플랜 도메인 등록도 완료했다.
 - 홈페이지는 `https://mirinaelabs.com`과 `https://mirinaelabs.pages.dev`에서 공개 중이다. `www`의 301 이동과 경로·쿼리 보존도 확인했다.
 - Pages 배포 전용 Secret 등록과 실제 GitHub 자동 배포를 완료했다. [첫 자동 배포 성공 기록](https://github.com/MirinaeLabs/mirinaelabs.github.io/actions/runs/38865826202).
-- 회사 이메일은 Zoho 무료 가입·도메인 인증·편지함 생성·송수신 테스트가 남아 있다.
+- Zoho 도메인 인증과 MX·SPF·DKIM 검증을 완료했다. DKIM selector는 `zmail`이고 DMARC는 `p=none`이다. 외부 네이버 주소로 테스트 메일을 보냈고 **배달됨**을 확인했다. 사용자의 외부 수신 확인과 네이버에서 보낸 답장의 회사 편지함 도착까지 확인했다. 홈페이지 문의 링크도 활성화했다.
 
 ## 1. Cloudflare에 도메인 추가
 
@@ -94,6 +94,8 @@ Gmail의 외부 주소 발신 방식은 Google 공식 도움말의 2027년 1월 
 
 ## 6. 실제 메일 왕복 확인과 홈페이지 활성화
 
+2026-10-16 확인 완료: 회사 주소에서 외부 네이버 주소로 발송 → 사용자가 수신 확인 후 답장 → 회사 받은편지함 도착. 아래는 추후 변경 시 다시 확인하는 절차다. 수신된 발신 메일의 원본 인증 결과는 외부 수신함에서 별도로 확인할 수 있다.
+
 1. 외부 Gmail 또는 다른 서비스 계정에서 `contact@mirinaelabs.com`으로 보내 Zoho 받은편지함에 도착하는지 확인한다.
 2. **Zoho에서 답장**하고 외부 계정에서 받은편지함·보낸사람·Reply-To를 확인한다. 회사 주소로 표시되어야 한다.
 3. Zoho에서 다른 외부 주소로 새 메일을 보내 발신도 확인한다. 수신만 테스트해서 완료로 판단하지 않는다.
@@ -108,6 +110,13 @@ Gmail의 외부 주소 발신 방식은 Google 공식 도움말의 2027년 1월 
 
 6. `main` 반영 → Cloudflare 자동 배포 성공 → 실제 도메인에서 문의 링크를 확인한다.
 
+## 평소 관리 방법
+
+- 홈페이지 수정: `company/index.html`과 `company/assets/company.css`를 수정하고 `main`에 push한다. GitHub Actions의 **Deploy company website**에서 성공 여부를 확인한다.
+- 메일 읽기·새 메일·답장: [Zoho 웹메일](https://mail.zoho.com/)에 본인이 설정한 계정으로 로그인해 사용한다. 기본 발신 주소는 `contact@mirinaelabs.com`이다.
+- 메일 사용자·별칭 관리: [Zoho 관리자 콘솔](https://mailadmin.zoho.com/)에서 관리한다. 무료 사용자 수와 저장 공간을 확인한다.
+- DNS 변경: Cloudflare에서 관리한다. hosting.kr에서는 도메인 갱신을 계속한다.
+
 ## 확인 명령과 비용 관리
 
 ```sh
@@ -117,7 +126,7 @@ npm run preview:company
 # http://127.0.0.1:4322/
 
 npm run check:domain
-npm run check:domain -- <Zoho의_DKIM_selector>
+npm run check:domain -- zmail
 ```
 
 `check:domain`은 공개 DNS와 HTTPS 상태만 읽는다. 웹 콘텐츠 진위·인증서 갱신 장기 보장·DKIM 실제 서명·메일 송수신 성공까지 증명하는 도구는 아니다. 설정 전에는 PENDING과 종료 코드 1이 정상이다.

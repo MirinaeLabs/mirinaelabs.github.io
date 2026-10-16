@@ -18,7 +18,7 @@ npm run preview:company
 
 회사 페이지는 `company/`에서 수정합니다. `build:company`는 이 파일들을 `dist/`에 복사하고, Astro 제품 사이트를 `dist/auroraviewer/`에 새로 생성합니다. 기존 GitHub Pages용 `auroraviewer/` 폴더는 수정하지 않습니다. 회사 사이트 배포 시 제품 canonical은 `mirinaelabs.com`을 사용합니다.
 
-회사 소개는 수정 가능한 기본안이며 메일 주소는 개설 준비 중으로 표시합니다. 홈페이지 공개·도메인 연결·GitHub 자동 배포는 완료했습니다. 회사 이메일은 Zoho 가입·도메인 메일 설정·실제 송수신 확인 후 안내서에 따라 문의 링크를 활성화해야 합니다.
+회사 소개는 수정 가능한 기본안입니다. 홈페이지 공개·도메인 연결·GitHub 자동 배포를 완료했습니다. 회사 이메일 **contact@mirinaelabs.com**은 [Zoho 웹메일](https://mail.zoho.com/)에서 사용합니다. 실제 요금제는 **Mail Free**이며 MX·SPF·DKIM·DMARC DNS 설정을 완료했습니다. 무료 플랜은 최대 5명, 사용자당 5GB이고 IMAP·POP·ActiveSync는 지원하지 않습니다. 송수신 확인 기록은 개설 안내에 있습니다.
 
 ## Source of truth
 
