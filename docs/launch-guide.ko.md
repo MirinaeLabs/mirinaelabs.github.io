@@ -17,15 +17,17 @@
 
 Cloudflare Email Routing은 기본적으로 수신 전달용이다. 이것만 설정해서는 회사 주소로 외부 고객에게 답장할 수 없다. 일반 외부 수신자에게 Cloudflare Email Sending으로 보내려면 Workers 유료 플랜이 필요하므로 이번 구성에 포함하지 않는다.
 
-## 지금 준비된 것과 남은 것
+## 개설 상태 (2026-10-16)
 
 - 회사 메인 페이지, AuroraViewer 제품·기존 한영 설명서 연결, 개인정보 안내, 404 페이지.
 - PC·모바일 레이아웃, 사이트맵, 검색 메타데이터, HTTPS 정식 주소, www 기본 주소 리다이렉트 구성.
 - 회사 사이트 빌드·전체 내부 링크 검증, GitHub Actions 설정.
-- 회사 소개 문구는 초안이다. 공개 전 실제 회사 소개와 맞는지 확인한다.
+- 회사 소개 문구는 수정 가능한 기본안이다. 정식 소개가 확정되면 `company/index.html`에서 변경한다.
 - `contact@mirinaelabs.com`은 아직 개설 완료로 표시하지 않는다. 수신·발신 테스트 후 아래 절차로 메일 링크를 활성화한다.
 - hosting.kr의 네임서버는 `hank.ns.cloudflare.com`, `uma.ns.cloudflare.com`으로 변경했고 공용 DNS 반영을 확인했다. Cloudflare Free 플랜 도메인 등록도 완료했다.
-- Pages 배포, GitHub의 배포 전용 Secret 설정, Zoho 가입·도메인 인증은 개별 완료 상태를 확인해야 한다.
+- 홈페이지는 `https://mirinaelabs.com`과 `https://mirinaelabs.pages.dev`에서 공개 중이다. `www`의 301 이동과 경로·쿼리 보존도 확인했다.
+- Pages 배포 전용 Secret 등록과 실제 GitHub 자동 배포를 완료했다. [첫 자동 배포 성공 기록](https://github.com/MirinaeLabs/mirinaelabs.github.io/actions/runs/38865826202).
+- 회사 이메일은 Zoho 무료 가입·도메인 인증·편지함 생성·송수신 테스트가 남아 있다.
 
 ## 1. Cloudflare에 도메인 추가
 
