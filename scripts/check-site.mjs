@@ -1,8 +1,8 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative, resolve, sep } from "node:path";
 
-const outputRoot = resolve("auroraviewer");
-const sitePrefix = "/auroraviewer";
+const outputRoot = resolve(process.argv[2] ?? "auroraviewer");
+const sitePrefix = process.argv[3] ?? "/auroraviewer";
 
 function walk(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {

@@ -1,0 +1,32 @@
+name: Validate company website
+
+on:
+  push:
+    branches: [main, feat/company-website]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: company-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run validate:company
+      - uses: actions/upload-artifact@v4
+        with:
+          name: company-website
+          path: dist/
+          retention-days: 7
