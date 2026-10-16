@@ -20,7 +20,7 @@ Cloudflare Email Routing은 기본적으로 수신 전달용이다. 이것만 �
 ## 지금 준비된 것과 남은 것
 
 - 회사 메인 페이지, AuroraViewer 제품·기존 한영 설명서 연결, 개인정보 안내, 404 페이지.
-- PC·모바일 레이아웃, 사이트맵, 검색 메타데이터, HTTPS 정식 주소, www 리다이렉트 파일.
+- PC·모바일 레이아웃, 사이트맵, 검색 메타데이터, HTTPS 정식 주소, www 기본 주소 리다이렉트 구성.
 - 회사 사이트 빌드·전체 내부 링크 검증, GitHub Actions 설정.
 - 회사 소개 문구는 초안이다. 공개 전 실제 회사 소개와 맞는지 확인한다.
 - `contact@mirinaelabs.com`은 아직 개설 완료로 표시하지 않는다. 수신·발신 테스트 후 아래 절차로 메일 링크를 활성화한다.
@@ -60,11 +60,13 @@ Cloudflare Email Routing은 기본적으로 수신 전달용이다. 이것만 �
 ## 4. 구매한 도메인 연결
 
 1. Pages 프로젝트 → **Custom domains → Set up a custom domain**에서 `mirinaelabs.com`을 추가한다.
-2. 같은 곳에서 `www.mirinaelabs.com`도 추가한다. `_redirects` 파일이 www 요청을 기본 주소로 보낸다. www 도메인도 인증서·연결이 완료되어야 리다이렉트가 동작한다.
+2. 같은 곳에서 `www.mirinaelabs.com`도 추가하고 인증서·연결이 완료되는지 확인한다.
 3. Cloudflare가 안내하는 웹용 DNS 레코드를 적용하고 도메인과 인증서가 **Active**가 될 때까지 기다린다.
 4. `https://mirinaelabs.com/`, `/auroraviewer/`, `/auroraviewer/manual/`을 확인한다.
 
 루트 도메인을 Pages에 연결하려면 Cloudflare의 네임서버를 사용해야 한다. DNS 레코드만 먼저 수동으로 만들지 말고 Pages의 Custom domains에서 등록부터 완료한다.
+
+www 리다이렉트는 Cloudflare 도메인의 **Rules → Redirect Rules**에 설정한다. 호스트가 `www.mirinaelabs.com`인 요청만 `https://mirinaelabs.com`으로 301 이동시키고 경로·쿼리 문자열을 보존한다. Pages의 `_redirects`는 호스트를 조건으로 하는 리다이렉트를 지원하지 않으므로 여기에 www 규칙을 넣지 않는다.
 
 ## 5. Zoho 무료 업무용 메일 개설
 
