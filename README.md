@@ -15,7 +15,7 @@ npm run dev
 
 회사 페이지 개발: `http://127.0.0.1:3000/`. 컴포넌트는 `company/components/`, 페이지는 `company/app/`, 디자인 토큰은 `company/app/globals.css`에 있습니다. 디자인 기준과 가이드 적용 범위는 [company/DESIGN.md](company/DESIGN.md)에 정리했습니다.
 
-회사 소개와 개인정보 안내는 한국어·영어로 제공합니다. 번역 문구는 `company/lib/site-content.ts`, 검색·공유 메타데이터는 `company/lib/site-metadata.ts`에서 관리합니다. 헤더의 EN/KO 링크는 같은 페이지의 다른 언어로 이동하며, 영어 제품 페이지의 회사 링크도 영어 홈페이지로 연결합니다. 로고와 메인 유리 조형물, 파비콘은 기존 디자인을 유지합니다.
+회사 소개와 개인정보 안내는 한국어·영어로 제공합니다. 번역 문구는 `company/lib/site-content.ts`, 검색·공유 메타데이터는 `company/lib/site-metadata.ts`에서 관리합니다. 헤더의 EN/KO 링크는 같은 페이지의 다른 언어로 이동하며, 영어 제품 페이지의 회사 링크도 영어 홈페이지로 연결합니다. 회사 배색은 은하 인디고(`#465cb3`)와 옅은 청백색(`#f6f7fc`)을 사용합니다. 기존 로고의 형태는 유지하며, 메인 유리 조형물도 로고와 같은 8개 광선과 중앙 여백으로 구성합니다. 로고와 조형물은 `company/components/icons.tsx`의 경로를 공유합니다.
 
 제품·설명서를 포함한 전체 사이트 확인:
 

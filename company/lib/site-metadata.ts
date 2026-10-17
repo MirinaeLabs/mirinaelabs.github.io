@@ -11,8 +11,8 @@ export function companyMetadata(locale: Locale, page: CompanyPage): Metadata {
     title,
     description,
     alternates: { canonical: path, languages: { ko: companyPath("ko", page), en: companyPath("en", page), "x-default": companyPath("ko", page) } },
-    icons: { icon: "/assets/mirinae-symbol.svg" },
-    openGraph: { type: "website", locale: locale === "en" ? "en_US" : "ko_KR", alternateLocale: locale === "en" ? "ko_KR" : "en_US", siteName: "MirinaeLabs", title, description: page === "home" ? copy.metadata.social : description, url: path, images: [{ url: locale === "en" ? "/assets/og-company-en.png" : "/assets/og-company.png", width: 1200, height: 630, alt: title }] },
+    icons: { icon: "/assets/mirinae-symbol.svg?v=indigo" },
+    openGraph: { type: "website", locale: locale === "en" ? "en_US" : "ko_KR", alternateLocale: locale === "en" ? "ko_KR" : "en_US", siteName: "MirinaeLabs", title, description: page === "home" ? copy.metadata.social : description, url: path, images: [{ url: locale === "en" ? "/assets/og-company-en.png?v=indigo" : "/assets/og-company.png?v=indigo", width: 1200, height: 630, alt: title }] },
     twitter: { card: "summary_large_image" },
   };
 }

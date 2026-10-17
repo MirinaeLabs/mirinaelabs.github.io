@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Arrow } from "./icons";
+import { Arrow, BrandSculpture } from "./icons";
 import { SiteHeader } from "./site-header";
 import { SiteFooter } from "./site-footer";
 import { companyCopy, type Locale } from "../lib/site-content";
@@ -18,7 +18,7 @@ export function CompanyHome({ locale }: { locale: Locale }) {
         <div className="hero-visual lg:col-span-6">
           <div className="sculpture-scene" aria-hidden="true">
             <div className="scene-disc" />
-            <div className="glass-sculpture"><i /><i /><i /><i /><div className="sculpture-core" /></div>
+            <BrandSculpture />
             <div className="scene-reflection" />
           </div>
           <p className="studio-signature">{copy.hero.signature[0]}<br />{copy.hero.signature[1]}</p>

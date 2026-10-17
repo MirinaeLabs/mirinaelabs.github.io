@@ -6,7 +6,7 @@ Scope: the Next.js company app in `company/`. The AuroraViewer Astro site keeps 
 
 A company introduction about useful tools and enjoyable experiences. The company story and making principles precede the compact app directory. The hero carries the MirinaeLabs identity, without a product advertisement or screenshot gallery.
 
-Preserve the user's minimal Next.js + Tailwind direction: generous space, responsive grids, and the original translucent eight-spoke brand sculpture inspired by Apple Music. Preserve the existing brand symbol and favicon; the user explicitly chose the original logo. The first action introduces the company. Product capabilities and screenshots belong on the product site.
+Preserve the user's minimal Next.js + Tailwind direction: generous space, responsive grids, and restrained glass inspired by Apple Music. The user selected the Galaxy Indigo palette: a misty blue-white canvas with an indigo accent. Preserve the original eight-spoke logo geometry and wordmark. The hero sculpture shares the logo's exact path, rounded terminals, stroke proportions, and open center; gradients, a thin glass edge, a small depth offset, and a gentle perspective give it material depth. The previous overlapping bars and center sphere were removed so the sculpture reads as the company logo. The first action introduces the company. Product capabilities and screenshots belong on the product site.
 
 Only publicly released apps appear in the directory. Names, descriptions, icons, compatibility targets, release dates, and other details of apps in development are not published. Broader company language may describe convenience, curiosity, interests, and enjoyment without announcing a particular project.
 
@@ -21,11 +21,13 @@ The user's explicit glass and whitespace direction takes priority over generic b
 
 | Role | Value |
 | --- | --- |
-| Canvas | `#faf9f6` |
-| Secondary surface | `#f1f0ec` |
-| Ink | `#27272b` |
-| Secondary text | `#5e5c63` |
-| Action / focus | `#c83f4c` / `#b63340` |
+| Canvas | `#f6f7fc` |
+| Secondary surface / panel | `#edf0f8` / `#e6eaf6` |
+| Ink | `#232a42` |
+| Secondary text | `#59627a` |
+| Action / focus | `#465cb3` |
+| Hover | `#35478f` |
+| Glass light / mid / deep | `#d8e2ff` / `#96a9e1` / `#526cb4` |
 | Typeface | Self-hosted Pretendard Variable, SIL Open Font License |
 | Display | 39–72px, weight 650, line height 1.22–1.24 |
 | Section heading | 26–48px, weight 610, line height 1.3–1.35 |
@@ -39,7 +41,7 @@ All content is visible without animation. Reduced motion disables travel and smo
 
 `lib/site-content.ts` owns Korean and English copy. `app/[[...segments]]/` statically exports `/`, `/en/`, `/privacy/`, and `/en/privacy/`, with the correct server-rendered document language. `components/company-home.tsx` and `components/company-privacy.tsx` share the layouts. `globals.css` owns tokens and material rules. Header and footer remain shared components. Language links preserve the page and, with JavaScript, the current section. The English company pages link to English product pages.
 
-`lib/site-metadata.ts` provides localized titles, descriptions, canonical URLs, language alternates, and social previews. Refresh both self-hosted social-preview images when hero copy or imagery changes. The original coral eight-spoke SVG symbol, wordmark, and favicon remain in use.
+`lib/site-metadata.ts` provides localized titles, descriptions, canonical URLs, language alternates, and social previews. Refresh both self-hosted social-preview images when hero copy or imagery changes. The original eight-spoke SVG symbol, wordmark, and favicon retain their geometry and use the selected indigo color. Favicon and social-preview URLs include the palette version to refresh cached coral assets. `components/icons.tsx` shares one path between `BrandMark` and `BrandSculpture`, so their silhouettes stay aligned. Colors are centralized as semantic CSS variables.
 
 ## Links and support
 
@@ -54,5 +56,7 @@ Company HTML retains `Cache-Control: no-transform` to prevent CDN email rewritin
 AuroraViewer's short description is grounded in sibling `../AuroraViewer/README.md` and `doc/01-feature-map.md` at main commit `7f39b71`. No new product capabilities, testimonials, performance claims, or company statistics were added. The privacy-policy update changes the support channel, not app data-processing behavior.
 
 Both company languages were rendered at 320, 390, 640, 768, 1024, 1280, 1440, and 1920px. Headings stay within two lines and there is no horizontal overflow or header overlap. Home and privacy language switches, section preservation, mobile menu navigation, Escape, focus return, and reduced motion were checked. Language navigation also works with JavaScript disabled. Product pages in both languages retain working company-home and email support links. The integrated and legacy exports were checked for GitHub links and unreleased-app content.
+
+The Galaxy Indigo update repeats those company layout and navigation checks. The glass SVG paths match the original logo path, the center is open, and all eight rays remain visible. Browser-computed text contrast ranges from 5.06:1 for secondary panel copy to 13.25:1 for headings; the primary action is 6.10:1. Both localized 1200×630 social previews were refreshed.
 
 The previous full-screen product gallery and its four company-only WebP assets were removed. The product website retains its original screenshots and full feature documentation.
