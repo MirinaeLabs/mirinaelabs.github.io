@@ -28,6 +28,8 @@ npm run preview:company
 
 제품 미리보기의 네 가지 탭은 실제 앱 스크린샷을 사용하며, 클릭·터치와 좌우 방향키·Home·End로 전환할 수 있습니다. 모바일 메뉴는 외부 클릭·Escape·메뉴 선택 시 닫힙니다. 애니메이션은 `prefers-reduced-motion`을 따릅니다. Pretendard 폰트와 이미지를 자체 호스팅하므로 외부 폰트·이미지 요청이 없습니다. 폰트 라이선스는 `company/public/assets/fonts/OFL.txt`에 포함되어 있습니다.
 
+`company/public/_headers`의 회사 HTML 응답에는 `Cache-Control: no-transform`을 유지합니다. Cloudflare 이메일 난독화가 연락처 HTML을 바꾸면 Next.js의 초기 화면과 클라이언트 렌더링이 달라져 hydration 오류가 발생할 수 있습니다. 새 회사 HTML 경로를 추가할 때도 같은 헤더를 적용합니다. 제품 Astro 경로와 정적 에셋의 캐시 설정은 별도로 유지합니다.
+
 회사 소개는 수정 가능한 기본안입니다. 홈페이지 공개·도메인 연결·GitHub 자동 배포를 완료했습니다. 회사 이메일 **contact@mirinaelabs.com**은 [Zoho 웹메일](https://mail.zoho.com/)에서 사용합니다. 실제 요금제는 **Mail Free**이며 MX·SPF·DKIM·DMARC DNS 설정을 완료했습니다. 무료 플랜은 최대 5명, 사용자당 5GB이고 IMAP·POP·ActiveSync는 지원하지 않습니다. 송수신 확인 기록은 개설 안내에 있습니다.
 
 ## Source of truth
