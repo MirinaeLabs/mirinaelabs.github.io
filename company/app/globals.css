@@ -46,7 +46,7 @@ img { max-width: 100%; }
 
 .site-header { position: sticky; top: 0; z-index: 30; background: rgb(250 249 246 / 83%); backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%); }
 .brand { font-size: 24px; font-weight: 700; letter-spacing: -.035em; line-height: 1.1; }
-.brand-mark { display: block; width: 38px; height: auto; flex-shrink: 0; }
+.brand > svg { color: var(--accent); }
 .brand-wordmark { white-space: nowrap; }
 .brand-light { font-weight: 420; }
 .language-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; min-height: 44px; border: 1px solid #d9d3ce; border-radius: 50%; font-size: 12px; font-weight: 650; letter-spacing: .02em; transition: background-color 180ms, border-color 180ms; }
@@ -72,10 +72,14 @@ img { max-width: 100%; }
 .hero-visual { position: relative; height: 500px; isolation: isolate; }
 .studio-signature { position: absolute; inset-inline: 0; bottom: 28px; text-align: center; color: #756970; font-size: 14px; line-height: 1.7; }
 .sculpture-scene { position: absolute; inset: 0; perspective: 900px; }
-.scene-disc { position: absolute; width: 390px; height: 390px; top: 33px; left: 50%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle at 30% 25%, #fffdfb 0%, #f3e5e3 68%, #ead6d3 100%); box-shadow: inset 0 1px 2px #fff, 0 24px 55px rgb(163 102 105 / 6%); }
-.brand-sculpture { position: absolute; display: grid; place-items: center; width: 335px; height: 335px; top: 56px; left: calc(50% - 167.5px); transform: rotate(-12deg) rotateY(-16deg) rotateX(12deg); animation: sculpture-arrive 1500ms var(--ease-out) both; }
-.brand-sculpture > img { display: block; width: 335px; height: auto; filter: drop-shadow(0 1px 0 #f9cfd0) drop-shadow(9px 18px 15px rgb(149 51 65 / 18%)); }
-.brand-sculpture > span { position: absolute; inset: 0; background: linear-gradient(140deg, rgb(255 234 233 / 74%), transparent 40%, rgb(255 210 213 / 12%) 65%, rgb(144 33 52 / 24%)); mask: url('/assets/brand/mirinae-mark.png') center / contain no-repeat; -webkit-mask: url('/assets/brand/mirinae-mark.png') center / contain no-repeat; }
+.scene-disc { position: absolute; width: 390px; height: 390px; top: 33px; left: 50%; transform: translateX(-50%); border-radius: 50%; background: #f0e7e5; }
+.glass-sculpture { position: absolute; width: 335px; height: 335px; top: 56px; left: calc(50% - 167.5px); transform: rotate(-12deg) rotateY(-16deg) rotateX(12deg); transform-style: preserve-3d; animation: sculpture-arrive 1500ms var(--ease-out) both; }
+.glass-sculpture > i { position: absolute; width: 90px; height: 335px; top: 0; left: calc(50% - 45px); border-radius: 27px; background: linear-gradient(110deg, rgb(255 255 255 / 88%) 0%, rgb(250 206 208 / 63%) 12%, rgb(214 109 121 / 53%) 52%, rgb(201 64 83 / 70%) 84%, rgb(255 222 218 / 88%) 100%); box-shadow: inset 2px 1px 2px rgb(255 255 255 / 95%), inset -3px -3px 7px rgb(162 50 67 / 30%), 12px 18px 25px rgb(137 76 82 / 12%); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.glass-sculpture > i:nth-child(1) { transform: rotate(0deg) translateZ(8px); }
+.glass-sculpture > i:nth-child(2) { transform: rotate(45deg) translateZ(16px); }
+.glass-sculpture > i:nth-child(3) { transform: rotate(90deg) translateZ(24px); }
+.glass-sculpture > i:nth-child(4) { transform: rotate(135deg) translateZ(32px); }
+.sculpture-core { position: absolute; top: calc(50% - 33px); left: calc(50% - 33px); width: 66px; height: 66px; border-radius: 50%; background: linear-gradient(135deg, #f2c3c6, #b95765); box-shadow: inset 3px 4px 9px rgb(116 44 55 / 20%), 2px 3px 4px rgb(255 255 255 / 45%); transform: translateZ(45px); }
 .scene-reflection { position: absolute; bottom: 64px; width: 240px; height: 26px; left: calc(50% - 120px); border-radius: 50%; background: #c6aaa4; opacity: .23; filter: blur(17px); }
 .hero-foot { min-height: 94px; padding-block: 22px 34px; color: var(--muted); font-size: 13px; }
 .hero-foot a { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 50%; background: #eeece8; transition: transform 200ms; }
@@ -118,7 +122,7 @@ h2 { font-size: clamp(32px, 3.45vw, 48px); font-weight: 610; line-height: 1.3; l
 .site-footer { padding-bottom: 30px; }
 .footer-top { padding-bottom: 32px; }
 .footer-top .brand { font-size: 22px; }
-.footer-top .brand-mark { width: 33px; }
+.footer-top .brand > svg { width: 25px; height: 25px; }
 .footer-top nav { font-size: 13px; color: var(--muted); }
 .footer-top nav a { display: inline-flex; align-items: center; min-height: 44px; transition: color 180ms; }
 .footer-top nav a:hover { color: var(--accent); }
@@ -138,13 +142,14 @@ h2 { font-size: clamp(32px, 3.45vw, 48px); font-weight: 610; line-height: 1.3; l
 
 @supports not (backdrop-filter: blur(1px)) {
   .site-header { background: #faf9f6; }
+  .glass-sculpture > i { background: linear-gradient(110deg, #f9e0df, #d17b88 75%, #f3c8ca); }
 }
 
 @media (min-width: 1024px) and (max-width: 1199px) {
   .hero h1 { font-size: 58px; }
   .hero-description { font-size: 16px; }
   .scene-disc { width: 350px; height: 350px; top: 55px; }
-  .brand-sculpture { scale: .9; }
+  .glass-sculpture { scale: .9; }
   .contact-inner { padding: 48px 36px; }
 }
 @media (max-width: 1023px) {
@@ -156,7 +161,7 @@ h2 { font-size: clamp(32px, 3.45vw, 48px); font-weight: 610; line-height: 1.3; l
   .desktop-break { display: none; }
   .hero-visual { height: 430px; }
   .scene-disc { width: 290px; height: 290px; top: 45px; }
-  .brand-sculpture { scale: .76; top: 28px; }
+  .glass-sculpture { scale: .76; top: 28px; }
   .hero-foot { grid-column: 1 / -1; }
   .section-space { padding-block: 88px; }
   .about-intro h2 { max-width: 680px; }
@@ -168,7 +173,7 @@ h2 { font-size: clamp(32px, 3.45vw, 48px); font-weight: 610; line-height: 1.3; l
   .shell { width: calc(100% - 40px); }
   .site-header .shell { height: 72px; }
   .brand { font-size: 21px; gap: 8px; }
-  .brand-mark { width: 32px; }
+  .brand > svg { width: 27px; height: 27px; }
   .header-actions { gap: 8px; }
   .desktop-nav { display: none; }
   .mobile-menu { position: relative; display: block; }
@@ -188,7 +193,7 @@ h2 { font-size: clamp(32px, 3.45vw, 48px); font-weight: 610; line-height: 1.3; l
   .button { min-height: 50px; padding-inline: 22px; }
   .hero-visual { height: 380px; margin-top: 6px; }
   .scene-disc { width: 278px; height: 278px; top: 31px; }
-  .brand-sculpture { top: -3px; scale: .7; }
+  .glass-sculpture { top: -3px; scale: .7; }
   .scene-reflection { bottom: 48px; width: 180px; left: calc(50% - 90px); }
   .hero-foot { min-height: 90px; padding-block: 18px 26px; font-size: 13px; }
   .hero-foot a { width: 40px; height: 40px; }

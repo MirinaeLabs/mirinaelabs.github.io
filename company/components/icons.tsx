@@ -10,6 +10,10 @@ export function Arrow({ diagonal = false, ...props }: SVGProps<SVGSVGElement> & 
 
 export function BrandMark({ className = "" }: { className?: string }) {
   return (
-    <img className={`brand-mark ${className}`} src="/assets/brand/mirinae-mark.png" width="38" height="26" alt="" aria-hidden="true" />
+    <svg className={className} width="30" height="30" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <g stroke="currentColor" strokeWidth="4.5" strokeLinecap="round">
+        <path d="M20 5v9m0 12v9M5 20h9m12 0h9M9.4 9.4l6.4 6.4m8.4 8.4 6.4 6.4M9.4 30.6l6.4-6.4m8.4-8.4 6.4-6.4" />
+      </g>
+    </svg>
   );
 }

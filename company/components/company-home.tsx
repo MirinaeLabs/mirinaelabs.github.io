@@ -18,7 +18,7 @@ export function CompanyHome({ locale }: { locale: Locale }) {
         <div className="hero-visual lg:col-span-6">
           <div className="sculpture-scene" aria-hidden="true">
             <div className="scene-disc" />
-            <div className="brand-sculpture"><img src="/assets/brand/mirinae-mark.png" width="335" height="226" alt="" /><span /></div>
+            <div className="glass-sculpture"><i /><i /><i /><i /><div className="sculpture-core" /></div>
             <div className="scene-reflection" />
           </div>
           <p className="studio-signature">{copy.hero.signature[0]}<br />{copy.hero.signature[1]}</p>
