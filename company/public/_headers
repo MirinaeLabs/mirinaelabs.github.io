@@ -10,5 +10,11 @@
 /privacy/
   Cache-Control: public, max-age=0, must-revalidate, no-transform
 
+/en/
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+
+/en/privacy/
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+
 /assets/*
   Cache-Control: public, max-age=3600

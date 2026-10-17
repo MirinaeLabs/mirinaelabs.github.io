@@ -2,7 +2,7 @@
 
 MirinaeLabs 회사 홈페이지(Next.js App Router + React + Tailwind CSS)와 AuroraViewer 제품 소개·한영 사용 설명서(Astro)입니다. 두 사이트를 하나의 정적 결과물로 빌드해 기존 Cloudflare Pages 배포를 사용합니다.
 
-운영 주소: **https://mirinaelabs.com** · 제품: **https://mirinaelabs.com/auroraviewer/**. `www`는 기본 도메인으로 301 이동하며 경로와 쿼리를 보존합니다.
+운영 주소: **https://mirinaelabs.com** · 영어: **https://mirinaelabs.com/en/** · 제품: **https://mirinaelabs.com/auroraviewer/**. `www`는 기본 도메인으로 301 이동하며 경로와 쿼리를 보존합니다.
 
 **개설 순서와 DNS·메일 설정:** [홈페이지·이메일 개설 안내](docs/launch-guide.ko.md)
 
@@ -14,6 +14,8 @@ npm run dev
 ```
 
 회사 페이지 개발: `http://127.0.0.1:3000/`. 컴포넌트는 `company/components/`, 페이지는 `company/app/`, 디자인 토큰은 `company/app/globals.css`에 있습니다. 디자인 기준과 가이드 적용 범위는 [company/DESIGN.md](company/DESIGN.md)에 정리했습니다.
+
+회사 소개와 개인정보 안내는 한국어·영어로 제공합니다. 번역 문구는 `company/lib/site-content.ts`, 검색·공유 메타데이터는 `company/lib/site-metadata.ts`에서 관리합니다. 헤더의 EN/KO 링크는 같은 페이지의 다른 언어로 이동하며, 영어 제품 페이지의 회사 링크도 영어 홈페이지로 연결합니다. ML 로고는 [원본과 생성 기록](branding/mirinae-ml/README.md)을 보관하고 헤더·히어로·푸터·파비콘에 적용했습니다.
 
 제품·설명서를 포함한 전체 사이트 확인:
 

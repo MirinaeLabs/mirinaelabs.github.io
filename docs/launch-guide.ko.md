@@ -22,7 +22,7 @@ Cloudflare Email Routing은 기본적으로 수신 전달용이다. 이것만 �
 - 회사 메인 페이지, AuroraViewer 제품·기존 한영 설명서 연결, 개인정보 안내, 404 페이지.
 - PC·모바일 레이아웃, 사이트맵, 검색 메타데이터, HTTPS 정식 주소, www 기본 주소 리다이렉트 구성.
 - 회사 사이트 빌드·전체 내부 링크 검증, GitHub Actions 설정.
-- 회사 소개 문구는 수정 가능한 기본안이다. 정식 소개가 확정되면 `company/app/page.tsx`에서 변경한다.
+- 회사 소개 문구는 수정 가능한 기본안이다. 정식 소개가 확정되면 `company/lib/site-content.ts`의 한국어·영어 문구를 함께 변경한다.
 - `contact@mirinaelabs.com` 편지함을 개설했다. 관리자 화면의 실제 요금제는 **Mail Free**, 전체 라이선스는 5개이며 현재 1개를 사용한다.
 - hosting.kr의 네임서버는 `hank.ns.cloudflare.com`, `uma.ns.cloudflare.com`으로 변경했고 공용 DNS 반영을 확인했다. Cloudflare Free 플랜 도메인 등록도 완료했다.
 - 홈페이지는 `https://mirinaelabs.com`과 `https://mirinaelabs.pages.dev`에서 공개 중이다. `www`의 301 이동과 경로·쿼리 보존도 확인했다.
@@ -100,13 +100,13 @@ Gmail의 외부 주소 발신 방식은 Google 공식 도움말의 2027년 1월 
 2. **Zoho에서 답장**하고 외부 계정에서 받은편지함·보낸사람·Reply-To를 확인한다. 회사 주소로 표시되어야 한다.
 3. Zoho에서 다른 외부 주소로 새 메일을 보내 발신도 확인한다. 수신만 테스트해서 완료로 판단하지 않는다.
 4. 수신된 메일의 원본에서 SPF/DKIM/DMARC 결과를 확인한다. 발신 인증과 DMARC 정렬이 통과하는지, 스팸함으로 가지 않는지 살펴본다.
-5. `company/app/page.tsx`의 `.contact-email` 링크가 `mailto:contact@mirinaelabs.com`을 가리키는지 확인한다. 현재 활성화되어 있다. 이메일 주소를 변경한다면 표시 문구와 `href`를 함께 바꾼다.
+5. `company/components/company-home.tsx`의 `.contact-email` 링크가 `mailto:contact@mirinaelabs.com`을 가리키는지 확인한다. 현재 활성화되어 있다. 이메일 주소를 변경한다면 표시 문구와 `href`를 함께 바꾼다.
 
 6. `main` 반영 → Cloudflare 자동 배포 성공 → 실제 도메인에서 문의 링크를 확인한다.
 
 ## 평소 관리 방법
 
-- 홈페이지 수정: `company/app/page.tsx`, `company/components/`, `company/app/globals.css`에서 수정하고 `npm run validate:company`로 확인한 뒤 `main`에 push한다. GitHub Actions의 **Deploy company website**에서 성공 여부를 확인한다. 회사 페이지 개발 서버는 `npm run dev`, 제품·설명서를 포함한 통합 미리보기는 빌드 후 `npm run preview:company`로 연다.
+- 홈페이지 수정: `company/lib/site-content.ts`, `company/components/`, `company/app/globals.css`에서 수정하고 `npm run validate:company`로 확인한 뒤 `main`에 push한다. GitHub Actions의 **Deploy company website**에서 성공 여부를 확인한다. 회사 페이지 개발 서버는 `npm run dev`, 제품·설명서를 포함한 통합 미리보기는 빌드 후 `npm run preview:company`로 연다.
 - 메일 읽기·새 메일·답장: [Zoho 웹메일](https://mail.zoho.com/)에 본인이 설정한 계정으로 로그인해 사용한다. 기본 발신 주소는 `contact@mirinaelabs.com`이다.
 - 메일 사용자·별칭 관리: [Zoho 관리자 콘솔](https://mailadmin.zoho.com/)에서 관리한다. 무료 사용자 수와 저장 공간을 확인한다.
 - DNS 변경: Cloudflare에서 관리한다. hosting.kr에서는 도메인 갱신을 계속한다.

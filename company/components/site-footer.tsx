@@ -1,16 +1,13 @@
 import { BrandMark } from "./icons";
+import { companyCopy, companyPath, type Locale } from "../lib/site-content";
 
-export function SiteFooter() {
-  return (
-    <footer className="site-footer shell">
-      <div className="footer-top flex flex-wrap items-center justify-between gap-6">
-        <a href="/" className="brand flex items-center gap-2.5" aria-label="MirinaeLabs 홈"><BrandMark /><span>mirinae<span className="brand-light">labs</span></span></a>
-        <nav className="flex flex-wrap items-center gap-x-7 gap-y-3" aria-label="하단 메뉴">
-          <a href="/privacy/">개인정보 안내</a>
-          <a href="/#contact">문의하기</a>
-        </nav>
-      </div>
-      <div className="footer-bottom flex flex-wrap items-center justify-between gap-3"><span>© 2026 MirinaeLabs</span><span>일상 속 취향과 즐거움을 위한 소프트웨어.</span></div>
-    </footer>
-  );
+export function SiteFooter({ locale = "ko" }: { locale?: Locale }) {
+  const copy = companyCopy[locale];
+  return <footer className="site-footer shell">
+    <div className="footer-top flex flex-wrap items-center justify-between gap-6">
+      <a href={companyPath(locale)} className="brand flex items-center gap-2.5" aria-label={copy.homeAria}><BrandMark /><span className="brand-wordmark">mirinae<span className="brand-light">labs</span></span></a>
+      <nav className="flex flex-wrap items-center gap-x-7 gap-y-3" aria-label={copy.nav.footerAria}><a href={companyPath(locale, "privacy")}>{copy.footer.privacy}</a><a href={`${companyPath(locale)}#contact`}>{copy.nav.contact}</a></nav>
+    </div>
+    <div className="footer-bottom flex flex-wrap items-center justify-between gap-3"><span>© 2026 MirinaeLabs</span><span>{copy.footer.note}</span></div>
+  </footer>;
 }

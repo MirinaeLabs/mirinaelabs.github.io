@@ -19,5 +19,5 @@ const copy = siteCopy[locale];
       <a href={APP_STORE_URL}>Mac App Store</a>
     </nav>
   </div>
-  <div class="site-footer__legal"><span>{copy.legal}</span> <a href={COMPANY_URL} aria-label={locale === "ko" ? "MirinaeLabs 회사 홈페이지" : "MirinaeLabs company home"}>MirinaeLabs</a></div>
+  <div class="site-footer__legal"><span>{copy.legal}</span> <a href={locale === "en" ? `${COMPANY_URL}en/` : COMPANY_URL} aria-label={locale === "ko" ? "MirinaeLabs 회사 홈페이지" : "MirinaeLabs company home"}>MirinaeLabs</a></div>
 </footer>
