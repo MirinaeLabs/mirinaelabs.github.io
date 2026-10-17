@@ -2,5 +2,7 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "verbatimModuleSyntax": true
-  }
+  },
+  "include": ["src/**/*", ".astro/types.d.ts"],
+  "exclude": ["company", "dist", "auroraviewer", "node_modules"]
 }

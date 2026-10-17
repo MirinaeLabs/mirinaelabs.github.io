@@ -1,6 +1,6 @@
 # MirinaeLabs company & AuroraViewer website
 
-MirinaeLabs 회사 홈페이지와 기존 AuroraViewer 제품 소개·한영 사용 설명서입니다. GitHub Actions가 정적 파일을 빌드하고 Cloudflare Pages 무료 플랜에 배포합니다.
+MirinaeLabs 회사 홈페이지(Next.js App Router + React + Tailwind CSS)와 AuroraViewer 제품 소개·한영 사용 설명서(Astro)입니다. 두 사이트를 하나의 정적 결과물로 빌드해 기존 Cloudflare Pages 배포를 사용합니다.
 
 운영 주소: **https://mirinaelabs.com** · 제품: **https://mirinaelabs.com/auroraviewer/**. `www`는 기본 도메인으로 301 이동하며 경로와 쿼리를 보존합니다.
 
@@ -10,13 +10,23 @@ MirinaeLabs 회사 홈페이지와 기존 AuroraViewer 제품 소개·한영 사
 
 ```sh
 npm ci
+npm run dev
+```
+
+회사 페이지 개발: `http://127.0.0.1:3000/`. 컴포넌트는 `company/components/`, 페이지는 `company/app/`, 디자인 토큰은 `company/app/globals.css`에 있습니다. 디자인 기준과 가이드 적용 범위는 [company/DESIGN.md](company/DESIGN.md)에 정리했습니다.
+
+제품·설명서를 포함한 전체 사이트 확인:
+
+```sh
 npm run validate:company
 npm run preview:company
 ```
 
 미리보기: `http://127.0.0.1:4322/`. `.github/workflows/deploy-company.yml`이 `main`의 사이트 변경 시 Node.js 22로 `npm run validate:company`를 실행하고 `dist/`를 Cloudflare Pages 프로젝트 `mirinaelabs`에 배포합니다. GitHub repository secret `CLOUDFLARE_API_TOKEN`과 repository variable `CLOUDFLARE_ACCOUNT_ID`를 설정해야 동작합니다. 토큰은 해당 Cloudflare 계정의 Pages 편집 권한으로 제한합니다. `.github/workflows/validate-company.yml`은 PR 검사용이며 유료 저장 공간을 사용하지 않도록 빌드 아티팩트는 업로드하지 않습니다.
 
-회사 페이지는 `company/`에서 수정합니다. `build:company`는 이 파일들을 `dist/`에 복사하고, Astro 제품 사이트를 `dist/auroraviewer/`에 새로 생성합니다. 기존 GitHub Pages용 `auroraviewer/` 폴더는 수정하지 않습니다. 회사 사이트 배포 시 제품 canonical은 `mirinaelabs.com`을 사용합니다.
+`build:company`는 Next.js 회사 사이트를 `company/out/`으로 정적 내보내기한 뒤 `dist/`에 복사하고, Astro 제품 사이트를 `dist/auroraviewer/`에 생성합니다. `npm run build`와 `npm run validate`도 회사·제품 통합 사이트를 대상으로 합니다. 기존 GitHub Pages용 `auroraviewer/` 폴더는 수정하지 않습니다. 회사 사이트 배포 시 제품 canonical은 `mirinaelabs.com`을 사용합니다. Next.js 개발 서버에는 Astro 경로가 없으므로 제품 링크는 통합 빌드의 4322 미리보기에서 확인합니다.
+
+제품 미리보기의 네 가지 탭은 실제 앱 스크린샷을 사용하며, 클릭·터치와 좌우 방향키·Home·End로 전환할 수 있습니다. 모바일 메뉴는 외부 클릭·Escape·메뉴 선택 시 닫힙니다. 애니메이션은 `prefers-reduced-motion`을 따릅니다. Pretendard 폰트와 이미지를 자체 호스팅하므로 외부 폰트·이미지 요청이 없습니다. 폰트 라이선스는 `company/public/assets/fonts/OFL.txt`에 포함되어 있습니다.
 
 회사 소개는 수정 가능한 기본안입니다. 홈페이지 공개·도메인 연결·GitHub 자동 배포를 완료했습니다. 회사 이메일 **contact@mirinaelabs.com**은 [Zoho 웹메일](https://mail.zoho.com/)에서 사용합니다. 실제 요금제는 **Mail Free**이며 MX·SPF·DKIM·DMARC DNS 설정을 완료했습니다. 무료 플랜은 최대 5명, 사용자당 5GB이고 IMAP·POP·ActiveSync는 지원하지 않습니다. 송수신 확인 기록은 개설 안내에 있습니다.
 
@@ -28,7 +38,7 @@ Product claims, supported formats, shortcuts, limitations, and privacy descripti
 
 ```sh
 npm ci
-npm run dev
+npm run dev:product
 ```
 
 The local URL is `http://127.0.0.1:4321/auroraviewer/`.
@@ -36,7 +46,7 @@ The local URL is `http://127.0.0.1:4321/auroraviewer/`.
 ## Production verification
 
 ```sh
-npm run validate
+npm run validate:product
 ```
 
 This checks Astro and TypeScript, rebuilds the static output in `auroraviewer/`, then validates internal page and asset references. Commit the generated output because GitHub Pages serves that directory directly.

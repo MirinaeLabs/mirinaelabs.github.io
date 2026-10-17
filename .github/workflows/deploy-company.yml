@@ -10,6 +10,7 @@ on:
       - "scripts/**"
       - "package*.json"
       - "astro.config.mjs"
+      - "tsconfig.json"
       - ".github/workflows/deploy-company.yml"
   workflow_dispatch:
 

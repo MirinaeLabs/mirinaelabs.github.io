@@ -5,3 +5,9 @@ dist/
 .env
 .env.*
 !.env.example
+company/.next/
+company/out/
+company/next-env.d.ts
+company/tsconfig.tsbuildinfo
+.taste-skill/
+.impeccable/

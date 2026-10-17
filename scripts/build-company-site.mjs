@@ -11,13 +11,15 @@ function run(command, args, env = process.env) {
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
 
+// Export the Next.js company app, then add the independent Astro product site.
 // The existing GitHub Pages product output stays untouched.
+run(process.execPath, ["node_modules/next/dist/bin/next", "build", "company"]);
 rmSync(output, { recursive: true, force: true });
 mkdirSync(output, { recursive: true });
-cpSync(resolve("company"), output, { recursive: true });
+cpSync(resolve("company/out"), output, { recursive: true });
 run(
   process.platform === "win32" ? "npm.cmd" : "npm",
-  ["run", "build", "--", "--outDir", "./dist/auroraviewer"],
+  ["run", "build:product", "--", "--outDir", "./dist/auroraviewer"],
   {
     ...process.env,
     SITE_URL: origin,

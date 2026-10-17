@@ -3,21 +3,34 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev --host 127.0.0.1",
-    "build": "astro build",
+    "dev": "next dev company --hostname 127.0.0.1 --port 3000",
+    "dev:product": "astro dev --host 127.0.0.1",
+    "build": "npm run build:company",
+    "build:product": "astro build",
     "check": "astro check",
-    "preview": "astro preview --host 127.0.0.1",
-    "validate": "npm run check && npm run build && node scripts/check-site.mjs",
+    "check:company": "tsc --project company/tsconfig.json --noEmit",
+    "preview": "npm run preview:company",
+    "preview:product": "astro preview --host 127.0.0.1",
+    "validate": "npm run validate:company",
+    "validate:product": "npm run check && npm run build:product && node scripts/check-site.mjs",
     "build:company": "node scripts/build-company-site.mjs",
     "validate:company": "npm run check && npm run build:company",
     "preview:company": "python3 -m http.server 4322 --bind 127.0.0.1 --directory dist",
     "check:domain": "node scripts/check-domain.mjs"
   },
   "dependencies": {
-    "astro": "7.3.1"
+    "astro": "7.3.1",
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   }
 }
