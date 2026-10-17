@@ -791,7 +791,7 @@ export const manualTopics: ManualTopic[] = [
           l("문제를 재현하는 가장 짧은 작업 순서", "The shortest steps that reproduce the issue"),
           l("개인정보를 가린 오류 메시지나 화면 캡처", "An error message or screenshot with personal information removed")
         ],
-        note: l("지원 페이지의 GitHub Issues 링크에서 새 제보를 작성할 수 있습니다. 저작권 또는 개인정보가 있는 원본 이미지는 공개 이슈에 첨부하지 마세요.", "Use the GitHub Issues link on the Support page to create a report. Do not attach source images containing copyrighted or personal information to a public issue.")
+        note: l("지원 페이지에서 이메일로 문제를 제보할 수 있습니다. 화면 캡처에 개인정보가 있다면 가리고, 원본 파일은 공유 권한을 확인한 뒤 보내 주세요.", "Use the email link on the Support page to report an issue. Remove personal information from screenshots and check that you have permission before sharing source files.")
       }
     ],
     related: ["open-and-import", "export-and-metadata", "settings-sessions-windows"]

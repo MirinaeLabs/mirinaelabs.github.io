@@ -6,11 +6,11 @@ const pretendard = localFont({ src: "../public/assets/fonts/PretendardVariable.w
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mirinaelabs.com"),
-  title: { default: "MirinaeLabs — 일상에 스며드는 소프트웨어", template: "%s — MirinaeLabs" },
-  description: "매일 쓰는 도구가 조금 더 편해질 수 있도록. 미리내랩스는 일상 속 작은 불편에서 출발합니다. Mac 이미지 뷰어 AuroraViewer를 만나보세요.",
+  title: { default: "MirinaeLabs — 좋아하는 순간을, 더 오래", template: "%s — MirinaeLabs" },
+  description: "미리내랩스는 편리함과 즐거움을 함께 생각하며 소프트웨어를 만듭니다. 작은 불편과 호기심에서 출발해, 오래 쓰고 싶은 앱을 다듬어 갑니다.",
   alternates: { canonical: "/" },
   icons: { icon: "/assets/mirinae-symbol.svg" },
-  openGraph: { type: "website", locale: "ko_KR", siteName: "MirinaeLabs", title: "MirinaeLabs — 일상에 스며드는 소프트웨어", description: "작은 불편에서 출발해, 매일 쓰고 싶은 도구를 만듭니다.", url: "/", images: [{ url: "/assets/og-company.png", width: 1200, height: 630, alt: "MirinaeLabs — 일상에 스며드는 소프트웨어" }] },
+  openGraph: { type: "website", locale: "ko_KR", siteName: "MirinaeLabs", title: "MirinaeLabs — 좋아하는 순간을, 더 오래", description: "일상 속 취향과 즐거움을 위한 소프트웨어를 만듭니다.", url: "/", images: [{ url: "/assets/og-company.png", width: 1200, height: 630, alt: "MirinaeLabs — 좋아하는 순간을, 더 오래" }] },
   twitter: { card: "summary_large_image" },
 };
 

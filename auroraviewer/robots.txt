@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /auroraviewer/
-Sitemap: https://mirinaelabs.github.io/auroraviewer/sitemap.xml
+Sitemap: https://mirinaelabs.com/auroraviewer/sitemap.xml

@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: process.env.SITE_URL || "https://mirinaelabs.github.io",
+  site: process.env.SITE_URL || "https://mirinaelabs.com",
   base: "/auroraviewer",
   trailingSlash: "always",
   outDir: "./auroraviewer",

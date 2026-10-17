@@ -1,5 +1,5 @@
 ---
-import { APP_STORE_URL, localizedPath, siteCopy, type Locale } from "../data/product";
+import { APP_STORE_URL, COMPANY_URL, localizedPath, siteCopy, type Locale } from "../data/product";
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -19,5 +19,5 @@ const copy = siteCopy[locale];
       <a href={APP_STORE_URL}>Mac App Store</a>
     </nav>
   </div>
-  <div class="site-footer__legal">{copy.legal}</div>
+  <div class="site-footer__legal"><span>{copy.legal}</span> <a href={COMPANY_URL} aria-label={locale === "ko" ? "MirinaeLabs 회사 홈페이지" : "MirinaeLabs company home"}>MirinaeLabs</a></div>
 </footer>

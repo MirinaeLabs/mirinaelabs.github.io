@@ -1,21 +1,23 @@
 # MirinaeLabs company homepage
 
-Scope: the Next.js company app in `company/`. AuroraViewer's Astro pages keep their own design system.
+Scope: the Next.js company app in `company/`. The AuroraViewer Astro site keeps its own visual system.
 
 ## Direction
 
-A quiet software studio, expressed through the existing eight-spoke MirinaeLabs symbol, generous space, real product imagery, and translucent material inspired by Apple Music. The original symbol becomes a glass object; the AuroraViewer preview is a real, usable route into the product.
+A company introduction about useful tools and enjoyable experiences. The company story and making principles precede the compact app directory. The hero carries the MirinaeLabs identity, without a product advertisement or screenshot gallery.
 
-The user explicitly requested Next.js, Tailwind, minimalism, glassmorphism, generous whitespace, and responsive grids. These requirements take precedence over generic rules in the reference guides.
+Preserve the user's minimal Next.js + Tailwind direction: generous space, responsive grids, and the existing translucent eight-spoke brand sculpture inspired by Apple Music. The first action introduces the company. Product capabilities and screenshots belong on the product site.
 
-## Applied guides
+Only publicly released apps appear in the directory. Names, descriptions, icons, compatibility targets, release dates, and other details of apps in development are not published. Broader company language may describe convenience, curiosity, interests, and enjoyment without announcing a particular project.
 
-- [Impeccable](https://github.com/pbakaus/impeccable): hierarchy, intentional materials, visible content before animation, responsive composition, keyboard focus, and rendered verification. The mechanical detector returned no findings on the completed source.
-- [Taste](https://github.com/Leonxlnx/taste-skill/tree/main/skills/taste-skill): short headlines, one clear action, true product imagery, a subject-specific visual motif, varied section geometry, and browser review. The `uneven-photographs` direction was drawn with seed `476310725`; its uneven visual emphasis informed the composition. Its dark hero, serif face, and slate palette were superseded by the user's Apple Music reference and the Korean company content.
+## Applied references
 
-The references guide craft; their full interactive installation and art-direction interview workflows are not installed into this repository. The company purpose, content, routes, and evidence come from the existing site and the user's explicit brief.
+- [Impeccable](https://github.com/pbakaus/impeccable): deliberate hierarchy, precise material treatment, visible content before animation, keyboard access, and rendered verification.
+- [Taste](https://github.com/Leonxlnx/taste-skill/tree/main/skills/taste-skill): short headings, one clear first-screen action, subject-specific geometry, varied section composition, and browser review.
 
-## Tokens
+The user's explicit glass and whitespace direction takes priority over generic bans on gradients, blur, and sparse imagery. The guides are craft references; their installation and interactive direction-selection workflows are not part of this repository.
+
+## Tokens and composition
 
 | Role | Value |
 | --- | --- |
@@ -24,38 +26,31 @@ The references guide craft; their full interactive installation and art-directio
 | Ink | `#27272b` |
 | Secondary text | `#5e5c63` |
 | Action / focus | `#c83f4c` / `#b63340` |
-| Glass | White at 64%, 24px backdrop blur |
 | Typeface | Self-hosted Pretendard Variable, SIL Open Font License |
 | Display | 39–72px, weight 650, line height 1.22–1.24 |
 | Section heading | 26–48px, weight 610, line height 1.3–1.35 |
 | Body | 15–17px; 13px minimum for secondary UI |
 | Container | 1200px maximum; 20 / 32 / 48px minimum side margins |
-| Grid | 12 columns on desktop; composed stacks on mobile |
-| Panels / controls | 24px radius panels; pill actions and desktop segmented controls |
-| Motion | One 1.5s glass-object arrival; 180–300ms control feedback |
+| Grid | 12 columns on desktop; independent mobile stacks |
+| Main panels | 24px corner radius |
+| Motion | One 1.5s brand sculpture arrival; brief control feedback |
 
-All content is visible without animation. Reduced motion disables travel and smooth scrolling. A solid material fallback supports browsers without backdrop filtering. Screenshots retain their intrinsic 1164:709 ratio and use lossless WebP.
+All content is visible without animation. Reduced motion disables travel and smooth scrolling. A solid material fallback supports browsers without backdrop filtering. The app directory has one concise AuroraViewer entry; no gallery, comparison tabs, download prompt, or product card in the hero.
 
-## Deliberate exceptions to Taste's default meter
+`app/page.tsx` owns company copy; `globals.css` owns tokens and material rules. Header and footer remain shared components. Refresh the self-hosted social-preview image when hero copy or imagery changes.
 
-- Glass, material gradients, and soft shadows belong to the explicitly requested visual direction. The solid primary action has no shadow or gradient.
-- The real product gallery shows one screenshot at a time, with four keyboard-accessible views, rather than inserting four decorative photographs to meet an image-count threshold.
-- No stock footage, autoplay carousel, or repeated scroll entrances: the user's requested minimal company page takes priority over a motion-count threshold.
-- The warm neutral canvas and contextual font sizes support Korean readability. They are not a claim of literal conformance to every Taste house-style metric.
+## Links and support
 
-## Content and evidence
+Public company and product pages have no GitHub links. Company navigation leads to company introduction, apps, and contact. Product support and privacy questions use the existing company email. The product footer's MirinaeLabs name links to `https://mirinaelabs.com/` in both languages and on manual pages.
 
-Company copy, contact address, privacy notice, product routes, and GitHub destination come from the previous company site. No customer logos, metrics, endorsements, pricing, or company history were invented.
+`src/data/product.ts` centralizes `COMPANY_URL`, `SUPPORT_EMAIL`, and `SUPPORT_URL`. Support, privacy, and troubleshooting copy must stay aligned with that email channel. Preserve product and manual routes, and regenerate the legacy `auroraviewer/` static output when those sources change.
 
-Screenshots are existing native AuroraViewer captures in `public/assets/screenshots/`, encoded losslessly for the company app. Product claims are limited to viewing, thumbnail browsing, ratings/tags, comparison, and color/pixel inspection, verified against sibling `../AuroraViewer` main commit `7f39b71` and `doc/01-feature-map.md`. The source repository has unrelated local changes; this task does not modify it.
+Company HTML retains `Cache-Control: no-transform` to prevent CDN email rewriting from changing the server-rendered markup before React hydrates.
 
-The interactive preview in `components/product-showcase.tsx` is the main demonstration. `app/page.tsx` owns company content; `globals.css` owns shared tokens and component material rules. Keep copy and functional UI readable before adding decoration.
+## Evidence and verification
 
-## Verification (2026-10-18)
+AuroraViewer's short description is grounded in sibling `../AuroraViewer/README.md` and `doc/01-feature-map.md` at main commit `7f39b71`. No new product capabilities, testimonials, performance claims, or company statistics were added. The privacy-policy update changes the support channel, not app data-processing behavior.
 
-- Production build, company TypeScript check, Astro check, and whitespace check passed. The integrated export contains 41 HTML files with 1,576 valid internal references.
-- Chromium checked widths 320, 390, 640, 768, 1024, 1280, 1440, and 1920px: no horizontal overflow, missing visible images, headings over two lines, or text under 13px. Desktop, tablet, phone, open-menu, and selected-preview screenshots were inspected directly.
-- Tested all four screenshot controls, ArrowLeft/ArrowRight wrapping, Home/End, mobile menu selection, outside click, Escape with focus return, reduced motion, and a JavaScript-disabled fallback. No runtime exceptions, console errors, or failed resource requests were found in that pass.
-- Company privacy, exported 404, product home, Korean/English manuals, and support routes resolve in the integrated static preview.
-- Lossless WebP reduces screenshot bytes by about 38%. All visible pixel values and alpha values match the original PNG captures. RGB values of fully transparent pixels may differ, as permitted by WebP's encoder.
-- Impeccable's final source detector returned an empty findings list. Taste's final 1440/768/390px browser meter reports no failures with the deliberate material/image/motion exceptions above. Its remaining warnings concern the warm canvas, contextual type-size count, and secondary copy contrast (6.3:1); those treatments are retained for the requested visual direction. These checks are an implementation review, not an external design award or formal accessibility certification.
+The company revision was rendered at 320, 390, 640, 768, 1024, 1280, 1440, and 1920px. Headings stay within two lines and there is no horizontal overflow. Mobile menu navigation, Escape, focus return, and reduced motion were checked. Product pages in both languages retain working company-home and email support links. The integrated and legacy exports were checked for GitHub links and unreleased-app content.
+
+The previous full-screen product gallery and its four company-only WebP assets were removed. The product website retains its original screenshots and full feature documentation.

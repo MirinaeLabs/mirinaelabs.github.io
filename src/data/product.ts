@@ -2,7 +2,9 @@ export type Locale = "ko" | "en";
 
 export const SITE_BASE = "/auroraviewer";
 export const APP_STORE_URL = "https://apps.apple.com/app/id6766165556?mt=12";
-export const ISSUE_URL = "https://github.com/MirinaeLabs/mirinaelabs.github.io/issues/new?title=AuroraViewer%20Support%20Request";
+export const COMPANY_URL = "https://mirinaelabs.com/";
+export const SUPPORT_EMAIL = "contact@mirinaelabs.com";
+export const SUPPORT_URL = `mailto:${SUPPORT_EMAIL}?subject=AuroraViewer%20Support`;
 
 export const productFacts = {
   name: "AuroraViewer",
@@ -56,7 +58,7 @@ export const siteCopy = {
     version: `버전 ${productFacts.version} · macOS ${productFacts.minimumMacOS} 이상`,
     conditionalFormats: "파일을 열 수 있는지와 표시 품질은 내부 코덱 및 macOS의 ImageIO·Quick Look 지원에 따라 달라질 수 있습니다.",
     footerNote: "이미지 보기와 정리를 Mac에서 한 번에.",
-    legal: "© 2026 Mirinae Labs"
+    legal: "© 2026"
   },
   en: {
     nav: {
@@ -74,7 +76,7 @@ export const siteCopy = {
     version: `Version ${productFacts.version} · Requires macOS ${productFacts.minimumMacOS} or later`,
     conditionalFormats: "Availability and rendering quality can vary with the file's codec and the ImageIO or Quick Look support available in macOS.",
     footerNote: "One flow for viewing, choosing, and organizing images on your Mac.",
-    legal: "© 2026 Mirinae Labs"
+    legal: "© 2026"
   }
 } as const;
 

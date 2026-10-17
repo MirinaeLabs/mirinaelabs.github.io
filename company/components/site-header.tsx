@@ -32,8 +32,8 @@ export function SiteHeader({ home = true }: { home?: boolean }) {
           <span>mirinae<span className="brand-light">labs</span></span>
         </a>
         <nav className="desktop-nav flex items-center gap-8" aria-label="주요 메뉴">
-          <a href={home ? "#products" : "/#products"}>제품</a>
-          <a href={home ? "#about" : "/#about"}>만드는 마음</a>
+          <a href={home ? "#about" : "/#about"}>미리내랩스</a>
+          <a href={home ? "#products" : "/#products"}>앱</a>
           <a className="nav-contact inline-flex items-center gap-2" href={home ? "#contact" : "/#contact"}>문의하기 <Arrow diagonal /></a>
         </nav>
         <details className="mobile-menu" ref={menu}>
@@ -41,8 +41,8 @@ export function SiteHeader({ home = true }: { home?: boolean }) {
           <nav aria-label="모바일 메뉴" onClick={(event) => {
             if ((event.target as Element).closest("a") && menu.current) menu.current.open = false;
           }}>
-            <a href={home ? "#products" : "/#products"}>제품</a>
-            <a href={home ? "#about" : "/#about"}>만드는 마음</a>
+            <a href={home ? "#about" : "/#about"}>미리내랩스</a>
+            <a href={home ? "#products" : "/#products"}>앱</a>
             <a href={home ? "#contact" : "/#contact"}>문의하기 <Arrow diagonal /></a>
           </nav>
         </details>
