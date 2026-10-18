@@ -86,7 +86,7 @@ img { max-width: 100%; }
 .studio-signature { position: absolute; inset-inline: 0; bottom: 28px; text-align: center; color: var(--muted); font-size: 14px; line-height: 1.7; }
 .sculpture-scene { position: absolute; inset: 0; perspective: 900px; }
 .scene-disc { position: absolute; width: 390px; height: 390px; top: 33px; left: 50%; transform: translateX(-50%); border-radius: 50%; background: var(--sculpture-disc); }
-.glass-sculpture { position: absolute; width: 335px; height: 335px; top: 56px; left: calc(50% - 167.5px); overflow: visible; transform: rotateY(-12deg) rotateX(10deg); filter: drop-shadow(5px 12px 10px rgb(59 79 139 / 15%)); animation: sculpture-arrive 1500ms var(--ease-out) both; }
+.glass-sculpture { position: absolute; width: 335px; height: 335px; top: 56px; left: calc(50% - 167.5px); overflow: visible; transform: rotateY(-12deg) rotateX(10deg); filter: drop-shadow(5px 12px 10px rgb(59 79 139 / 15%)); }
 .scene-reflection { position: absolute; bottom: 64px; width: 240px; height: 26px; left: calc(50% - 120px); border-radius: 50%; background: var(--sculpture-deep); opacity: .23; filter: blur(17px); }
 .hero-foot { min-height: 94px; padding-block: 22px 34px; color: var(--muted); font-size: 13px; }
 .hero-foot a { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 50%; background: var(--control); transition: transform 200ms; }
@@ -145,7 +145,14 @@ h2 { font-size: clamp(32px, 3.45vw, 48px); font-weight: 610; line-height: 1.3; l
 .not-found > p { color: var(--muted); }
 .not-found .button { margin-top: 28px; }
 
-@keyframes sculpture-arrive { from { opacity: .65; transform: rotateY(-20deg) rotateX(16deg) translateY(20px); } to { opacity: 1; transform: rotateY(-12deg) rotateX(10deg) translateY(0); } }
+@keyframes sculpture-ray-enter {
+  from { opacity: 0; transform: translate(var(--ray-x), var(--ray-y)); }
+  to { opacity: 1; transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sculpture-ray { animation: sculpture-ray-enter 650ms var(--ease-out) calc(120ms + var(--ray-order) * 110ms) both; }
+}
 
 @supports not (backdrop-filter: blur(1px)) {
   .site-header { background: var(--paper); }

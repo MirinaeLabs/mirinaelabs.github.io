@@ -28,7 +28,7 @@ npm run preview:company
 
 `build:company`는 Next.js 회사 사이트를 `company/out/`으로 정적 내보내기한 뒤 `dist/`에 복사하고, Astro 제품 사이트를 `dist/auroraviewer/`에 생성합니다. `npm run build`와 `npm run validate`도 회사·제품 통합 사이트를 대상으로 합니다. 기존 GitHub Pages용 `auroraviewer/` 폴더는 수정하지 않습니다. 회사 사이트 배포 시 제품 canonical은 `mirinaelabs.com`을 사용합니다. Next.js 개발 서버에는 Astro 경로가 없으므로 제품 링크는 통합 빌드의 4322 미리보기에서 확인합니다.
 
-회사 홈페이지는 회사 소개와 제작 철학을 먼저 보여 주고, 공개 제품은 간단한 앱 소개로 연결합니다. 개발 중인 앱의 이름·기능·아이콘은 공개하지 않습니다. 모바일 메뉴는 외부 클릭·Escape·메뉴 선택 시 닫힙니다. 애니메이션은 `prefers-reduced-motion`을 따릅니다. Pretendard 폰트와 이미지를 자체 호스팅하므로 외부 폰트·이미지 요청이 없습니다. 폰트 라이선스는 `company/public/assets/fonts/OFL.txt`에 포함되어 있습니다.
+회사 홈페이지는 회사 소개와 제작 철학을 먼저 보여 주고, 공개 제품은 간단한 앱 소개로 연결합니다. 개발 중인 앱의 이름·기능·아이콘은 공개하지 않습니다. 모바일 메뉴는 외부 클릭·Escape·메뉴 선택 시 닫힙니다. 메인의 유리 막대 8개는 위쪽부터 시계 방향으로 한 번씩 제자리로 슬라이드하며, 약 1.5초에 완성됩니다. CSS 애니메이션이므로 JavaScript 없이도 동작하고, `prefers-reduced-motion`에서는 완성된 조형물을 바로 표시합니다. Pretendard 폰트와 이미지를 자체 호스팅하므로 외부 폰트·이미지 요청이 없습니다. 폰트 라이선스는 `company/public/assets/fonts/OFL.txt`에 포함되어 있습니다.
 
 회사·제품 페이지에는 GitHub 링크를 표시하지 않습니다. 제품 지원은 `src/data/product.ts`의 `SUPPORT_URL`에 정의한 회사 이메일을 사용하며, 제품 페이지 하단의 MirinaeLabs 링크는 `COMPANY_URL`에 정의한 회사 메인 페이지로 이동합니다. 지원·개인정보 안내와 한영 설명서에서도 같은 지원 경로를 유지합니다.
 

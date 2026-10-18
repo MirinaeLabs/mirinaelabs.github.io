@@ -35,13 +35,13 @@ The user's explicit glass and whitespace direction takes priority over generic b
 | Container | 1200px maximum; 20 / 32 / 48px minimum side margins |
 | Grid | 12 columns on desktop; independent mobile stacks |
 | Main panels | 24px corner radius |
-| Motion | One 1.5s brand sculpture arrival; brief control feedback |
+| Motion | Eight glass rays slide inward once, clockwise from the top; 650ms each, 110ms stagger, complete at 1.54s |
 
-All content is visible without animation. Reduced motion disables travel and smooth scrolling. A solid material fallback supports browsers without backdrop filtering. The app directory has one concise AuroraViewer entry; no gallery, comparison tabs, download prompt, or product card in the hero.
+All content is visible without animation. The glass rays animate only under `prefers-reduced-motion: no-preference`; reduced motion shows the completed logo immediately and disables smooth scrolling. The animation uses SVG groups and CSS, with no JavaScript dependency or loop. Each group's glass layers move together and retain the original stroke geometry. A solid material fallback supports browsers without backdrop filtering. The app directory has one concise AuroraViewer entry; no gallery, comparison tabs, download prompt, or product card in the hero.
 
 `lib/site-content.ts` owns Korean and English copy. `app/[[...segments]]/` statically exports `/`, `/en/`, `/privacy/`, and `/en/privacy/`, with the correct server-rendered document language. `components/company-home.tsx` and `components/company-privacy.tsx` share the layouts. `globals.css` owns tokens and material rules. Header and footer remain shared components. Language links preserve the page and, with JavaScript, the current section. The English company pages link to English product pages.
 
-`lib/site-metadata.ts` provides localized titles, descriptions, canonical URLs, language alternates, and social previews. Refresh both self-hosted social-preview images when hero copy or imagery changes. The original eight-spoke SVG symbol, wordmark, and favicon retain their geometry and use the selected indigo color. Favicon and social-preview URLs include the palette version to refresh cached coral assets. `components/icons.tsx` shares one path between `BrandMark` and `BrandSculpture`, so their silhouettes stay aligned. Colors are centralized as semantic CSS variables.
+`lib/site-metadata.ts` provides localized titles, descriptions, canonical URLs, language alternates, and social previews. Refresh both self-hosted social-preview images when hero copy or imagery changes. The original eight-spoke SVG symbol, wordmark, and favicon retain their geometry and use the selected indigo color. Favicon and social-preview URLs include the palette version to refresh cached coral assets. `components/icons.tsx` defines the original logo path and its eight individual strokes for `BrandSculpture`. Colors are centralized as semantic CSS variables.
 
 ## Links and support
 
@@ -58,5 +58,7 @@ AuroraViewer's short description is grounded in sibling `../AuroraViewer/README.
 Both company languages were rendered at 320, 390, 640, 768, 1024, 1280, 1440, and 1920px. Headings stay within two lines and there is no horizontal overflow or header overlap. Home and privacy language switches, section preservation, mobile menu navigation, Escape, focus return, and reduced motion were checked. Language navigation also works with JavaScript disabled. Product pages in both languages retain working company-home and email support links. The integrated and legacy exports were checked for GitHub links and unreleased-app content.
 
 The Galaxy Indigo update repeats those company layout and navigation checks. The glass SVG paths match the original logo path, the center is open, and all eight rays remain visible. Browser-computed text contrast ranges from 5.06:1 for secondary panel copy to 13.25:1 for headings; the primary action is 6.10:1. Both localized 1200×630 social previews were refreshed.
+
+The ray entrance was checked at 0, 320, 550, 880, and 1600ms, with 0, 2, 4, 7, and 8 visible rays respectively. Korean and English were rendered at 320, 390, 768, and 1440px without overflow during the entrance. At completion, 6,561 stroke samples match the original logo silhouette. Natural playback finishes once, reduced motion shows all rays immediately, and the entrance also completes with JavaScript disabled.
 
 The previous full-screen product gallery and its four company-only WebP assets were removed. The product website retains its original screenshots and full feature documentation.

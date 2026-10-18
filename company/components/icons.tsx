@@ -1,6 +1,18 @@
-import type { SVGProps } from "react";
+import type { CSSProperties, SVGProps } from "react";
 
 const BRAND_MARK_PATH = "M20 5v9m0 12v9M5 20h9m12 0h9M9.4 9.4l6.4 6.4m8.4 8.4 6.4 6.4M9.4 30.6l6.4-6.4m8.4-8.4 6.4-6.4";
+
+// The same eight logo strokes, ordered clockwise from twelve o'clock.
+const BRAND_MARK_RAYS = [
+  { path: "M20 5v9", x: 0, y: -6 },
+  { path: "M24.2 15.8l6.4-6.4", x: 4.25, y: -4.25 },
+  { path: "M26 20h9", x: 6, y: 0 },
+  { path: "M24.2 24.2l6.4 6.4", x: 4.25, y: 4.25 },
+  { path: "M20 26v9", x: 0, y: 6 },
+  { path: "M9.4 30.6l6.4-6.4", x: -4.25, y: 4.25 },
+  { path: "M5 20h9", x: -6, y: 0 },
+  { path: "M9.4 9.4l6.4 6.4", x: -4.25, y: -4.25 },
+] as const;
 
 export function Arrow({ diagonal = false, ...props }: SVGProps<SVGSVGElement> & { diagonal?: boolean }) {
   return (
@@ -44,10 +56,14 @@ export function BrandSculpture() {
         </linearGradient>
       </defs>
       <g strokeLinecap="round">
-        <path d={BRAND_MARK_PATH} stroke="var(--sculpture-deep)" strokeWidth="4.5" strokeOpacity=".24" transform="translate(.28 .48)" />
-        <path d={BRAND_MARK_PATH} stroke="url(#brand-glass-edge)" strokeWidth="4.7" />
-        <path d={BRAND_MARK_PATH} stroke="url(#brand-glass-body)" strokeWidth="4.5" />
-        <path d={BRAND_MARK_PATH} stroke="url(#brand-glass-shine)" strokeWidth="3.5" transform="translate(-.12 -.16)" />
+        {BRAND_MARK_RAYS.map((ray, index) => (
+          <g key={ray.path} className="sculpture-ray" style={{ "--ray-order": index, "--ray-x": `${ray.x}px`, "--ray-y": `${ray.y}px` } as CSSProperties}>
+            <path d={ray.path} stroke="var(--sculpture-deep)" strokeWidth="4.5" strokeOpacity=".24" transform="translate(.28 .48)" />
+            <path d={ray.path} stroke="url(#brand-glass-edge)" strokeWidth="4.7" />
+            <path d={ray.path} stroke="url(#brand-glass-body)" strokeWidth="4.5" />
+            <path d={ray.path} stroke="url(#brand-glass-shine)" strokeWidth="3.5" transform="translate(-.12 -.16)" />
+          </g>
+        ))}
       </g>
     </svg>
   );
